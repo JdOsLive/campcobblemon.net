@@ -3,6 +3,7 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var NY = "America/New_York";
+  var now = Date.now();
 
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
@@ -13,6 +14,18 @@
     var d = new Date(iso.length === 10 ? iso + "T12:00:00Z" : iso);
     return d.toLocaleDateString("en-US", Object.assign({ timeZone: iso.length === 10 ? "UTC" : NY }, opts));
   }
+  // screenshot ids look like "s1-42": season folder from the prefix, full-size copy only if listed in C.large
+  function shotFolder(id) { return "assets/season" + id.split("-")[0].slice(1); }
+  function thumbOf(id) { return shotFolder(id) + "/thumb/" + id + ".jpg"; }
+  function fullOf(id) { return (C.large.indexOf(id) > -1 ? shotFolder(id) + "/large/" : shotFolder(id) + "/thumb/") + id + ".jpg"; }
+  function shotLink(id, i) {
+    return '<a href="' + fullOf(id) + '" data-i="' + i + '"><img src="' + thumbOf(id) + '" alt="" loading="lazy"></a>';
+  }
+  function seasonState(s) {
+    var start = new Date(s.start).getTime(), end = s.end ? new Date(s.end).getTime() : Infinity;
+    return now < start ? "upcoming" : now < end ? "current" : "ended";
+  }
+  var TAG = { upcoming: "Next", current: "Current world", ended: "Ended" };
 
   // ---- shared: nav, links, address ----------------------------------------
   var page = location.pathname.split("/").pop() || "index.html";
@@ -34,9 +47,36 @@
     });
   });
 
-  // ---- home: season line, live status, seasons ----------------------------
+  // ---- shared: lightbox -------------------------------------------------------
+  var lb = $("#lightbox"), lbList = [], lbIdx = 0;
+  function lbShow(i) {
+    var n = lbList.length;
+    lbIdx = (i + n) % n;
+    $("img", lb).src = lbList[lbIdx];
+    $(".lb-count", lb).textContent = (lbIdx + 1) + " / " + n;
+  }
+  function openLightbox(list, i) {
+    lbList = list;
+    lbShow(i);
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function closeLightbox() { lb.classList.remove("open"); document.body.style.overflow = ""; }
+  if (lb) {
+    $(".lb-close", lb).addEventListener("click", closeLightbox);
+    $(".lb-prev", lb).addEventListener("click", function () { lbShow(lbIdx - 1); });
+    $(".lb-next", lb).addEventListener("click", function () { lbShow(lbIdx + 1); });
+    lb.addEventListener("click", function (e) { if (e.target === lb) closeLightbox(); });
+    document.addEventListener("keydown", function (e) {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") lbShow(lbIdx - 1);
+      if (e.key === "ArrowRight") lbShow(lbIdx + 1);
+    });
+  }
+
+  // ---- home ---------------------------------------------------------------------
   var opens = new Date(C.season2Opens);
-  var now = Date.now();
   $$("[data-season-line]").forEach(function (el) {
     if (now < opens.getTime()) {
       el.textContent = "Season 2 opens " +
@@ -71,21 +111,18 @@
   var seasonsEl = $("#seasons");
   if (seasonsEl) {
     seasonsEl.innerHTML = C.seasons.map(function (s) {
-      var start = new Date(s.start).getTime(), end = s.end ? new Date(s.end).getTime() : Infinity;
-      var state = now < start ? "upcoming" : now < end ? "current" : "ended";
-      var tag = { upcoming: "Next", current: "Current world", ended: "Ended" }[state];
-      return '<div class="card season ' + state + '">' +
-        '<span class="tag">' + tag + '</span>' +
+      var state = seasonState(s);
+      return '<a class="card season ' + state + '" href="seasons.html#' + s.id + '">' +
+        '<span class="tag">' + TAG[state] + '</span>' +
         '<h3>' + esc(s.label) + '</h3>' +
         '<span class="dates">' + esc(s.dates) + ' · ' + esc(s.cobblemon) + '</span>' +
-        '<p>' + esc(s.blurb) + '</p></div>';
+        '<p>' + esc(s.blurb) + '</p></a>';
     }).join("");
   }
 
   var mp = $("#modpack-chips");
   if (mp) {
-    mp.innerHTML = C.modpack.highlights.map(function (h) { return '<span class="chip">' + esc(h) + '</span>'; }).join("") +
-      C.modpack.ours.map(function (m) { return '<span class="chip ours" title="' + esc(m.text) + '">' + esc(m.name) + ' · ours</span>'; }).join("");
+    mp.innerHTML = C.modpack.highlights.map(function (h) { return '<span class="chip">' + esc(h) + '</span>'; }).join("");
   }
   var mpOurs = $("#modpack-ours");
   if (mpOurs) {
@@ -95,16 +132,68 @@
   }
   $$("[data-modpack-version]").forEach(function (el) { el.textContent = C.modpack.version; });
 
+  var ml = $("#modlist");
+  if (ml && window.CC_MODS) {
+    var groups = [["mod", "Mods"], ["resourcepack", "Resource packs"], ["shader", "Shaders"], ["datapack", "Data packs"]];
+    ml.innerHTML = groups.map(function (g) {
+      var items = CC_MODS.items.filter(function (m) { return m.type === g[0]; });
+      if (!items.length) return "";
+      return '<h3>' + g[1] + ' <span class="faint">· ' + items.length + '</span></h3><ul>' + items.map(function (m) {
+        var name = m.url ? '<a href="' + esc(m.url) + '" target="_blank" rel="noopener">' + esc(m.name) + '</a>' : esc(m.name);
+        return '<li>' + name + (m.ours ? ' <span class="ours-tag">ours</span>' : '') + '</li>';
+      }).join("") + '</ul>';
+    }).join("");
+    $$("[data-mod-count]").forEach(function (el) { el.textContent = CC_MODS.items.length; });
+  }
+
   var feat = $("#featured");
   if (feat) {
     feat.innerHTML = C.featured.map(function (id) {
-      return '<a href="gallery.html"><img src="assets/season1/thumb/' + id + '.jpg" alt="Season 1 build" loading="lazy"></a>';
+      return '<a href="gallery.html"><img src="' + thumbOf(id) + '" alt="Season 1 build" loading="lazy"></a>';
     }).join("");
   }
   $$("[data-mon-count]").forEach(function (el) { el.textContent = C.pokemon.length; });
   $$("[data-bidoof-count]").forEach(function (el) {
     el.textContent = C.pokemon.filter(function (m) { return m.group === "bidoof"; }).length;
   });
+
+  // ---- seasons page ---------------------------------------------------------------
+  var sl = $("#season-list");
+  if (sl) {
+    var ordered = C.seasons.slice().reverse();
+    sl.innerHTML = ordered.map(function (s) {
+      var state = seasonState(s);
+      var links = [];
+      if (s.download) links.push('<a class="btn btn-outline" href="' + esc(s.download) + '">Download the world</a>');
+      if (s.map) links.push('<a class="btn btn-outline" href="' + esc(s.map) + '" target="_blank" rel="noopener">Map</a>');
+      if (s.galleryCount) links.push('<a class="more" href="gallery.html">All ' + s.galleryCount + ' photos in the gallery →</a>');
+      var shots = s.shots.length
+        ? '<div class="grid-gallery" data-season="' + s.id + '">' + s.shots.map(shotLink).join("") + '</div>'
+        : (s.shotsNote ? '<p class="faint">' + esc(s.shotsNote) + '</p>' : "");
+      return '<section class="season-full ' + state + '" id="' + s.id + '">' +
+        '<div class="season-head">' +
+        (s.logo ? '<img class="season-logo" src="' + s.logo + '" alt="">' : '') +
+        '<div class="season-copy">' +
+        '<span class="tag">' + TAG[state] + '</span>' +
+        '<h2>' + esc(s.label) + '</h2>' +
+        '<p class="dates">' + esc(s.dates) + ' · ' + esc(s.cobblemon) + '</p>' +
+        '<p class="blurb">' + esc(s.blurb) + '</p>' +
+        (links.length ? '<div class="actions">' + links.join("") + '</div>' : '') +
+        '</div></div>' + shots + '</section>';
+    }).join("");
+    sl.addEventListener("click", function (e) {
+      var a = e.target.closest(".grid-gallery a");
+      if (!a) return;
+      e.preventDefault();
+      var id = a.parentNode.getAttribute("data-season");
+      var s = C.seasons.filter(function (x) { return x.id === id; })[0];
+      openLightbox(s.shots.map(fullOf), +a.getAttribute("data-i"));
+    });
+    if (location.hash) {
+      var target = $(location.hash);
+      if (target) target.scrollIntoView();
+    }
+  }
 
   // ---- pokédex --------------------------------------------------------------
   var dex = $("#dex");
@@ -177,56 +266,21 @@
   // ---- gallery ---------------------------------------------------------------
   var gal = $("#gallery");
   if (gal) {
-    var sets = {
-      season1: C.gallery.season1.map(function (id) {
-        return {
-          thumb: "assets/season1/thumb/" + id + ".jpg",
-          full: (C.large.indexOf(id) > -1 ? "assets/season1/large/" : "assets/season1/thumb/") + id + ".jpg"
-        };
-      }),
-      season0: C.gallery.season0.map(function (id) {
-        return { thumb: "assets/season0/" + id + "-thumb.jpg", full: "assets/season0/" + id + ".jpg" };
-      })
-    };
-    var cur = "season1", idx = 0;
+    var cur = "season1";
     $$("[data-set]").forEach(function (b) {
-      var n = sets[b.getAttribute("data-set")].length;
-      b.textContent = b.textContent + " · " + n;
+      b.textContent = b.textContent + " · " + C.gallery[b.getAttribute("data-set")].length;
       b.addEventListener("click", function () {
         cur = b.getAttribute("data-set");
         $$("[data-set]").forEach(function (x) { x.classList.toggle("active", x === b); });
         renderGallery();
       });
     });
-    function renderGallery() {
-      gal.innerHTML = sets[cur].map(function (s, i) {
-        return '<a href="' + s.full + '" data-i="' + i + '"><img src="' + s.thumb + '" alt="" loading="lazy"></a>';
-      }).join("");
-    }
-    var lb = $("#lightbox"), lbImg = $("img", lb), lbCount = $(".lb-count", lb);
-    function show(i) {
-      var n = sets[cur].length;
-      idx = (i + n) % n;
-      lbImg.src = sets[cur][idx].full;
-      lbCount.textContent = (idx + 1) + " / " + n;
-    }
-    function open(i) { show(i); lb.classList.add("open"); document.body.style.overflow = "hidden"; }
-    function close() { lb.classList.remove("open"); document.body.style.overflow = ""; }
+    function renderGallery() { gal.innerHTML = C.gallery[cur].map(shotLink).join(""); }
     gal.addEventListener("click", function (e) {
       var a = e.target.closest("a");
       if (!a) return;
       e.preventDefault();
-      open(+a.getAttribute("data-i"));
-    });
-    $(".lb-close", lb).addEventListener("click", close);
-    $(".lb-prev", lb).addEventListener("click", function () { show(idx - 1); });
-    $(".lb-next", lb).addEventListener("click", function () { show(idx + 1); });
-    lb.addEventListener("click", function (e) { if (e.target === lb) close(); });
-    document.addEventListener("keydown", function (e) {
-      if (!lb.classList.contains("open")) return;
-      if (e.key === "Escape") close();
-      if (e.key === "ArrowLeft") show(idx - 1);
-      if (e.key === "ArrowRight") show(idx + 1);
+      openLightbox(C.gallery[cur].map(fullOf), +a.getAttribute("data-i"));
     });
     renderGallery();
   }

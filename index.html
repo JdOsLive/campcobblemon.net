@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Camp Cobblemon</title>
-  <meta name="description" content="Camp Cobblemon is a small, application-only Cobblemon SMP for adults. Season 2 opens September 11, 2026 on a brand new world.">
+  <meta name="description" content="Camp Cobblemon is a small, application-only Cobblemon SMP for adults, open since August 2024 — one of the longest-running private Cobblemon servers. Season 2 opens September 11, 2026 on a brand new world.">
   <meta property="og:title" content="Camp Cobblemon">
-  <meta property="og:description" content="A small Cobblemon server with big builds. Application-only, 18+, Cobblemon 1.8.">
+  <meta property="og:description" content="A small Cobblemon server with big builds. Application-only, 18+, open since August 2024.">
   <meta property="og:image" content="https://campcobblemon.net/assets/logo.png">
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,6 +21,7 @@
     <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp Cobblemon</span></a>
     <nav class="nav">
       <a href="index.html">Home</a>
+      <a href="seasons.html">Seasons</a>
       <a href="pokedex.html">Pokédex</a>
       <a href="gallery.html">Gallery</a>
       <a href="rules.html">Rules</a>
@@ -33,9 +34,9 @@
 
   <section class="hero">
     <div class="hero-copy">
-      <p class="kicker">Application-only · 18+ · Cobblemon 1.8</p>
+      <p class="kicker">Application-only · 18+ · Open since August 2024</p>
       <h1>A small Cobblemon server with big builds.</h1>
-      <p class="lede">Camp Cobblemon is a close-knit SMP that cares about building, running a modpack we maintain ourselves. <span data-season-line>Season 2 opens Friday, September 11 at 7:00 PM ET on a brand new world.</span></p>
+      <p class="lede">One of the longest-running private Cobblemon SMPs: a close-knit camp that cares about building, running a modpack we maintain ourselves. <span data-season-line>Season 2 opens Friday, September 11 at 7:00 PM ET on a brand new world.</span></p>
       <div class="actions">
         <a class="btn btn-primary btn-lg" data-link="discord" href="#" target="_blank" rel="noopener">Apply in Discord</a>
         <a class="btn btn-outline btn-lg" data-link="modrinth" href="#" target="_blank" rel="noopener">Get the modpack</a>
@@ -75,7 +76,7 @@
         <img src="assets/pokemon/r29.png" alt="Campion Gligar" style="height:120px">
         <img src="assets/pokemon/r5.png" alt="Bidoof in a Helldivers costume" style="height:100px">
       </div>
-      <p class="blurb"><span data-mon-count>27</span> Pokémon you won't find anywhere else: <span data-bidoof-count>20</span> costume Bidoofs, Campion regional forms and a couple of new evolutions, all designed by campers.</p>
+      <p class="blurb"><span data-mon-count>27</span> Pokémon you won't find anywhere else: <span data-bidoof-count>20</span> costume Bidoofs, Campion regional forms and a couple of new evolutions.</p>
       <a class="more" href="pokedex.html">Open the Pokédex →</a>
     </div>
   </section>
@@ -87,13 +88,17 @@
     </div>
     <div class="chips" id="modpack-chips"></div>
     <div class="cards-4" id="modpack-ours" style="grid-template-columns: repeat(2, minmax(0, 1fr))"></div>
+    <details class="dropdown">
+      <summary>Everything in the pack <span class="faint">· <span data-mod-count>121</span> mods, packs and shaders</span></summary>
+      <div class="modlist" id="modlist"></div>
+    </details>
     <div><a class="btn btn-outline" data-link="modrinth" href="#" target="_blank" rel="noopener">Get it on Modrinth</a></div>
   </section>
 
   <section class="section" id="seasons-section">
     <div class="section-head">
       <h2>Seasons</h2>
-      <p>The server opened August 7, 2024. Each season is a fresh world.</p>
+      <a class="more" href="seasons.html">Every world so far →</a>
     </div>
     <div class="seasons" id="seasons"></div>
   </section>
@@ -112,6 +117,7 @@
 </footer>
 
 <script src="content.js"></script>
+<script src="mods.js"></script>
 <script src="site.js"></script>
 </body>
 </html>

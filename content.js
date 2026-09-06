@@ -11,6 +11,8 @@ window.CC = {
   // ISO time Season 2 opens. Before this the home page says "opens…", after it says "is live".
   season2Opens: "2026-09-11T19:00:00-04:00",
 
+  // Oldest first. `shots` are screenshot ids shown on the Seasons page (thumbs live in
+  // assets/seasonN/thumb). `download` and `map` are optional links — leave "" to hide the button.
   seasons: [
     {
       id: "s0",
@@ -19,7 +21,11 @@ window.CC = {
       start: "2024-08-07T00:00:00-04:00",
       end: "2024-12-27T00:00:00-05:00",
       dates: "Aug 7, 2024 – Dec 27, 2024",
-      blurb: "Where it started. Just under five months before the first reset."
+      blurb: "Where it started. Just under five months before the first reset.",
+      logo: "",
+      shots: ["s0-01"],
+      download: "",
+      map: ""
     },
     {
       id: "s1",
@@ -28,7 +34,12 @@ window.CC = {
       start: "2024-12-27T00:00:00-05:00",
       end: "2026-09-11T19:00:00-04:00",
       dates: "Dec 27, 2024 – Sep 11, 2026",
-      blurb: "Our longest world. Updated in place from 1.6 to 1.7.3 as Cobblemon moved forward."
+      blurb: "Our longest world. Updated in place from 1.6 to 1.7.3 as Cobblemon moved forward.",
+      logo: "assets/season1/logo.png",
+      shots: ["s1-42", "s1-60", "s1-17", "s1-37", "s1-12", "s1-28", "s1-19", "s1-36"],
+      galleryCount: 56,
+      download: "",
+      map: ""
     },
     {
       id: "s2",
@@ -37,10 +48,16 @@ window.CC = {
       start: "2026-09-11T19:00:00-04:00",
       end: "",
       dates: "Sep 11, 2026 –",
-      blurb: "A brand new world on modpack 2.0.0, with 3× shiny weekends and the new trophies."
+      blurb: "A brand new world on modpack 2.0.0, with 3× shiny weekends and the new trophies.",
+      logo: "assets/logo.png",
+      shots: [],
+      shotsNote: "Screenshots once the world opens.",
+      download: "",
+      map: ""
     }
   ],
 
+  // The full "everything in the pack" list is generated into mods.js (see camp-tools/modlist.py).
   modpack: {
     version: "2.0.0",
     highlights: [
@@ -68,8 +85,8 @@ window.CC = {
     ],
     season0: ["s0-01"]
   },
-  // Season 1 shots that also have a full-size copy in assets/season1/large (the lightbox uses it when present)
-  large: ["s1-12", "s1-17", "s1-19", "s1-28", "s1-36", "s1-37", "s1-42", "s1-60"],
+  // Shots that also have a full-size copy in assets/seasonN/large (the lightbox uses it when present)
+  large: ["s0-01", "s1-12", "s1-17", "s1-19", "s1-28", "s1-36", "s1-37", "s1-42", "s1-60"],
 
   // Costume Bidoofs share these unless a row overrides them.
   bidoofBase: {
