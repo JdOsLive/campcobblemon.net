@@ -75,6 +75,26 @@
     });
   }
 
+  // ---- shared: modals ------------------------------------------------------------
+  function openModal(el, html) {
+    $(".modal-body", el).innerHTML = html;
+    el.classList.add("open");
+    document.body.style.overflow = "hidden";
+    $(".modal-card", el).scrollTop = 0;
+  }
+  function closeModal(el) {
+    el.classList.remove("open");
+    if (!$(".modal.open")) document.body.style.overflow = "";
+  }
+  $$(".modal").forEach(function (el) {
+    $(".modal-close", el).addEventListener("click", function () { closeModal(el); });
+    el.addEventListener("click", function (e) { if (e.target === el) closeModal(el); });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    $$(".modal.open").forEach(closeModal);
+  });
+
   // ---- home ---------------------------------------------------------------------
   var opens = new Date(C.season2Opens);
   $$("[data-season-line]").forEach(function (el) {
@@ -205,6 +225,33 @@
     };
     var RARITY = { "Ultra Rare": "#d685ad", Rare: "#7fa5e0", Uncommon: "#7fc79a", Common: "#9aab9f" };
     var STAT = ["HP", "Atk", "Def", "SpA", "SpD", "Spe"];
+    // attacking type -> defending type -> multiplier (anything missing is 1×)
+    var CHART = {
+      normal: { rock: .5, ghost: 0, steel: .5 },
+      fire: { fire: .5, water: .5, grass: 2, ice: 2, bug: 2, rock: .5, dragon: .5, steel: 2 },
+      water: { fire: 2, water: .5, grass: .5, ground: 2, rock: 2, dragon: .5 },
+      electric: { water: 2, electric: .5, grass: .5, ground: 0, flying: 2, dragon: .5 },
+      grass: { fire: .5, water: 2, grass: .5, poison: .5, ground: 2, flying: .5, bug: .5, rock: 2, dragon: .5, steel: .5 },
+      ice: { fire: .5, water: .5, grass: 2, ice: .5, ground: 2, flying: 2, dragon: 2, steel: .5 },
+      fighting: { normal: 2, ice: 2, poison: .5, flying: .5, psychic: .5, bug: .5, rock: 2, ghost: 0, dark: 2, steel: 2, fairy: .5 },
+      poison: { grass: 2, poison: .5, ground: .5, rock: .5, ghost: .5, steel: 0, fairy: 2 },
+      ground: { fire: 2, electric: 2, grass: .5, poison: 2, flying: 0, bug: .5, rock: 2, steel: 2 },
+      flying: { electric: .5, grass: 2, fighting: 2, bug: 2, rock: .5, steel: .5 },
+      psychic: { fighting: 2, poison: 2, psychic: .5, dark: 0, steel: .5 },
+      bug: { fire: .5, grass: 2, fighting: .5, poison: .5, flying: .5, psychic: 2, ghost: .5, dark: 2, steel: .5, fairy: .5 },
+      rock: { fire: 2, ice: 2, fighting: .5, ground: .5, flying: 2, bug: 2, steel: .5 },
+      ghost: { normal: 0, psychic: 2, ghost: 2, dark: .5 },
+      dragon: { dragon: 2, steel: .5, fairy: 0 },
+      dark: { fighting: .5, psychic: 2, ghost: 2, dark: .5, fairy: .5 },
+      steel: { fire: .5, water: .5, electric: .5, ice: 2, rock: 2, steel: .5, fairy: 2 },
+      fairy: { fire: .5, fighting: 2, poison: .5, dragon: 2, dark: 2, steel: .5 }
+    };
+    var TYPE_NAMES = Object.keys(TYPE);
+    function eff(att, defTypes) {
+      var row = CHART[att.toLowerCase()] || {}, m = 1;
+      defTypes.forEach(function (t) { var v = row[t.toLowerCase()]; if (v !== undefined) m *= v; });
+      return m;
+    }
     function ink(hex) {
       var r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
       return (0.299 * r + 0.587 * g + 0.114 * b) > 150 ? "#1b1b1b" : "#ffffff";
@@ -212,38 +259,159 @@
     function badge(label, color) {
       return '<span class="type" style="background:' + color + ';color:' + ink(color) + '">' + esc(label) + '</span>';
     }
-    var mons = C.pokemon.map(function (m) {
-      return Object.assign({}, m.group === "bidoof" ? C.bidoofBase : {}, m);
+    function typeBadge(t) { return badge(t, TYPE[t] || "#888"); }
+    function mult(m) { return m === 0.25 ? "¼×" : m === 0.5 ? "½×" : m + "×"; }
+
+    var mons = C.pokemon.map(function (m, i) {
+      var o = Object.assign({}, m.group === "bidoof" ? C.bidoofBase : {}, m);
+      o.order = i;
+      o.total = o.stats.reduce(function (a, b) { return a + b; }, 0);
+      o.isNew = now - new Date(o.added + "T12:00:00Z").getTime() < 45 * 864e5;
+      return o;
     });
-    var filter = "all", shiny = false, q = "";
+    var byRow = {};
+    mons.forEach(function (m) { byRow[m.row] = m; });
+    var filter = "all", shiny = false, q = "", sort = "default", compare = [];
+
+    var notice = $("#doof-notice");
+    if (notice && !C.doofRebalanceLive) notice.hidden = false;
+
+    function sprite(m, s) { return "assets/pokemon/r" + m.row + (s ? "-s" : "") + ".png"; }
+    function subLine(m) { return m.dex.charAt(0) === "#" ? m.form + " · " + m.species + " " + m.dex : m.dex + " · " + m.form; }
+    function typeBadges(m) { return m.types.map(typeBadge).join(""); }
+    function whereChips(m) {
+      return '<div class="where"><span class="lbl">Found in</span>' +
+        m.where.map(function (w) { return '<span class="biome">' + esc(w) + '</span>'; }).join("") + '</div>';
+    }
+    function statBars(m, other) {
+      return '<div class="stats">' + m.stats.map(function (v, i) {
+        var win = other && v > other.stats[i] ? ' class="win"' : "";
+        return '<span>' + STAT[i] + '</span><span class="bar"><i style="width:' + Math.min(100, v / 160 * 100) + '%"></i></span><b' + win + '>' + v + '</b>';
+      }).join("") + '<span>Total</span><span></span><b>' + m.total + '</b></div>';
+    }
+    function newTag(m) { return m.isNew ? '<span class="new-tag">New</span>' : ""; }
 
     function card(m) {
-      var total = m.stats.reduce(function (a, b) { return a + b; }, 0);
-      var sub = m.dex.charAt(0) === "#" ? m.form + " · " + m.species + " " + m.dex : m.dex + " · " + m.form;
-      return '<article class="card mon">' +
-        '<div class="art"><img src="assets/pokemon/r' + m.row + (shiny ? "-s" : "") + '.png" alt="' + esc(m.name) + '" loading="lazy"></div>' +
-        '<div><h3>' + esc(m.name) + '</h3><div class="sub">' + esc(sub) + '</div></div>' +
-        '<div class="types">' + m.types.map(function (t) { return badge(t, TYPE[t] || "#888"); }).join("") +
-        badge(m.rarity, RARITY[m.rarity] || "#9aab9f") + '</div>' +
-        '<div class="where"><span class="lbl">Found in</span>' +
-        m.where.map(function (w) { return '<span class="biome">' + esc(w) + '</span>'; }).join("") + '</div>' +
+      var inCompare = compare.indexOf(m.row) > -1;
+      return '<article class="card mon" data-row="' + m.row + '">' +
+        '<div class="art"><img src="' + sprite(m, shiny) + '" alt="' + esc(m.name) + '" loading="lazy"></div>' +
+        '<div><h3>' + esc(m.name) + newTag(m) + '</h3><div class="sub">' + esc(subLine(m)) + '</div></div>' +
+        '<div class="types">' + typeBadges(m) + badge(m.rarity, RARITY[m.rarity] || "#9aab9f") + '</div>' +
+        whereChips(m) +
         (m.how ? '<div class="how"><span class="lbl">Or</span>' + esc(m.how) + '</div>' : '') +
+        (m.ability ? '<div class="ability"><span class="lbl">Ability</span>' + esc(m.ability.split(" (hidden")[0]) + '</div>' : '') +
         '<dl><dt>Design</dt><dd>' + esc(m.designer) + '</dd>' +
         '<dt>Added</dt><dd>' + fmtDate(m.added, { month: "short", day: "numeric", year: "numeric" }) + '</dd></dl>' +
-        '<details><summary>Base stats · ' + total + '</summary><div class="stats">' +
-        m.stats.map(function (v, i) {
-          return '<span>' + STAT[i] + '</span><span class="bar"><i style="width:' + Math.min(100, v / 160 * 100) + '%"></i></span><b>' + v + '</b>';
-        }).join("") + '</div></details></article>';
+        '<div class="card-actions"><button class="pill small" data-detail="' + m.row + '">Details</button>' +
+        '<button class="pill small' + (inCompare ? ' active' : '') + '" data-compare="' + m.row + '">' + (inCompare ? "✓ Comparing" : "Compare") + '</button></div>' +
+        '</article>';
     }
-    function render() {
+    function visible() {
       var needle = q.trim().toLowerCase();
-      var shown = mons.filter(function (m) {
+      var list = mons.filter(function (m) {
         if (filter !== "all" && m.group !== filter) return false;
         if (!needle) return true;
-        return (m.name + " " + m.where.join(" ") + " " + (m.how || "") + " " + m.designer + " " + m.types.join(" ")).toLowerCase().indexOf(needle) > -1;
+        var hay = [m.name, m.form, m.types.join(" "), m.where.join(" "), m.how || "", m.ability || "", m.designer].join(" ");
+        return hay.toLowerCase().indexOf(needle) > -1;
       });
+      if (sort === "newest") list.sort(function (a, b) { return b.added.localeCompare(a.added) || a.order - b.order; });
+      else if (sort === "stats") list.sort(function (a, b) { return b.total - a.total || a.order - b.order; });
+      else if (sort === "name") list.sort(function (a, b) { return a.name.localeCompare(b.name); });
+      else list.sort(function (a, b) { return a.order - b.order; });
+      return list;
+    }
+    function render() {
+      var shown = visible();
       dex.innerHTML = shown.length ? shown.map(card).join("") : '<p class="empty">Nothing matches that.</p>';
     }
+
+    // detail view
+    function row(label, html) { return '<div class="row"><span class="lbl">' + label + '</span>' + html + '</div>'; }
+    function matchupList(m, test) {
+      var out = [];
+      TYPE_NAMES.forEach(function (t) {
+        var e = eff(t, m.types);
+        if (test(e)) out.push(typeBadge(t) + (e === 4 || e === 0.25 ? ' <span class="faint">' + mult(e) + '</span>' : ""));
+      });
+      return out.length ? '<div class="types">' + out.join("") + '</div>' : '<span class="faint">nothing</span>';
+    }
+    function detailHtml(m) {
+      var inCompare = compare.indexOf(m.row) > -1;
+      return '<div class="detail">' +
+        '<div class="arts"><div class="art"><img src="' + sprite(m, false) + '" alt=""></div><div class="cap">Normal</div>' +
+        '<div class="art"><img src="' + sprite(m, true) + '" alt=""></div><div class="cap">Shiny</div></div>' +
+        '<div class="info">' +
+        '<div><h2>' + esc(m.name) + newTag(m) + '</h2><div class="sub">' + esc(subLine(m)) + '</div></div>' +
+        '<div class="types">' + typeBadges(m) + badge(m.rarity, RARITY[m.rarity] || "#9aab9f") + '</div>' +
+        (m.role ? row("Role", esc(m.role)) : "") +
+        (m.ability ? row("Abilities", esc(m.ability)) : "") +
+        row("Found in", '<div class="types">' + m.where.map(function (w) { return '<span class="biome">' + esc(w) + '</span>'; }).join("") + '</div>') +
+        (m.how ? row("Or", esc(m.how)) : "") +
+        (m.moves ? row("Signature moves", '<div class="moves">' + m.moves.map(function (x) { return '<span class="biome">' + esc(x) + '</span>'; }).join("") + '</div>') : "") +
+        row("Base stats", statBars(m)) +
+        row("Weak to", matchupList(m, function (e) { return e >= 2; })) +
+        row("Resists", matchupList(m, function (e) { return e > 0 && e < 1; })) +
+        row("Immune to", matchupList(m, function (e) { return e === 0; })) +
+        row("Design", esc(m.designer) + ' · added ' + fmtDate(m.added, { month: "long", day: "numeric", year: "numeric" })) +
+        '<div class="actions"><button class="pill' + (inCompare ? ' active' : '') + '" data-compare="' + m.row + '">' + (inCompare ? "Remove from compare" : "Add to compare") + '</button></div>' +
+        '</div></div>';
+    }
+
+    // compare view
+    function bestHit(att, def) {
+      var best = -1, bt = "";
+      att.types.forEach(function (t) { var e = eff(t, def.types); if (e > best) { best = e; bt = t; } });
+      return { mult: best, type: bt };
+    }
+    function compareHtml(a, b) {
+      function side(m, other) {
+        return '<div class="side"><div class="art"><img src="' + sprite(m, shiny) + '" alt=""></div>' +
+          '<h3>' + esc(m.name) + '</h3><div class="types">' + typeBadges(m) + '</div>' +
+          (m.ability ? '<div class="ability">' + esc(m.ability) + '</div>' : '') + statBars(m, other) + '</div>';
+      }
+      var ab = bestHit(a, b), ba = bestHit(b, a);
+      var lines = [
+        '<strong>' + esc(a.name) + '</strong>’s ' + ab.type + ' moves hit ' + esc(b.name) + ' for <strong>' + mult(ab.mult) + '</strong>.',
+        '<strong>' + esc(b.name) + '</strong>’s ' + ba.type + ' moves hit ' + esc(a.name) + ' for <strong>' + mult(ba.mult) + '</strong>.',
+        a.stats[5] === b.stats[5] ? 'Same Speed — it comes down to the roll.'
+          : '<strong>' + esc(a.stats[5] > b.stats[5] ? a.name : b.name) + '</strong> moves first (' + Math.max(a.stats[5], b.stats[5]) + ' vs ' + Math.min(a.stats[5], b.stats[5]) + ' Speed).'
+      ];
+      return '<h2 style="margin-bottom:18px">Head to head</h2><div class="compare">' + side(a, b) + side(b, a) + '</div>' +
+        '<div class="verdict">' + lines.map(function (l) { return '<div>' + l + '</div>'; }).join("") +
+        '<div class="faint">Type matchups only — abilities, items and moves still decide it.</div></div>';
+    }
+
+    var tray = $("#compare-tray"), trayNames = $("#compare-names"), trayOpen = $("#compare-open");
+    function updateTray() {
+      tray.hidden = compare.length === 0;
+      trayNames.textContent = compare.map(function (r) { return byRow[r].name; }).join(" vs ");
+      trayOpen.disabled = compare.length < 2;
+    }
+    function toggleCompare(rowId) {
+      var i = compare.indexOf(rowId);
+      if (i > -1) compare.splice(i, 1);
+      else {
+        if (compare.length === 2) compare.shift();
+        compare.push(rowId);
+      }
+      updateTray();
+      render();
+      if ($("#mon-modal").classList.contains("open")) openModal($("#mon-modal"), detailHtml(byRow[rowId]));
+      if (compare.length === 2 && i === -1 && !$("#mon-modal").classList.contains("open")) {
+        openModal($("#compare-modal"), compareHtml(byRow[compare[0]], byRow[compare[1]]));
+      }
+    }
+    document.addEventListener("click", function (e) {
+      var d = e.target.closest("[data-detail]");
+      if (d) { openModal($("#mon-modal"), detailHtml(byRow[+d.getAttribute("data-detail")])); return; }
+      var c = e.target.closest("[data-compare]");
+      if (c) toggleCompare(+c.getAttribute("data-compare"));
+    });
+    trayOpen.addEventListener("click", function () {
+      if (compare.length === 2) openModal($("#compare-modal"), compareHtml(byRow[compare[0]], byRow[compare[1]]));
+    });
+    $("#compare-clear").addEventListener("click", function () { compare = []; updateTray(); render(); });
+
     $$("[data-filter]").forEach(function (b) {
       b.addEventListener("click", function () {
         filter = b.getAttribute("data-filter");
@@ -255,6 +423,8 @@
     if (shinyBox) shinyBox.addEventListener("change", function () { shiny = shinyBox.checked; render(); });
     var search = $("#search");
     if (search) search.addEventListener("input", function () { q = search.value; render(); });
+    var sortSel = $("#sort");
+    if (sortSel) sortSel.addEventListener("change", function () { sort = sortSel.value; render(); });
     render();
 
     var evos = $("#evolutions");
@@ -285,5 +455,43 @@
       openLightbox(C.gallery[cur].map(fullOf), +a.getAttribute("data-i"));
     });
     renderGallery();
+  }
+
+  // ---- events (written by the Discord bot into events.json) -------------------
+  var evUp = $("#events-upcoming"), evPast = $("#events-past");
+  if (evUp) {
+    var MEDAL = { 1: "🥇", 2: "🥈", 3: "🥉" };
+    function eventCard(e) {
+      var d = new Date(e.date);
+      var when = d.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric", timeZone: NY }) +
+        " · " + d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZone: NY }) + " ET";
+      var results = (e.results || []).map(function (r) {
+        return '<li><span class="medal">' + (MEDAL[r.place] || r.place + ".") + '</span>' + esc(r.player) +
+          (r.note ? ' <span class="faint">— ' + esc(r.note) + '</span>' : '') + '</li>';
+      }).join("");
+      return '<article class="card event">' +
+        '<div class="when">' + when + (e.status === "cancelled" ? ' · cancelled' : '') + '</div>' +
+        '<h3>' + esc(e.name) + '</h3>' +
+        '<div class="meta">' + esc(e.type) + (e.host ? ' · hosted by ' + esc(e.host) : '') + '</div>' +
+        (e.description ? '<p>' + esc(e.description) + '</p>' : '') +
+        (results ? '<ol>' + results + '</ol>' : '') +
+        (e.trophy ? '<div class="trophy">' + esc(e.trophy) + '</div>' : '') +
+        (e.link ? '<a class="more" href="' + esc(e.link) + '" target="_blank" rel="noopener">Details in Discord →</a>' : '') +
+        '</article>';
+    }
+    fetch("events.json", { cache: "no-store" })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var events = (d.events || []).filter(function (e) { return e.status !== "cancelled"; });
+        var up = events.filter(function (e) { return e.status !== "done" && new Date(e.date).getTime() >= now - 6 * 3600e3; })
+          .sort(function (a, b) { return new Date(a.date) - new Date(b.date); });
+        var past = events.filter(function (e) { return up.indexOf(e) < 0; })
+          .sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
+        evUp.innerHTML = up.length ? up.map(eventCard).join("")
+          : '<p class="empty">Nothing on the calendar right now. Events are announced in the Discord and show up here the same minute.</p>';
+        evPast.innerHTML = past.length ? past.map(eventCard).join("")
+          : '<p class="empty">No results recorded yet — Season 2 starts the record.</p>';
+      })
+      .catch(function () { evUp.innerHTML = '<p class="empty">Couldn’t load the event list.</p>'; });
   }
 })();

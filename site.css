@@ -16,6 +16,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
@@ -191,6 +192,53 @@ table.evos th, table.evos td { text-align: left; padding: 10px 14px; border-bott
 table.evos th { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
 table.evos td.how { color: var(--muted); }
 
+.notice { background: var(--card); border: 2px solid var(--accent); border-radius: 14px; padding: 14px 18px; margin: 8px 0 0; color: var(--muted); font-size: 16px; }
+.notice strong { color: var(--accent-dark); }
+.new-tag { display: inline-block; font-family: var(--head); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: var(--accent); color: var(--accent-ink); border-radius: 999px; padding: 2px 8px; margin-left: 8px; vertical-align: middle; }
+.mon .ability { font-size: 14px; color: var(--muted); }
+.mon .card-actions { display: flex; gap: 8px; margin-top: auto; padding-top: 4px; }
+.pill.small { font-size: 13px; padding: 6px 12px; }
+.pill:disabled { opacity: .45; cursor: default; }
+.compare-tray { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--card); border: 2px solid var(--line); border-radius: 999px; padding: 8px 10px 8px 18px; }
+.compare-tray .compare-names { font-weight: 700; }
+.modal { position: fixed; inset: 0; background: rgba(30, 18, 10, .62); display: none; align-items: center; justify-content: center; z-index: 60; padding: 24px; }
+.modal.open { display: flex; }
+.modal-card { position: relative; background: var(--card); border: 2px solid var(--line); border-radius: 18px; width: 100%; max-width: 760px; max-height: 92vh; overflow: auto; padding: 28px; }
+.modal-card.wide { max-width: 1000px; }
+.modal-close { position: absolute; top: 10px; right: 14px; background: none; border: 0; font-size: 32px; line-height: 1; color: var(--faint); cursor: pointer; padding: 6px; }
+.modal-close:hover { color: var(--ink); }
+.detail { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 28px; }
+.detail .arts { display: flex; flex-direction: column; gap: 10px; }
+.detail .arts .art { height: 210px; }
+.detail .arts .art img { max-height: 186px; }
+.detail .arts .cap { font-size: 13px; color: var(--faint); text-align: center; }
+.detail .info { display: flex; flex-direction: column; gap: 12px; }
+.detail h2 { font-size: 34px; }
+.detail .row { font-size: 15px; }
+.detail .row .lbl { display: block; margin-bottom: 2px; }
+.detail .moves { display: flex; flex-wrap: wrap; gap: 4px; }
+.detail .stats { max-width: 420px; }
+.compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.compare .side { display: flex; flex-direction: column; gap: 10px; }
+.compare .side .art { height: 170px; }
+.compare .side .art img { max-height: 150px; }
+.compare h3 { font-size: 26px; }
+.compare .stats b.win { color: var(--accent-dark); }
+.compare .verdict { margin-top: 20px; font-size: 15px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+.compare .verdict strong { color: var(--ink); }
+
+/* events */
+.event-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.event { gap: 10px; }
+.event .when { color: var(--accent-dark); font-weight: 700; font-size: 15px; }
+.event h3 { font-size: 24px; }
+.event .meta { color: var(--faint); font-size: 14px; }
+.event p { font-size: 16px; }
+.event ol { margin: 4px 0 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.event ol li { font-size: 16px; }
+.event ol li .medal { display: inline-block; width: 26px; }
+.event .trophy { border-left: 3px solid var(--accent); padding: 4px 12px; color: var(--muted); font-style: italic; font-size: 15px; }
+
 /* gallery */
 .grid-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .grid-gallery a { display: block; border-radius: 12px; overflow: hidden; background: var(--chip); }
@@ -228,6 +276,8 @@ table.evos td.how { color: var(--muted); }
   .lightbox { padding: 24px 48px; }
   .modlist ul { columns: 2; }
   .season-logo { width: 130px; height: 130px; }
+  .detail { grid-template-columns: 1fr; }
+  .event-list { grid-template-columns: 1fr; }
   .season-copy h2 { font-size: 36px; }
 }
 @media (max-width: 600px) {
@@ -245,6 +295,9 @@ table.evos td.how { color: var(--muted); }
   .hero-art > img { width: 200px; height: 200px; }
   .toggle { margin-left: 0; }
   .modlist ul { columns: 1; }
+  .compare { grid-template-columns: 1fr; }
+  .modal { padding: 10px; }
+  .modal-card { padding: 20px; }
   .season-head { flex-direction: column; align-items: flex-start; gap: 16px; }
   .lightbox { padding: 48px 8px; }
   .lb-prev, .lb-next { top: auto; bottom: 36px; transform: none; }

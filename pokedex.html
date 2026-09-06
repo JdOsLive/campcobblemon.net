@@ -27,6 +27,7 @@
     <nav class="nav">
       <a href="index.html">Home</a>
       <a href="seasons.html">Seasons</a>
+      <a href="events.html">Events</a>
       <a href="pokedex.html">Pokédex</a>
       <a href="gallery.html">Gallery</a>
       <a href="rules.html">Rules</a>
@@ -39,8 +40,12 @@
 
   <div class="page-head">
     <h1>Pokédex</h1>
-    <p>Everything here is custom to the server and doesn't spawn anywhere else. Costume Bidoofs are normal Bidoofs in outfits. Campion forms are regional variants with their own types and stats. The new evolutions branch off Pokémon you already know.</p>
-    <p>Each card lists the biomes or places it spawns in and how rare it is there. A few can also be evolved from something you already have — those say so.</p>
+    <p>Everything here is custom to the server and doesn't spawn anywhere else. Costume Bidoofs are Bidoofs in outfits — each with its own typing, ability and stats. Campion forms are regional variants with their own types and stats. The new evolutions branch off Pokémon you already know.</p>
+    <p>Each card lists the biomes or places it spawns in and how rare it is there. Open one for the full picture, and add two to compare them before a doof tournament.</p>
+  </div>
+
+  <div class="notice" id="doof-notice" hidden>
+    <strong>Heads up:</strong> the costume Bidoof typings, abilities and stats shown here are from datapack v2.0, which isn't on the server yet. Until it is, they're still plain Normal-type Bidoofs in game.
   </div>
 
   <section class="section">
@@ -49,8 +54,20 @@
       <button class="pill" data-filter="bidoof">Costume Bidoofs</button>
       <button class="pill" data-filter="campion">Campion forms</button>
       <button class="pill" data-filter="evo">New evolutions</button>
-      <input class="search" id="search" type="search" placeholder="Search name, biome, designer…">
+      <input class="search" id="search" type="search" placeholder="Search name, type, biome, designer…">
+      <select class="search" id="sort" aria-label="Sort">
+        <option value="default">Sort: default</option>
+        <option value="newest">Sort: newest first</option>
+        <option value="stats">Sort: highest stats</option>
+        <option value="name">Sort: name</option>
+      </select>
       <label class="toggle"><input type="checkbox" id="shiny"> Show shiny</label>
+    </div>
+    <div class="compare-tray" id="compare-tray" hidden>
+      <span class="lbl">Comparing</span>
+      <span class="compare-names" id="compare-names"></span>
+      <button class="pill" id="compare-open" disabled>Compare</button>
+      <button class="pill" id="compare-clear">Clear</button>
     </div>
     <div class="dex" id="dex"></div>
   </section>
@@ -64,6 +81,20 @@
   </section>
 
 </main>
+
+<div class="modal" id="mon-modal">
+  <div class="modal-card">
+    <button class="modal-close" aria-label="Close">×</button>
+    <div class="modal-body"></div>
+  </div>
+</div>
+
+<div class="modal" id="compare-modal">
+  <div class="modal-card wide">
+    <button class="modal-close" aria-label="Close">×</button>
+    <div class="modal-body"></div>
+  </div>
+</div>
 
 <footer class="site-footer">
   <div class="wrap">
