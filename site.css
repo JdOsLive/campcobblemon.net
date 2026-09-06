@@ -19,7 +19,12 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--bg);
+  /* soft campfire glow top-right and a hint of forest green low-left, over the cream */
+  background:
+    radial-gradient(900px 600px at 85% -5%, rgba(217, 100, 43, .14), transparent 70%),
+    radial-gradient(800px 500px at 0% 100%, rgba(63, 155, 92, .10), transparent 70%),
+    var(--bg);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--body);
   font-size: 18px;
@@ -92,6 +97,10 @@ p { margin: 0; }
 .card { background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
 .card .num { font-family: var(--head); font-weight: 700; font-size: 34px; color: var(--accent); line-height: 1; }
 .card p { color: var(--muted); font-size: 16px; }
+.join-grid { display: grid; grid-template-columns: minmax(0, 1fr) 350px; gap: 40px; align-items: start; }
+.join-grid > div:first-child { display: flex; flex-direction: column; gap: 22px; }
+.join-grid .cards-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.discord-widget iframe { display: block; width: 100%; max-width: 350px; height: 500px; border: 2px solid var(--line); border-radius: 18px; background: var(--card); }
 .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; align-items: start; }
 .two-col > div { display: flex; flex-direction: column; gap: 16px; }
 .thumbs-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
@@ -214,7 +223,8 @@ table.evos td.how { color: var(--muted); }
   .hero-art > img { width: 260px; height: 260px; }
   .cards-4, .dex { grid-template-columns: repeat(2, 1fr); }
   .grid-gallery { grid-template-columns: repeat(3, 1fr); }
-  .two-col, .seasons { grid-template-columns: 1fr; }
+  .two-col, .seasons, .join-grid { grid-template-columns: 1fr; }
+  .discord-widget iframe { max-width: 100%; }
   .lightbox { padding: 24px 48px; }
   .modlist ul { columns: 2; }
   .season-logo { width: 130px; height: 130px; }
@@ -230,7 +240,7 @@ table.evos td.how { color: var(--muted); }
   .hero h1 { font-size: 40px; }
   h2 { font-size: 30px; }
   .page-head h1 { font-size: 38px; }
-  .cards-4, .dex, .thumbs-3 { grid-template-columns: 1fr; }
+  .cards-4, .join-grid .cards-4, .dex, .thumbs-3 { grid-template-columns: 1fr; }
   .grid-gallery { grid-template-columns: repeat(2, 1fr); }
   .hero-art > img { width: 200px; height: 200px; }
   .toggle { margin-left: 0; }
