@@ -225,8 +225,10 @@
         '<div><h3>' + esc(m.name) + '</h3><div class="sub">' + esc(sub) + '</div></div>' +
         '<div class="types">' + m.types.map(function (t) { return badge(t, TYPE[t] || "#888"); }).join("") +
         badge(m.rarity, RARITY[m.rarity] || "#9aab9f") + '</div>' +
-        '<dl><dt>Spawns</dt><dd>' + esc(m.spawn) + '</dd>' +
-        '<dt>Design</dt><dd>' + esc(m.designer) + '</dd>' +
+        '<div class="where"><span class="lbl">Found in</span>' +
+        m.where.map(function (w) { return '<span class="biome">' + esc(w) + '</span>'; }).join("") + '</div>' +
+        (m.how ? '<div class="how"><span class="lbl">Or</span>' + esc(m.how) + '</div>' : '') +
+        '<dl><dt>Design</dt><dd>' + esc(m.designer) + '</dd>' +
         '<dt>Added</dt><dd>' + fmtDate(m.added, { month: "short", day: "numeric", year: "numeric" }) + '</dd></dl>' +
         '<details><summary>Base stats · ' + total + '</summary><div class="stats">' +
         m.stats.map(function (v, i) {
@@ -238,7 +240,7 @@
       var shown = mons.filter(function (m) {
         if (filter !== "all" && m.group !== filter) return false;
         if (!needle) return true;
-        return (m.name + " " + m.spawn + " " + m.designer + " " + m.types.join(" ")).toLowerCase().indexOf(needle) > -1;
+        return (m.name + " " + m.where.join(" ") + " " + (m.how || "") + " " + m.designer + " " + m.types.join(" ")).toLowerCase().indexOf(needle) > -1;
       });
       dex.innerHTML = shown.length ? shown.map(card).join("") : '<p class="empty">Nothing matches that.</p>';
     }
