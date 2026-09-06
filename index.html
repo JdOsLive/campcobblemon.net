@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Camp Cobblemon</title>
+  <meta name="description" content="Camp Cobblemon is a small, application-only Cobblemon SMP for adults. Season 2 opens September 11, 2026 on a brand new world.">
+  <meta property="og:title" content="Camp Cobblemon">
+  <meta property="og:description" content="A small Cobblemon server with big builds. Application-only, 18+, Cobblemon 1.8.">
+  <meta property="og:image" content="https://campcobblemon.net/assets/logo.png">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp Cobblemon</span></a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="pokedex.html">Pokédex</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="rules.html">Rules</a>
+      <a class="btn btn-primary" data-link="discord" href="#" target="_blank" rel="noopener">Join the Discord</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="kicker">Application-only · 18+ · Cobblemon 1.8</p>
+      <h1>A small Cobblemon server with big builds.</h1>
+      <p class="lede">Camp Cobblemon is a close-knit SMP that cares about building, running a modpack we maintain ourselves. <span data-season-line>Season 2 opens Friday, September 11 at 7:00 PM ET on a brand new world.</span></p>
+      <div class="actions">
+        <a class="btn btn-primary btn-lg" data-link="discord" href="#" target="_blank" rel="noopener">Apply in Discord</a>
+        <a class="btn btn-outline btn-lg" data-link="modrinth" href="#" target="_blank" rel="noopener">Get the modpack</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <img src="assets/logo.png" alt="Camp Cobblemon Season 2 logo">
+      <div class="status" id="status">
+        <span class="dot"></span>
+        <strong class="status-text">Checking…</strong>
+        <span class="status-players muted"></span>
+        <button class="mono" data-copy title="Copy the server address" data-address>play.campcobblemon.net</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="join">
+    <h2>How to join</h2>
+    <div class="cards-4">
+      <div class="card"><span class="num">1</span><strong>Join the Discord</strong><p>Everything happens there: announcements, chat, applications.</p></div>
+      <div class="card"><span class="num">2</span><strong>Hit Apply in #apply</strong><p>A short application. Staff read every one and you'll get a DM with the decision.</p></div>
+      <div class="card"><span class="num">3</span><strong>Install the modpack</strong><p>One click in the Modrinth app. Always use the latest version.</p></div>
+      <div class="card"><span class="num">4</span><strong>Hop on</strong><p><span data-address>play.campcobblemon.net</span>. Find a spot and start building.</p></div>
+    </div>
+  </section>
+
+  <section class="section two-col">
+    <div>
+      <h2>From Season 1</h2>
+      <div class="thumbs-3" id="featured"></div>
+      <a class="more" href="gallery.html">See the whole gallery →</a>
+    </div>
+    <div>
+      <h2>Only at camp</h2>
+      <div class="sprites">
+        <img src="assets/pokemon/r32.png" alt="Campion Spiritomb" style="height:150px">
+        <img src="assets/pokemon/r29.png" alt="Campion Gligar" style="height:120px">
+        <img src="assets/pokemon/r5.png" alt="Bidoof in a Helldivers costume" style="height:100px">
+      </div>
+      <p class="blurb"><span data-mon-count>27</span> Pokémon you won't find anywhere else: <span data-bidoof-count>20</span> costume Bidoofs, Campion regional forms and a couple of new evolutions, all designed by campers.</p>
+      <a class="more" href="pokedex.html">Open the Pokédex →</a>
+    </div>
+  </section>
+
+  <section class="section" id="modpack">
+    <div class="section-head">
+      <h2>The modpack</h2>
+      <p>Camp Cobblemon Official Modpack <span data-modpack-version>2.0.0</span> · Fabric · Modrinth app</p>
+    </div>
+    <div class="chips" id="modpack-chips"></div>
+    <div class="cards-4" id="modpack-ours" style="grid-template-columns: repeat(2, minmax(0, 1fr))"></div>
+    <div><a class="btn btn-outline" data-link="modrinth" href="#" target="_blank" rel="noopener">Get it on Modrinth</a></div>
+  </section>
+
+  <section class="section" id="seasons-section">
+    <div class="section-head">
+      <h2>Seasons</h2>
+      <p>The server opened August 7, 2024. Each season is a fresh world.</p>
+    </div>
+    <div class="seasons" id="seasons"></div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Fan-made server. Not affiliated with Nintendo, The Pokémon Company or the Cobblemon team.</span>
+    <nav>
+      <a data-link="discord" href="#" target="_blank" rel="noopener">Discord</a>
+      <a data-link="modrinth" href="#" target="_blank" rel="noopener">Modrinth</a>
+      <a data-link="map" href="#" target="_blank" rel="noopener">Live map</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="content.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

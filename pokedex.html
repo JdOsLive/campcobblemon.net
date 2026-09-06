@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pokédex · Camp Cobblemon</title>
+  <meta name="description" content="Every custom Pokémon on Camp Cobblemon: costume Bidoofs, Campion regional forms and new evolutions, all designed by campers.">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp Cobblemon</span></a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="pokedex.html">Pokédex</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="rules.html">Rules</a>
+      <a class="btn btn-primary" data-link="discord" href="#" target="_blank" rel="noopener">Join the Discord</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="page-head">
+    <h1>Pokédex</h1>
+    <p>Everything here was designed by campers and only spawns on our server. Costume Bidoofs are normal Bidoofs in outfits. Campion forms are regional variants with their own types and stats. The new evolutions branch off Pokémon you already know.</p>
+  </div>
+
+  <section class="section">
+    <div class="filters">
+      <button class="pill active" data-filter="all">All</button>
+      <button class="pill" data-filter="bidoof">Costume Bidoofs</button>
+      <button class="pill" data-filter="campion">Campion forms</button>
+      <button class="pill" data-filter="evo">New evolutions</button>
+      <input class="search" id="search" type="search" placeholder="Search name, biome, designer…">
+      <label class="toggle"><input type="checkbox" id="shiny"> Show shiny</label>
+    </div>
+    <div class="dex" id="dex"></div>
+  </section>
+
+  <section class="section">
+    <h2>Evolutions</h2>
+    <table class="evos">
+      <thead><tr><th>From</th><th>How</th><th>To</th></tr></thead>
+      <tbody id="evolutions"></tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Fan-made server. Not affiliated with Nintendo, The Pokémon Company or the Cobblemon team.</span>
+    <nav>
+      <a data-link="discord" href="#" target="_blank" rel="noopener">Discord</a>
+      <a data-link="modrinth" href="#" target="_blank" rel="noopener">Modrinth</a>
+      <a data-link="map" href="#" target="_blank" rel="noopener">Live map</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="content.js"></script>
+<script src="site.js"></script>
+</body>
+</html>
