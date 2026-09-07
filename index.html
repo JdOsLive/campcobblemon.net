@@ -14,7 +14,7 @@
   <meta property="og:image:width" content="512">
   <meta property="og:image:height" content="512">
   <meta name="twitter:card" content="summary">
-  <meta name="theme-color" content="#d9642b">
+  <meta name="theme-color" content="#253d32">
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,68 +22,72 @@
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp Cobblemon</span></a>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="seasons.html">Seasons</a>
-      <a href="events.html">Events</a>
-      <a href="pokedex.html">Pokédex</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="rules.html">Rules</a>
-      <a class="btn btn-primary" data-link="discord" href="#" target="_blank" rel="noopener">Join the Discord</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#menu"></use></svg>Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Main navigation">
+      <a href="index.html" class="active" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#home"></use></svg>Home</a>
+      <a href="seasons.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#calendar"></use></svg>Seasons</a>
+      <a href="events.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#events"></use></svg>Events</a>
+      <a href="pokedex.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#book"></use></svg>Pokédex</a>
+      <a href="gallery.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#gallery"></use></svg>Gallery</a>
+      <a href="rules.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#shield"></use></svg>Rules</a>
+      <a class="btn btn-primary" data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Join the Discord</a>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="main" tabindex="-1">
 
-  <section class="hero">
+  <aside class="season-announcement" aria-label="Season announcement">
+    <span class="tag">Season 2</span>
+    <p data-season-line>Season 2 opens Friday, September 11 at 7:00 PM ET on a brand new world.</p>
+    <a href="seasons.html#s2">About the season <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a>
+  </aside>
+
+  <section class="hero" aria-labelledby="welcome-heading">
     <div class="hero-copy">
-      <p class="kicker">Application-only · 18+ · Open since August 2024</p>
-      <h1>Big builds, custom Pokémon, and a lot of Bidoofs.</h1>
-      <p class="lede">Camp Cobblemon is an 18+, application-only SMP that’s been going since August 2024 — one of the longest-running private Cobblemon servers — on a modpack we maintain ourselves. <span data-season-line>Season 2 opens Friday, September 11 at 7:00 PM ET on a brand new world.</span></p>
+      <p class="kicker">A private Cobblemon SMP · Since 2024</p>
+      <h1 id="welcome-heading">Big builds.<br>Custom Pokémon.<br><span>A lot of Bidoofs.</span></h1>
+      <p class="lede">A place to build, catch, and settle in. We're an 18+ community playing on a modpack we maintain ourselves.</p>
       <div class="actions">
-        <a class="btn btn-primary btn-lg" data-link="discord" href="#" target="_blank" rel="noopener">Apply in Discord</a>
-        <a class="btn btn-outline btn-lg" data-link="modrinth" href="#" target="_blank" rel="noopener">Get the modpack</a>
+        <a class="btn btn-primary btn-lg" data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Apply in Discord</a>
+        <a class="btn btn-outline btn-lg" data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Get the modpack</a>
       </div>
+      <p class="hero-note">Application-only. New to camp? <a href="#join">Here's how to join.</a></p>
     </div>
     <div class="hero-art">
-      <img src="assets/logo.png" alt="Camp Cobblemon Season 2 logo">
-      <div class="status" id="status">
-        <span class="dot"></span>
-        <strong class="status-text">Checking…</strong>
-        <span class="status-players muted"></span>
-        <span class="tag current shiny-badge" id="shiny-badge" hidden>✦ Shiny weekend on</span>
-        <button class="mono" data-copy title="Copy the server address" data-address>play.campcobblemon.net</button>
-      </div>
+      <figure class="camp-photo">
+        <img class="world-photo" src="assets/season1/large/s1-42.jpg" alt="Season 1: a riverside bridge, Pokémon builds, and a tree above a tall stone cliff" width="1600" height="900" fetchpriority="high">
+        <img class="camp-emblem" src="assets/logo.png" alt="" width="512" height="512">
+        <figcaption><span>Built by our community</span><a href="gallery.html">Explore Season 1 <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a></figcaption>
+      </figure>
     </div>
   </section>
 
-  <section class="section join-grid" id="join">
-    <div>
-      <h2>How to join</h2>
-      <div class="cards-4">
-        <div class="card"><span class="num">1</span><strong>Join the Discord</strong><p>Everything happens there: announcements, chat, applications.</p></div>
-        <div class="card"><span class="num">2</span><strong>Hit Apply in #apply</strong><p>A short application. Staff read every one and you'll get a DM with the decision.</p></div>
-        <div class="card"><span class="num">3</span><strong>Install the modpack</strong><p>One click in the Modrinth app. Always use the latest version.</p></div>
-        <div class="card"><span class="num">4</span><strong>Hop on</strong><p><span data-address>play.campcobblemon.net</span>. Find a spot and start building.</p></div>
-      </div>
+  <div class="server-bar">
+    <div class="status" id="status" role="status">
+      <span class="dot" aria-hidden="true"></span>
+      <strong class="status-text">Checking server…</strong>
+      <span class="status-players muted"></span>
+      <span class="tag current shiny-badge" id="shiny-badge" hidden>✦ Shiny weekend on</span>
     </div>
-    <div class="discord-widget">
-      <iframe src="https://discord.com/widget?id=1269333810647138377&theme=light" width="350" height="500" title="Camp Cobblemon Discord" allowtransparency="true" frameborder="0" loading="lazy" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-    </div>
-  </section>
+    <div class="server-address"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#copy"></use></svg>Server address</span><button class="mono" data-copy aria-label="Copy server address" title="Copy the server address" data-address>play.campcobblemon.net</button></div>
+    <p class="sr-only" id="copy-feedback" role="status"></p>
+  </div>
 
   <section class="section two-col">
-    <div>
+    <div class="camp-gallery">
+      <p class="kicker">A look around</p>
       <h2>From Season 1</h2>
       <div class="thumbs-3" id="featured"></div>
       <a class="more" href="gallery.html">See the whole gallery →</a>
     </div>
-    <div>
+    <div class="camp-pokemon">
+      <p class="kicker">Meet the locals</p>
       <h2>Only at camp</h2>
       <div class="sprites">
         <img src="assets/pokemon/r32.png" alt="Campion Spiritomb" style="height:150px">
@@ -95,18 +99,36 @@
     </div>
   </section>
 
+
+  <section class="section join-grid" id="join" aria-labelledby="join-heading">
+    <div>
+      <div class="section-head"><div><p class="kicker">Make yourself at home</p><h2 id="join-heading">How to join</h2></div><a class="more" href="rules.html">Read the camp rules <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a></div>
+      <ol class="cards-4 join-steps">
+        <li class="card"><span class="step-marker"><span class="num" aria-hidden="true">01</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg></span><strong>Join the Discord</strong><p>Our home for announcements, chat, and applications.</p><a class="more" data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Open Discord ↗</a></li>
+        <li class="card"><span class="step-marker"><span class="num" aria-hidden="true">02</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#apply"></use></svg></span><strong>Apply in #apply</strong><p>Fill out a short application. Staff read every one and DM you with the decision.</p></li>
+        <li class="card"><span class="step-marker"><span class="num" aria-hidden="true">03</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg></span><strong>Install the modpack</strong><p>Get the latest version in the Modrinth app while you wait for approval.</p><a class="more" data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Get the modpack ↗</a></li>
+        <li class="card"><span class="step-marker"><span class="num" aria-hidden="true">04</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#play"></use></svg></span><strong>See you at camp</strong><p>Once approved, connect to <span data-address>play.campcobblemon.net</span>. Find a spot and start building.</p></li>
+      </ol>
+    </div>
+    <details class="dropdown discord-widget">
+      <summary>Who's around in Discord?</summary>
+      <iframe src="https://discord.com/widget?id=1269333810647138377&theme=light" width="350" height="500" title="Camp Cobblemon Discord" allowtransparency="true" frameborder="0" loading="lazy" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+    </details>
+  </section>
+
+
   <section class="section" id="modpack">
     <div class="section-head">
       <h2>The modpack</h2>
       <p>Camp Cobblemon Official Modpack <span data-modpack-version>2.0.0</span> · Fabric · Modrinth app</p>
     </div>
     <div class="chips" id="modpack-chips"></div>
-    <div class="cards-4" id="modpack-ours" style="grid-template-columns: repeat(2, minmax(0, 1fr))"></div>
+    <div class="cards-4" id="modpack-ours"></div>
     <details class="dropdown">
       <summary>Everything in the pack <span class="faint">· <span data-mod-count>121</span> mods, packs and shaders</span></summary>
       <div class="modlist" id="modlist"></div>
     </details>
-    <div><a class="btn btn-outline" data-link="modrinth" href="#" target="_blank" rel="noopener">Get it on Modrinth</a></div>
+    <div><a class="btn btn-outline" data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Get it on Modrinth</a></div>
   </section>
 
   <section class="section" id="seasons-section">
@@ -123,9 +145,9 @@
   <div class="wrap">
     <span>Fan-made server. Not affiliated with Nintendo, The Pokémon Company or the Cobblemon team.</span>
     <nav>
-      <a data-link="discord" href="#" target="_blank" rel="noopener">Discord</a>
-      <a data-link="modrinth" href="#" target="_blank" rel="noopener">Modrinth</a>
-      <a data-link="map" href="#" target="_blank" rel="noopener">Live map</a>
+      <a data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Discord</a>
+      <a data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Modrinth</a>
+      <a data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener">Live map</a>
     </nav>
   </div>
 </footer>

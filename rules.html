@@ -12,7 +12,7 @@
   <meta property="og:description" content="Camp Cobblemon's server rules, community rules and enforcement policies.">
   <meta property="og:image" content="https://campcobblemon.net/assets/logo.png">
   <meta name="twitter:card" content="summary">
-  <meta name="theme-color" content="#d9642b">
+  <meta name="theme-color" content="#253d32">
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,23 +20,25 @@
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp Cobblemon</span></a>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="seasons.html">Seasons</a>
-      <a href="events.html">Events</a>
-      <a href="pokedex.html">Pokédex</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="rules.html">Rules</a>
-      <a class="btn btn-primary" data-link="discord" href="#" target="_blank" rel="noopener">Join the Discord</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#menu"></use></svg>Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Main navigation">
+      <a href="index.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#home"></use></svg>Home</a>
+      <a href="seasons.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#calendar"></use></svg>Seasons</a>
+      <a href="events.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#events"></use></svg>Events</a>
+      <a href="pokedex.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#book"></use></svg>Pokédex</a>
+      <a href="gallery.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#gallery"></use></svg>Gallery</a>
+      <a href="rules.html" class="active" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#shield"></use></svg>Rules</a>
+      <a class="btn btn-primary" data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Join the Discord</a>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="main" tabindex="-1">
 
   <div class="page-head">
     <h1>Rules</h1>
@@ -126,9 +128,9 @@
   <div class="wrap">
     <span>Fan-made server. Not affiliated with Nintendo, The Pokémon Company or the Cobblemon team.</span>
     <nav>
-      <a data-link="discord" href="#" target="_blank" rel="noopener">Discord</a>
-      <a data-link="modrinth" href="#" target="_blank" rel="noopener">Modrinth</a>
-      <a data-link="map" href="#" target="_blank" rel="noopener">Live map</a>
+      <a data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Discord</a>
+      <a data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Modrinth</a>
+      <a data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener">Live map</a>
     </nav>
   </div>
 </footer>

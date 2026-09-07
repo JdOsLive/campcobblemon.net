@@ -12,7 +12,7 @@
   <meta property="og:description" content="Every custom Pokémon on Camp Cobblemon: costume Bidoofs, Campion regional forms and new evolutions.">
   <meta property="og:image" content="https://campcobblemon.net/assets/logo.png">
   <meta name="twitter:card" content="summary">
-  <meta name="theme-color" content="#d9642b">
+  <meta name="theme-color" content="#253d32">
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,28 +20,29 @@
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp Cobblemon</span></a>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="seasons.html">Seasons</a>
-      <a href="events.html">Events</a>
-      <a href="pokedex.html">Pokédex</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="rules.html">Rules</a>
-      <a class="btn btn-primary" data-link="discord" href="#" target="_blank" rel="noopener">Join the Discord</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#menu"></use></svg>Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Main navigation">
+      <a href="index.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#home"></use></svg>Home</a>
+      <a href="seasons.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#calendar"></use></svg>Seasons</a>
+      <a href="events.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#events"></use></svg>Events</a>
+      <a href="pokedex.html" class="active" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#book"></use></svg>Pokédex</a>
+      <a href="gallery.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#gallery"></use></svg>Gallery</a>
+      <a href="rules.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#shield"></use></svg>Rules</a>
+      <a class="btn btn-primary" data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Join the Discord</a>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="main" tabindex="-1">
 
   <div class="page-head">
     <h1>Pokédex</h1>
-    <p>Everything here is custom to the server and doesn't spawn anywhere else. Costume Bidoofs are Bidoofs in outfits — each with its own typing, ability and stats. Campion forms are regional variants with their own types and stats. The new evolutions branch off Pokémon you already know.</p>
-    <p>Each card lists the biomes or places it spawns in and how rare it is there. Open one for the full picture, and add two to compare them before a doof tournament.</p>
+    <p>Costume Bidoofs, Campion regional forms, and new evolutions — all custom to camp. Find where they spawn, explore their stats, or compare two Pokémon.</p>
   </div>
 
   <div class="notice" id="doof-notice" hidden>
@@ -50,11 +51,11 @@
 
   <section class="section">
     <div class="filters">
-      <button class="pill active" data-filter="all">All</button>
-      <button class="pill" data-filter="bidoof">Costume Bidoofs</button>
-      <button class="pill" data-filter="campion">Campion forms</button>
-      <button class="pill" data-filter="evo">New evolutions</button>
-      <input class="search" id="search" type="search" placeholder="Search name, type, biome, designer…">
+      <button class="pill active" data-filter="all" aria-pressed="true">All</button>
+      <button class="pill" data-filter="bidoof" aria-pressed="false">Costume Bidoofs</button>
+      <button class="pill" data-filter="campion" aria-pressed="false">Campion forms</button>
+      <button class="pill" data-filter="evo" aria-pressed="false">New evolutions</button>
+      <input class="search" id="search" aria-label="Search Pokémon by name, type, biome, or designer" type="search" placeholder="Search name, type, biome, designer…">
       <select class="search" id="sort" aria-label="Sort">
         <option value="default">Sort: default</option>
         <option value="newest">Sort: newest first</option>
@@ -69,6 +70,7 @@
       <button class="pill" id="compare-open" disabled>Compare</button>
       <button class="pill" id="compare-clear">Clear</button>
     </div>
+    <p class="results-count" id="dex-results" role="status"></p>
     <div class="dex" id="dex"></div>
   </section>
 
@@ -82,14 +84,14 @@
 
 </main>
 
-<div class="modal" id="mon-modal">
+<div class="modal" id="mon-modal" role="dialog" aria-modal="true" aria-label="Pokémon details" tabindex="-1">
   <div class="modal-card">
     <button class="modal-close" aria-label="Close">×</button>
     <div class="modal-body"></div>
   </div>
 </div>
 
-<div class="modal" id="compare-modal">
+<div class="modal" id="compare-modal" role="dialog" aria-modal="true" aria-label="Compare Pokémon" tabindex="-1">
   <div class="modal-card wide">
     <button class="modal-close" aria-label="Close">×</button>
     <div class="modal-body"></div>
@@ -100,9 +102,9 @@
   <div class="wrap">
     <span>Fan-made server. Not affiliated with Nintendo, The Pokémon Company or the Cobblemon team.</span>
     <nav>
-      <a data-link="discord" href="#" target="_blank" rel="noopener">Discord</a>
-      <a data-link="modrinth" href="#" target="_blank" rel="noopener">Modrinth</a>
-      <a data-link="map" href="#" target="_blank" rel="noopener">Live map</a>
+      <a data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Discord</a>
+      <a data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Modrinth</a>
+      <a data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener">Live map</a>
     </nav>
   </div>
 </footer>

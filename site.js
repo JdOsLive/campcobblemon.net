@@ -10,6 +10,9 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
     });
   }
+  function icon(name) {
+    return '<svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#' + name + '"></use></svg>';
+  }
   function fmtDate(iso, opts) {
     var d = new Date(iso.length === 10 ? iso + "T12:00:00Z" : iso);
     return d.toLocaleDateString("en-US", Object.assign({ timeZone: iso.length === 10 ? "UTC" : NY }, opts));
@@ -19,7 +22,7 @@
   function thumbOf(id) { return shotFolder(id) + "/thumb/" + id + ".jpg"; }
   function fullOf(id) { return (C.large.indexOf(id) > -1 ? shotFolder(id) + "/large/" : shotFolder(id) + "/thumb/") + id + ".jpg"; }
   function shotLink(id, i) {
-    return '<a href="' + fullOf(id) + '" data-i="' + i + '"><img src="' + thumbOf(id) + '" alt="" loading="lazy"></a>';
+    return '<a href="' + fullOf(id) + '" data-i="' + i + '" aria-label="Open Season ' + id.split('-')[0].slice(1) + ' screenshot ' + id.split('-')[1] + '"><img src="' + thumbOf(id) + '" alt="" loading="lazy" width="720" height="405"></a>';
   }
   function seasonState(s) {
     var start = new Date(s.start).getTime(), end = s.end ? new Date(s.end).getTime() : Infinity;
@@ -30,21 +33,100 @@
   // ---- shared: nav, links, address ----------------------------------------
   var page = location.pathname.split("/").pop() || "index.html";
   $$(".nav a[href]").forEach(function (a) {
-    if (a.getAttribute("href") === page) a.classList.add("active");
+    if (a.getAttribute("href") === page) {
+      a.classList.add("active");
+      a.setAttribute("aria-current", "page");
+    }
   });
+  var menuButton = $(".nav-toggle"), navigation = $("#primary-nav");
+  if (menuButton && navigation) {
+    menuButton.hidden = false;
+    document.documentElement.classList.add("nav-enhanced");
+    function closeMenu() {
+      navigation.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+    }
+    menuButton.addEventListener("click", function () {
+      var expanded = menuButton.getAttribute("aria-expanded") !== "true";
+      navigation.classList.toggle("open", expanded);
+      menuButton.setAttribute("aria-expanded", String(expanded));
+    });
+    navigation.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { closeMenu(); menuButton.focus(); }
+    });
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest(".site-header")) closeMenu();
+    });
+  }
   $$("[data-link]").forEach(function (a) {
     if (C.site[a.getAttribute("data-link")]) a.href = C.site[a.getAttribute("data-link")];
   });
   $$("[data-address]").forEach(function (el) { el.textContent = C.site.address; });
   $$("[data-copy]").forEach(function (btn) {
+    var resetTimer;
     btn.addEventListener("click", function () {
-      if (!navigator.clipboard) return;
+      var feedback = $("#copy-feedback");
+      function failed() {
+        clearTimeout(resetTimer);
+        btn.textContent = C.site.address;
+        if (feedback) {
+          feedback.className = "copy-error";
+          feedback.textContent = "Couldn't copy automatically. Select and copy the server address: " + C.site.address;
+        }
+        btn.title = "Select and copy this address: " + C.site.address;
+        var range = document.createRange();
+        range.selectNodeContents(btn);
+        var selection = window.getSelection();
+        if (selection) { selection.removeAllRanges(); selection.addRange(range); }
+      }
+      if (!navigator.clipboard || !navigator.clipboard.writeText) { failed(); return; }
       navigator.clipboard.writeText(C.site.address).then(function () {
-        var old = btn.textContent;
+        clearTimeout(resetTimer);
         btn.textContent = "Copied!";
-        setTimeout(function () { btn.textContent = old; }, 1200);
-      });
+        if (feedback) { feedback.className = "sr-only"; feedback.textContent = "Server address copied."; }
+        resetTimer = setTimeout(function () { btn.textContent = C.site.address; }, 1600);
+      }).catch(failed);
     });
+  });
+
+  // Keep keyboard focus inside an open dialog and return it to its trigger.
+  var dialogTriggers = new WeakMap();
+  function activateDialog(el) {
+    if (!el.classList.contains("open")) {
+      var trigger = document.activeElement;
+      var attr = trigger.hasAttribute("data-detail") ? "data-detail" : trigger.hasAttribute("data-compare") ? "data-compare" : null;
+      dialogTriggers.set(el, { element: trigger, attribute: attr, row: attr ? trigger.getAttribute(attr) : null });
+    }
+    el.classList.add("open");
+    document.body.style.overflow = "hidden";
+    $$(".site-header, main, .site-footer, .skip-link").forEach(function (background) { background.inert = true; });
+    ($("button", el) || el).focus();
+  }
+  function deactivateDialog(el) {
+    el.classList.remove("open");
+    if (!$(".modal.open, .lightbox.open")) {
+      document.body.style.overflow = "";
+      $$(".site-header, main, .site-footer, .skip-link").forEach(function (background) { background.inert = false; });
+    }
+    var trigger = dialogTriggers.get(el);
+    if (trigger) {
+      var target = trigger.element.isConnected ? trigger.element : trigger.attribute ? $("#dex [" + trigger.attribute + "='" + trigger.row + "']") : null;
+      if (target) target.focus();
+    }
+    dialogTriggers.delete(el);
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Tab") return;
+    var dialog = $(".modal.open, .lightbox.open");
+    if (!dialog) return;
+    var focusable = $$("button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), [tabindex='0']", dialog);
+    var first = focusable[0], last = focusable[focusable.length - 1];
+    if (!first) { e.preventDefault(); dialog.focus(); return; }
+    if (!dialog.contains(document.activeElement) || (e.shiftKey && document.activeElement === first)) {
+      e.preventDefault(); (e.shiftKey ? last : first).focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
   });
 
   // ---- shared: lightbox -------------------------------------------------------
@@ -53,15 +135,15 @@
     var n = lbList.length;
     lbIdx = (i + n) % n;
     $("img", lb).src = lbList[lbIdx];
+    $("img", lb).alt = "Camp Cobblemon screenshot " + (lbIdx + 1) + " of " + n;
     $(".lb-count", lb).textContent = (lbIdx + 1) + " / " + n;
   }
   function openLightbox(list, i) {
     lbList = list;
     lbShow(i);
-    lb.classList.add("open");
-    document.body.style.overflow = "hidden";
+    activateDialog(lb);
   }
-  function closeLightbox() { lb.classList.remove("open"); document.body.style.overflow = ""; }
+  function closeLightbox() { deactivateDialog(lb); }
   if (lb) {
     $(".lb-close", lb).addEventListener("click", closeLightbox);
     $(".lb-prev", lb).addEventListener("click", function () { lbShow(lbIdx - 1); });
@@ -78,13 +160,11 @@
   // ---- shared: modals ------------------------------------------------------------
   function openModal(el, html) {
     $(".modal-body", el).innerHTML = html;
-    el.classList.add("open");
-    document.body.style.overflow = "hidden";
+    activateDialog(el);
     $(".modal-card", el).scrollTop = 0;
   }
   function closeModal(el) {
-    el.classList.remove("open");
-    if (!$(".modal.open")) document.body.style.overflow = "";
+    deactivateDialog(el);
   }
   $$(".modal").forEach(function (el) {
     $(".modal-close", el).addEventListener("click", function () { closeModal(el); });
@@ -132,8 +212,10 @@
   var st = $("#status");
   if (st) {
     var text = $(".status-text", st), players = $(".status-players", st);
-    fetch("https://api.mcstatus.io/v2/status/java/" + C.site.address)
-      .then(function (r) { return r.json(); })
+    var statusController = new AbortController();
+    var statusTimeout = setTimeout(function () { statusController.abort(); }, 8000);
+    fetch("https://api.mcstatus.io/v2/status/java/" + C.site.address, { signal: statusController.signal })
+      .then(function (r) { if (!r.ok) throw new Error("Status request failed"); return r.json(); })
       .then(function (d) {
         if (d.online) {
           st.classList.add("online");
@@ -145,12 +227,13 @@
           players.textContent = "";
         }
       })
-      .catch(function () { text.textContent = "Status unavailable"; players.textContent = ""; });
+      .catch(function () { text.textContent = "Status unavailable"; players.textContent = ""; })
+      .finally(function () { clearTimeout(statusTimeout); });
   }
 
   var seasonsEl = $("#seasons");
   if (seasonsEl) {
-    seasonsEl.innerHTML = C.seasons.map(function (s) {
+    seasonsEl.innerHTML = C.seasons.slice().reverse().map(function (s) {
       var state = seasonState(s);
       return '<a class="card season ' + state + '" href="seasons.html#' + s.id + '">' +
         '<span class="tag">' + TAG[state] + '</span>' +
@@ -189,7 +272,7 @@
   var feat = $("#featured");
   if (feat) {
     feat.innerHTML = C.featured.map(function (id) {
-      return '<a href="gallery.html"><img src="' + thumbOf(id) + '" alt="Season 1 build" loading="lazy"></a>';
+      return '<a href="gallery.html" aria-label="Explore the Season 1 gallery"><img src="' + thumbOf(id) + '" alt="Season 1 community build" loading="lazy" width="720" height="405"></a>';
     }).join("");
   }
   $$("[data-mon-count]").forEach(function (el) { el.textContent = C.pokemon.length; });
@@ -230,7 +313,7 @@
       openLightbox(s.shots.map(fullOf), +a.getAttribute("data-i"));
     });
     if (location.hash) {
-      var target = $(location.hash);
+      var target = document.getElementById(location.hash.slice(1));
       if (target) target.scrollIntoView();
     }
   }
@@ -273,13 +356,17 @@
       return m;
     }
     function ink(hex) {
-      var r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
-      return (0.299 * r + 0.587 * g + 0.114 * b) > 150 ? "#1b1b1b" : "#ffffff";
+      var rgb = [1, 3, 5].map(function (start) {
+        var channel = parseInt(hex.slice(start, start + 2), 16) / 255;
+        return channel <= 0.04045 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);
+      });
+      var luminance = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+      return (luminance + 0.05) / 0.05 >= 1.05 / (luminance + 0.05) ? "#000000" : "#ffffff";
     }
     function badge(label, color) {
       return '<span class="type" style="background:' + color + ';color:' + ink(color) + '">' + esc(label) + '</span>';
     }
-    function typeBadge(t) { return badge(t, TYPE[t] || "#888"); }
+    function typeBadge(t) { return badge(t, TYPE[t] || "#888888"); }
     function mult(m) { return m === 0.25 ? "¼×" : m === 0.5 ? "½×" : m + "×"; }
 
     var mons = C.pokemon.map(function (m, i) {
@@ -322,8 +409,8 @@
         (m.ability ? '<div class="ability"><span class="lbl">Ability</span>' + esc(m.ability.split(" (hidden")[0]) + '</div>' : '') +
         '<dl><dt>Design</dt><dd>' + esc(m.designer) + '</dd>' +
         '<dt>Added</dt><dd>' + fmtDate(m.added, { month: "short", day: "numeric", year: "numeric" }) + '</dd></dl>' +
-        '<div class="card-actions"><button class="pill small" data-detail="' + m.row + '">Details</button>' +
-        '<button class="pill small' + (inCompare ? ' active' : '') + '" data-compare="' + m.row + '">' + (inCompare ? "✓ Comparing" : "Compare") + '</button></div>' +
+        '<div class="card-actions"><button class="pill small" data-detail="' + m.row + '" aria-label="Details for ' + esc(m.name) + '">' + icon("book") + 'Details</button>' +
+        '<button class="pill small' + (inCompare ? ' active' : '') + '" data-compare="' + m.row + '" aria-label="Compare ' + esc(m.name) + '" aria-pressed="' + inCompare + '">' + icon("compare") + (inCompare ? "Comparing" : "Compare") + '</button></div>' +
         '</article>';
     }
     function visible() {
@@ -341,8 +428,17 @@
       return list;
     }
     function render() {
+      var active = document.activeElement;
+      var focusAttribute = active && dex.contains(active) && (active.hasAttribute("data-compare") ? "data-compare" : active.hasAttribute("data-detail") ? "data-detail" : null);
+      var focusRow = focusAttribute ? active.getAttribute(focusAttribute) : null;
       var shown = visible();
-      dex.innerHTML = shown.length ? shown.map(card).join("") : '<p class="empty">Nothing matches that.</p>';
+      dex.innerHTML = shown.length ? shown.map(card).join("") : '<p class="empty">No Pokémon match. Try another name, type, or biome, or choose All.</p>';
+      var results = $("#dex-results");
+      if (results) results.textContent = shown.length + " of " + mons.length + " Pokémon";
+      if (focusAttribute) {
+        var replacement = $("[" + focusAttribute + "='" + focusRow + "']", dex);
+        if (replacement) replacement.focus();
+      }
     }
 
     // detail view
@@ -435,7 +531,7 @@
     $$("[data-filter]").forEach(function (b) {
       b.addEventListener("click", function () {
         filter = b.getAttribute("data-filter");
-        $$("[data-filter]").forEach(function (x) { x.classList.toggle("active", x === b); });
+        $$("[data-filter]").forEach(function (x) { x.classList.toggle("active", x === b); x.setAttribute("aria-pressed", String(x === b)); });
         render();
       });
     });
@@ -463,7 +559,7 @@
       b.textContent = b.textContent + " · " + C.gallery[b.getAttribute("data-set")].length;
       b.addEventListener("click", function () {
         cur = b.getAttribute("data-set");
-        $$("[data-set]").forEach(function (x) { x.classList.toggle("active", x === b); });
+        $$("[data-set]").forEach(function (x) { x.classList.toggle("active", x === b); x.setAttribute("aria-pressed", String(x === b)); });
         renderGallery();
       });
     });
