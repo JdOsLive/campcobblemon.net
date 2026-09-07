@@ -109,6 +109,26 @@
     }
   });
 
+  // ---- shiny weekend (Friday 7 PM -> Sunday midnight, Eastern; same window Camp Radio uses) ----
+  var shinyStrip = $("#shiny-strip"), shinyStatus = $("#shiny-status"), shinyBadge = $("#shiny-badge");
+  if (shinyStrip || shinyBadge) {
+    var parts = new Intl.DateTimeFormat("en-US", { timeZone: NY, weekday: "short", hour: "numeric", minute: "numeric", hour12: false })
+      .formatToParts(new Date());
+    var get = function (t) { return (parts.filter(function (p) { return p.type === t; })[0] || {}).value; };
+    var dayIdx = { Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6 }[get("weekday")];
+    var nowMin = dayIdx * 1440 + (parseInt(get("hour"), 10) % 24) * 60 + parseInt(get("minute"), 10);
+    var START = 4 * 1440 + 19 * 60, END = 7 * 1440;
+    var on = nowMin >= START;
+    function span(mins) {
+      var d = Math.floor(mins / 1440), h = Math.round((mins % 1440) / 60);
+      if (d >= 1) return d + (d === 1 ? " day" : " days") + (h ? " " + h + " h" : "");
+      return h <= 1 ? "under an hour" : "about " + h + " hours";
+    }
+    var text = on ? "On now — " + span(END - nowMin) + " left" : "Next one Friday 7 PM ET — in " + span(START - nowMin);
+    if (shinyStrip) { shinyStrip.classList.toggle("on", on); shinyStatus.textContent = text; }
+    if (shinyBadge) shinyBadge.hidden = !on;
+  }
+
   var st = $("#status");
   if (st) {
     var text = $(".status-text", st), players = $(".status-players", st);
