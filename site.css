@@ -227,6 +227,13 @@ table.evos td.how { color: var(--muted); }
 .compare .verdict { margin-top: 20px; font-size: 15px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
 .compare .verdict strong { color: var(--ink); }
 
+/* support */
+.support { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+  background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 26px 30px; }
+.support > div { display: flex; flex-direction: column; gap: 10px; max-width: 68ch; }
+.support p { color: var(--muted); font-size: 16px; }
+.support .btn { flex-shrink: 0; }
+
 /* shiny weekend strip */
 .strip { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 16px 22px; margin-top: 16px; }
 .strip.on { border-color: var(--accent); }
