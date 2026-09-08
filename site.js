@@ -363,6 +363,7 @@
         '<div class="info">' +
         '<div><h2>' + esc(m.name) + newTag(m) + '</h2><div class="sub">' + esc(subLine(m)) + '</div></div>' +
         '<div class="types">' + typeBadges(m) + badge(m.rarity, RARITY[m.rarity] || "#9aab9f") + '</div>' +
+        (m.flavor ? '<p class="dex-text">' + esc(m.flavor) + '</p>' : "") +
         (m.role ? row("Role", esc(m.role)) : "") +
         (m.ability ? row("Abilities", esc(m.ability)) : "") +
         row("Found in", '<div class="types">' + m.where.map(function (w) { return '<span class="biome">' + esc(w) + '</span>'; }).join("") + '</div>') +

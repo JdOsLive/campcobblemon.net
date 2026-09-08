@@ -216,6 +216,8 @@ table.evos td.how { color: var(--muted); }
 .detail h2 { font-size: 34px; }
 .detail .row { font-size: 15px; }
 .detail .row .lbl { display: block; margin-bottom: 2px; }
+.dex-text { margin: 0; font-size: 16px; line-height: 1.5; color: var(--muted); font-style: italic;
+  border-left: 3px solid var(--line); padding-left: 14px; }
 .detail .moves { display: flex; flex-wrap: wrap; gap: 4px; }
 .detail .stats { max-width: 420px; }
 .compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
