@@ -4,6 +4,28 @@
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var NY = "America/New_York";
   var now = Date.now();
+  var motionQuery = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : { matches: false };
+  var motionPreference = "full";
+  try { if (localStorage.getItem("camp-motion") === "reduced") motionPreference = "reduced"; } catch (e) { /* Preferences may be unavailable in private browsing. */ }
+  function applyMotionPreference() {
+    var reduced = motionQuery.matches || motionPreference === "reduced";
+    document.documentElement.setAttribute("data-motion", reduced ? "reduced" : "full");
+    $$("[data-motion-toggle]").forEach(function (button) {
+      button.hidden = false;
+      button.setAttribute("aria-pressed", String(reduced));
+      button.disabled = motionQuery.matches;
+      $("span", button).textContent = motionQuery.matches ? "Reduced motion (device setting)" : "Reduce motion";
+    });
+  }
+  $$("[data-motion-toggle]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      motionPreference = motionPreference === "full" ? "reduced" : "full";
+      try { localStorage.setItem("camp-motion", motionPreference); } catch (e) { /* The choice still applies for this page. */ }
+      applyMotionPreference();
+    });
+  });
+  if (motionQuery.addEventListener) motionQuery.addEventListener("change", applyMotionPreference);
+  applyMotionPreference();
 
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
@@ -21,8 +43,15 @@
   function shotFolder(id) { return "assets/season" + id.split("-")[0].slice(1); }
   function thumbOf(id) { return shotFolder(id) + "/thumb/" + id + ".jpg"; }
   function fullOf(id) { return (C.large.indexOf(id) > -1 ? shotFolder(id) + "/large/" : shotFolder(id) + "/thumb/") + id + ".jpg"; }
+  function shotInfo(id) {
+    return (C.shots || {})[id] || { caption: "Season " + id.split("-")[0].slice(1) + " screenshot " + id.split("-")[1], alt: "Camp Cobblemon community screenshot." };
+  }
+  function shotCaption(id) {
+    var info = shotInfo(id);
+    return '<span class="shot-title">' + esc(info.caption) + '</span><span class="shot-meta">Season ' + id.split("-")[0].slice(1) + (info.creator ? ' · Built by ' + esc(info.creator) : '') + '</span>';
+  }
   function shotLink(id, i) {
-    return '<a href="' + fullOf(id) + '" data-i="' + i + '" aria-label="Open Season ' + id.split('-')[0].slice(1) + ' screenshot ' + id.split('-')[1] + '"><img src="' + thumbOf(id) + '" alt="" loading="lazy" width="720" height="405"></a>';
+    return '<a href="' + fullOf(id) + '" data-i="' + i + '" aria-label="View ' + esc(shotInfo(id).caption) + '"><figure><img src="' + thumbOf(id) + '" alt="' + esc(shotInfo(id).alt) + '" loading="lazy" width="720" height="405"><figcaption>' + shotCaption(id) + '</figcaption></figure></a>';
   }
   function seasonState(s) {
     var start = new Date(s.start).getTime(), end = s.end ? new Date(s.end).getTime() : Infinity;
@@ -51,10 +80,13 @@
       navigation.classList.toggle("open", expanded);
       menuButton.setAttribute("aria-expanded", String(expanded));
     });
-    navigation.addEventListener("keydown", function (e) {
+    $(".site-header").addEventListener("keydown", function (e) {
       if (e.key === "Escape") { closeMenu(); menuButton.focus(); }
     });
     document.addEventListener("click", function (e) {
+      if (!e.target.closest(".site-header")) closeMenu();
+    });
+    document.addEventListener("focusin", function (e) {
       if (!e.target.closest(".site-header")) closeMenu();
     });
   }
@@ -134,8 +166,10 @@
   function lbShow(i) {
     var n = lbList.length;
     lbIdx = (i + n) % n;
-    $("img", lb).src = lbList[lbIdx];
-    $("img", lb).alt = "Camp Cobblemon screenshot " + (lbIdx + 1) + " of " + n;
+    var id = lbList[lbIdx];
+    $("img", lb).src = fullOf(id);
+    $("img", lb).alt = shotInfo(id).alt;
+    $(".lb-caption", lb).innerHTML = shotCaption(id);
     $(".lb-count", lb).textContent = (lbIdx + 1) + " / " + n;
   }
   function openLightbox(list, i) {
@@ -152,8 +186,8 @@
     document.addEventListener("keydown", function (e) {
       if (!lb.classList.contains("open")) return;
       if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowLeft") lbShow(lbIdx - 1);
-      if (e.key === "ArrowRight") lbShow(lbIdx + 1);
+      if (e.key === "ArrowLeft") { e.preventDefault(); lbShow(lbIdx - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); lbShow(lbIdx + 1); }
     });
   }
 
@@ -272,7 +306,7 @@
   var feat = $("#featured");
   if (feat) {
     feat.innerHTML = C.featured.map(function (id) {
-      return '<a href="gallery.html" aria-label="Explore the Season 1 gallery"><img src="' + thumbOf(id) + '" alt="Season 1 community build" loading="lazy" width="720" height="405"></a>';
+      return '<a href="gallery.html" aria-label="Explore the gallery: ' + esc(shotInfo(id).caption) + '"><img src="' + thumbOf(id) + '" alt="' + esc(shotInfo(id).alt) + '" loading="lazy" width="720" height="405"></a>';
     }).join("");
   }
   $$("[data-mon-count]").forEach(function (el) { el.textContent = C.pokemon.length; });
@@ -310,7 +344,7 @@
       e.preventDefault();
       var id = a.parentNode.getAttribute("data-season");
       var s = C.seasons.filter(function (x) { return x.id === id; })[0];
-      openLightbox(s.shots.map(fullOf), +a.getAttribute("data-i"));
+      openLightbox(s.shots, +a.getAttribute("data-i"));
     });
     if (location.hash) {
       var target = document.getElementById(location.hash.slice(1));
@@ -432,9 +466,11 @@
       var focusAttribute = active && dex.contains(active) && (active.hasAttribute("data-compare") ? "data-compare" : active.hasAttribute("data-detail") ? "data-detail" : null);
       var focusRow = focusAttribute ? active.getAttribute(focusAttribute) : null;
       var shown = visible();
-      dex.innerHTML = shown.length ? shown.map(card).join("") : '<p class="empty">No Pokémon match. Try another name, type, or biome, or choose All.</p>';
+      dex.innerHTML = shown.length ? shown.map(card).join("") : '<div class="empty dex-empty"><h3>No Pokémon found</h3><p>Try another name, type, or biome, or reset your filters to see everyone.</p><button class="pill" data-reset-filters type="button">' + icon("reset") + 'Reset filters</button></div>';
       var results = $("#dex-results");
       if (results) results.textContent = shown.length + " of " + mons.length + " Pokémon";
+      var reset = $(".reset-filters");
+      if (reset) reset.disabled = filter === "all" && !q && sort === "default" && !shiny;
       if (focusAttribute) {
         var replacement = $("[" + focusAttribute + "='" + focusRow + "']", dex);
         if (replacement) replacement.focus();
@@ -459,6 +495,7 @@
         '<div class="info">' +
         '<div><h2>' + esc(m.name) + newTag(m) + '</h2><div class="sub">' + esc(subLine(m)) + '</div></div>' +
         '<div class="types">' + typeBadges(m) + badge(m.rarity, RARITY[m.rarity] || "#9aab9f") + '</div>' +
+        (m.flavor ? '<p class="dex-text">' + esc(m.flavor) + '</p>' : "") +
         (m.role ? row("Role", esc(m.role)) : "") +
         (m.ability ? row("Abilities", esc(m.ability)) : "") +
         row("Found in", '<div class="types">' + m.where.map(function (w) { return '<span class="biome">' + esc(w) + '</span>'; }).join("") + '</div>') +
@@ -541,6 +578,16 @@
     if (search) search.addEventListener("input", function () { q = search.value; render(); });
     var sortSel = $("#sort");
     if (sortSel) sortSel.addEventListener("change", function () { sort = sortSel.value; render(); });
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest("[data-reset-filters]")) return;
+      filter = "all"; q = ""; sort = "default"; shiny = false;
+      search.value = ""; sortSel.value = "default"; shinyBox.checked = false;
+      $$("[data-filter]").forEach(function (b) {
+        var selected = b.getAttribute("data-filter") === "all";
+        b.classList.toggle("active", selected); b.setAttribute("aria-pressed", String(selected));
+      });
+      render(); search.focus();
+    });
     render();
 
     var evos = $("#evolutions");
@@ -563,12 +610,16 @@
         renderGallery();
       });
     });
-    function renderGallery() { gal.innerHTML = C.gallery[cur].map(shotLink).join(""); }
+    function renderGallery() {
+      gal.innerHTML = C.gallery[cur].map(shotLink).join("");
+      var results = $("#gallery-results");
+      if (results) results.textContent = C.gallery[cur].length + (C.gallery[cur].length === 1 ? " photo" : " photos") + " from Season " + cur.slice(-1);
+    }
     gal.addEventListener("click", function (e) {
       var a = e.target.closest("a");
       if (!a) return;
       e.preventDefault();
-      openLightbox(C.gallery[cur].map(fullOf), +a.getAttribute("data-i"));
+      openLightbox(C.gallery[cur], +a.getAttribute("data-i"));
     });
     renderGallery();
   }
@@ -595,8 +646,12 @@
         (e.link ? '<a class="more" href="' + esc(e.link) + '" target="_blank" rel="noopener">Details in Discord →</a>' : '') +
         '</article>';
     }
-    fetch("events.json", { cache: "no-store" })
-      .then(function (r) { return r.json(); })
+    function loadEvents() {
+    evUp.innerHTML = '<p class="empty" role="status">Loading events…</p>';
+    var controller = new AbortController();
+    var timeout = setTimeout(function () { controller.abort(); }, 8000);
+    fetch("events.json", { cache: "no-store", signal: controller.signal })
+      .then(function (r) { if (!r.ok) throw new Error("Events unavailable"); return r.json(); })
       .then(function (d) {
         var events = (d.events || []).filter(function (e) { return e.status !== "cancelled"; });
         var up = events.filter(function (e) { return e.status !== "done" && new Date(e.date).getTime() >= now - 6 * 3600e3; })
@@ -608,6 +663,22 @@
         evPast.innerHTML = past.length ? past.map(eventCard).join("")
           : '<p class="empty">No results recorded yet — Season 2 starts the record.</p>';
       })
-      .catch(function () { evUp.innerHTML = '<p class="empty">Couldn’t load the event list.</p>'; });
+      .catch(function () {
+        evUp.innerHTML = '<div class="empty"><p role="alert">Couldn’t load the event list. Please try again.</p><button class="pill" id="retry-events" type="button">Try again</button></div>';
+        $("#retry-events").addEventListener("click", loadEvents);
+      })
+      .finally(function () { clearTimeout(timeout); });
+    }
+    loadEvents();
+  }
+  if ("IntersectionObserver" in window) {
+    var arrivalObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("arrived");
+        arrivalObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.05 });
+    $$(".section, .season-full").forEach(function (section) { arrivalObserver.observe(section); });
   }
 })();

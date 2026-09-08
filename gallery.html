@@ -12,7 +12,7 @@
   <meta property="og:description" content="Builds, bases and landmarks from Camp Cobblemon's worlds.">
   <meta property="og:image" content="https://campcobblemon.net/assets/season1/large/s1-42.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#253d32">
+  <meta name="theme-color" content="#294be9">
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,11 +46,13 @@
   </div>
 
   <section class="section">
-    <div class="filters">
+    <div class="filters" role="group" aria-label="Gallery season">
       <button class="pill active" data-set="season1" aria-pressed="true">Season 1</button>
       <button class="pill" data-set="season0" aria-pressed="false">Season 0</button>
     </div>
+    <p class="results-count" id="gallery-results" role="status" aria-atomic="true"></p>
     <div class="grid-gallery" id="gallery"></div>
+    <a class="more back-top" href="#main">Back to gallery top ↑</a>
   </section>
 
 </main>
@@ -58,19 +60,22 @@
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer" tabindex="-1">
   <button class="lb-close" aria-label="Close">×</button>
   <button class="lb-prev" aria-label="Previous">‹</button>
-  <img alt="">
+  <figure class="lb-figure"><img alt=""><figcaption class="lb-caption"></figcaption></figure>
   <button class="lb-next" aria-label="Next">›</button>
+  <p class="lb-help">Use the arrow keys to browse. Escape to close.</p>
   <div class="lb-count" aria-live="polite" aria-atomic="true"></div>
 </div>
 
 <footer class="site-footer">
   <div class="wrap">
     <span>Fan-made server. Not affiliated with Nintendo, The Pokémon Company or the Cobblemon team.</span>
-    <nav>
+    <nav aria-label="Footer links">
       <a data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Discord</a>
       <a data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Modrinth</a>
       <a data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener">Live map</a>
+      <a data-link="paypal" href="https://paypal.me/campcobblemon" target="_blank" rel="noopener">Support</a>
     </nav>
+    <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#motion"></use></svg><span>Reduce motion</span></button>
   </div>
 </footer>
 

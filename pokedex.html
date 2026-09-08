@@ -12,7 +12,7 @@
   <meta property="og:description" content="Every custom Pokémon on Camp Cobblemon: costume Bidoofs, Campion regional forms and new evolutions.">
   <meta property="og:image" content="https://campcobblemon.net/assets/logo.png">
   <meta name="twitter:card" content="summary">
-  <meta name="theme-color" content="#253d32">
+  <meta name="theme-color" content="#294be9">
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,19 +50,25 @@
   </div>
 
   <section class="section">
-    <div class="filters">
+    <div class="filters" role="group" aria-label="Pokémon category">
       <button class="pill active" data-filter="all" aria-pressed="true">All</button>
       <button class="pill" data-filter="bidoof" aria-pressed="false">Costume Bidoofs</button>
       <button class="pill" data-filter="campion" aria-pressed="false">Campion forms</button>
       <button class="pill" data-filter="evo" aria-pressed="false">New evolutions</button>
-      <input class="search" id="search" aria-label="Search Pokémon by name, type, biome, or designer" type="search" placeholder="Search name, type, biome, designer…">
-      <select class="search" id="sort" aria-label="Sort">
-        <option value="default">Sort: default</option>
-        <option value="newest">Sort: newest first</option>
-        <option value="stats">Sort: highest stats</option>
-        <option value="name">Sort: name</option>
-      </select>
+    </div>
+    <div class="dex-tools">
+      <div class="field search-field"><label for="search"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#search"></use></svg>Search Pokémon</label>
+      <input class="search" id="search" type="search" placeholder="Name, type, biome, or designer" aria-describedby="search-help">
+      <span class="field-hint" id="search-help">Try “Fire”, “Forest”, or a Pokémon’s name.</span></div>
+      <div class="field"><label for="sort">Sort by</label>
+      <select class="search" id="sort">
+        <option value="default">Default order</option>
+        <option value="newest">Newest first</option>
+        <option value="stats">Highest stats</option>
+        <option value="name">Name</option>
+      </select></div>
       <label class="toggle"><input type="checkbox" id="shiny"> Show shiny</label>
+      <button class="pill reset-filters" data-reset-filters type="button"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#reset"></use></svg>Reset filters</button>
     </div>
     <div class="compare-tray" id="compare-tray" hidden>
       <span class="lbl">Comparing</span>
@@ -70,7 +76,7 @@
       <button class="pill" id="compare-open" disabled>Compare</button>
       <button class="pill" id="compare-clear">Clear</button>
     </div>
-    <p class="results-count" id="dex-results" role="status"></p>
+    <p class="results-count" id="dex-results" role="status" aria-atomic="true"></p>
     <div class="dex" id="dex"></div>
   </section>
 
@@ -101,11 +107,13 @@
 <footer class="site-footer">
   <div class="wrap">
     <span>Fan-made server. Not affiliated with Nintendo, The Pokémon Company or the Cobblemon team.</span>
-    <nav>
+    <nav aria-label="Footer links">
       <a data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Discord</a>
       <a data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Modrinth</a>
       <a data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener">Live map</a>
+      <a data-link="paypal" href="https://paypal.me/campcobblemon" target="_blank" rel="noopener">Support</a>
     </nav>
+    <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#motion"></use></svg><span>Reduce motion</span></button>
   </div>
 </footer>
 

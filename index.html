@@ -14,7 +14,7 @@
   <meta property="og:image:width" content="512">
   <meta property="og:image:height" content="512">
   <meta name="twitter:card" content="summary">
-  <meta name="theme-color" content="#253d32">
+  <meta name="theme-color" content="#294be9">
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,7 +50,7 @@
 
   <section class="hero" aria-labelledby="welcome-heading">
     <div class="hero-copy">
-      <p class="kicker">A private Cobblemon SMP · Since 2024</p>
+      <p class="kicker">Your next Minecraft home · Since 2024</p>
       <h1 id="welcome-heading">Big builds.<br>Custom Pokémon.<br><span>A lot of Bidoofs.</span></h1>
       <p class="lede">A place to build, catch, and settle in. We're an 18+ community playing on a modpack we maintain ourselves.</p>
       <div class="actions">
@@ -62,7 +62,7 @@
     <div class="hero-art">
       <figure class="camp-photo">
         <img class="world-photo" src="assets/season1/large/s1-42.jpg" alt="Season 1: a riverside bridge, Pokémon builds, and a tree above a tall stone cliff" width="1600" height="900" fetchpriority="high">
-        <img class="camp-emblem" src="assets/logo.png" alt="" width="512" height="512">
+        <a class="camper-sticker" href="pokedex.html" aria-label="Meet Camper Bidoof in the Pokédex"><img src="assets/pokemon/r33.png" alt="" width="256" height="256"><span>Meet Camper Bidoof <span aria-hidden="true">↗</span></span></a>
         <figcaption><span>Built by our community</span><a href="gallery.html">Explore Season 1 <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a></figcaption>
       </figure>
     </div>
@@ -75,7 +75,11 @@
       <span class="status-players muted"></span>
       <span class="tag current shiny-badge" id="shiny-badge" hidden>✦ Shiny weekend on</span>
     </div>
-    <div class="server-address"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#copy"></use></svg>Server address</span><button class="mono" data-copy aria-label="Copy server address" title="Copy the server address" data-address>play.campcobblemon.net</button></div>
+    <nav class="player-shortcuts" aria-label="Player shortcuts">
+      <a class="shortcut" data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#map"></use></svg>Live map</a>
+      <a class="shortcut" data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Modpack</a>
+    <div class="server-address"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#copy"></use></svg>Copy address</span><button class="mono" data-copy aria-label="Copy server address" title="Copy the server address" data-address>play.campcobblemon.net</button></div>
+    </nav>
     <p class="sr-only" id="copy-feedback" role="status"></p>
   </div>
 
@@ -92,9 +96,9 @@
       <div class="sprites">
         <img src="assets/pokemon/r32.png" alt="Campion Spiritomb" style="height:150px">
         <img src="assets/pokemon/r29.png" alt="Campion Gligar" style="height:120px">
-        <img src="assets/pokemon/r5.png" alt="Bidoof in a Helldivers costume" style="height:100px">
+        <img src="assets/pokemon/r34.png" alt="Bidoof in a Spider-Man costume" style="height:120px">
       </div>
-      <p class="blurb"><span data-mon-count>27</span> Pokémon you won't find anywhere else: <span data-bidoof-count>20</span> costume Bidoofs, Campion regional forms and a couple of new evolutions.</p>
+      <p class="blurb"><span data-mon-count>30</span> Pokémon you won't find anywhere else: <span data-bidoof-count>23</span> costume Bidoofs, Campion regional forms and a couple of new evolutions.</p>
       <a class="more" href="pokedex.html">Open the Pokédex →</a>
     </div>
   </section>
@@ -131,6 +135,19 @@
     <div><a class="btn btn-outline" data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Get it on Modrinth</a></div>
   </section>
 
+  <section class="section" id="support">
+    <div class="support">
+      <div>
+        <h2>Support the camp</h2>
+        <p>Camp Cobblemon is free and always will be. The server costs money to keep running, and every
+        custom Pokémon here was commissioned from an artist. If you want to chip in towards the next one,
+        contributions help fund the next commission. Giving is completely optional. Nothing on the server is ever paid-for:
+        no ranks, no perks, no pay-to-win.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" data-link="paypal" href="https://paypal.me/campcobblemon" target="_blank" rel="noopener">Chip in via PayPal</a>
+    </div>
+  </section>
+
   <section class="section" id="seasons-section">
     <div class="section-head">
       <h2>Seasons</h2>
@@ -144,11 +161,13 @@
 <footer class="site-footer">
   <div class="wrap">
     <span>Fan-made server. Not affiliated with Nintendo, The Pokémon Company or the Cobblemon team.</span>
-    <nav>
+    <nav aria-label="Footer links">
       <a data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Discord</a>
       <a data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Modrinth</a>
       <a data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener">Live map</a>
+      <a data-link="paypal" href="https://paypal.me/campcobblemon" target="_blank" rel="noopener">Support</a>
     </nav>
+    <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#motion"></use></svg><span>Reduce motion</span></button>
   </div>
 </footer>
 

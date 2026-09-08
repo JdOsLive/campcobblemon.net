@@ -12,7 +12,7 @@
   <meta property="og:description" content="Every Camp Cobblemon world so far: Season 0, Season 1 and the Season 2 world that opens September 11, 2026.">
   <meta property="og:image" content="https://campcobblemon.net/assets/logo.png">
   <meta name="twitter:card" content="summary">
-  <meta name="theme-color" content="#253d32">
+  <meta name="theme-color" content="#294be9">
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,19 +52,22 @@
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer" tabindex="-1">
   <button class="lb-close" aria-label="Close">×</button>
   <button class="lb-prev" aria-label="Previous">‹</button>
-  <img alt="">
+  <figure class="lb-figure"><img alt=""><figcaption class="lb-caption"></figcaption></figure>
   <button class="lb-next" aria-label="Next">›</button>
+  <p class="lb-help">Use the arrow keys to browse. Escape to close.</p>
   <div class="lb-count" aria-live="polite" aria-atomic="true"></div>
 </div>
 
 <footer class="site-footer">
   <div class="wrap">
     <span>Fan-made server. Not affiliated with Nintendo, The Pokémon Company or the Cobblemon team.</span>
-    <nav>
+    <nav aria-label="Footer links">
       <a data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Discord</a>
       <a data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Modrinth</a>
       <a data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener">Live map</a>
+      <a data-link="paypal" href="https://paypal.me/campcobblemon" target="_blank" rel="noopener">Support</a>
     </nav>
+    <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#motion"></use></svg><span>Reduce motion</span></button>
   </div>
 </footer>
 
