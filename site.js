@@ -216,9 +216,9 @@
       el.textContent = "Season 2 opens " +
         opens.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", timeZone: NY }) +
         " at " + opens.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZone: NY }) +
-        " ET on a brand new world.";
+        " ET on a new world.";
     } else {
-      el.textContent = "Season 2 is live on a brand new world. It opened " +
+      el.textContent = "Season 2 is live. It opened " +
         opens.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: NY }) + ".";
     }
   });
@@ -466,7 +466,7 @@
       var focusAttribute = active && dex.contains(active) && (active.hasAttribute("data-compare") ? "data-compare" : active.hasAttribute("data-detail") ? "data-detail" : null);
       var focusRow = focusAttribute ? active.getAttribute(focusAttribute) : null;
       var shown = visible();
-      dex.innerHTML = shown.length ? shown.map(card).join("") : '<div class="empty dex-empty"><h3>No Pokémon found</h3><p>Try another name, type, or biome, or reset your filters to see everyone.</p><button class="pill" data-reset-filters type="button">' + icon("reset") + 'Reset filters</button></div>';
+      dex.innerHTML = shown.length ? shown.map(card).join("") : '<div class="empty dex-empty"><h3>No Pokémon found</h3><p>Try another name, type, or biome, or reset your filters.</p><button class="pill" data-reset-filters type="button">' + icon("reset") + 'Reset filters</button></div>';
       var results = $("#dex-results");
       if (results) results.textContent = shown.length + " of " + mons.length + " Pokémon";
       var reset = $(".reset-filters");
@@ -659,9 +659,9 @@
         var past = events.filter(function (e) { return up.indexOf(e) < 0; })
           .sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
         evUp.innerHTML = up.length ? up.map(eventCard).join("")
-          : '<p class="empty">Nothing on the calendar right now. Events are announced in the Discord and show up here the same minute.</p>';
+          : '<p class="empty">No upcoming events are listed. Check Discord for announcements.</p>';
         evPast.innerHTML = past.length ? past.map(eventCard).join("")
-          : '<p class="empty">No results recorded yet — Season 2 starts the record.</p>';
+          : '<p class="empty">No past results have been recorded.</p>';
       })
       .catch(function () {
         evUp.innerHTML = '<div class="empty"><p role="alert">Couldn’t load the event list. Please try again.</p><button class="pill" id="retry-events" type="button">Try again</button></div>';
