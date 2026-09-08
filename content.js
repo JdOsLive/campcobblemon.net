@@ -10,7 +10,7 @@ window.CC = {
   },
 
   // ISO time Season 2 opens. Before this the home page says "opens…", after it says "is live".
-  season2Opens: "2026-09-11T19:00:00-04:00",
+  season2Opens: "2026-09-11T22:00:00-04:00",
 
   // Costume Bidoof typings, abilities and stats below are from datapack v2.0 (the rebalance).
   // Flip to true once that datapack is on the server — it removes the "not live yet" notice on the Pokédex.
@@ -50,7 +50,7 @@ window.CC = {
       id: "s2",
       label: "Season 2",
       cobblemon: "Cobblemon 1.8",
-      start: "2026-09-11T19:00:00-04:00",
+      start: "2026-09-11T22:00:00-04:00",
       end: "",
       dates: "Sep 11, 2026 –",
       blurb: "A brand new world on modpack 2.0.0, with 3× shiny weekends and the new trophies.",
