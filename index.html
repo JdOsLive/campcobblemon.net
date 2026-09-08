@@ -14,19 +14,19 @@
   <meta property="og:image:width" content="512">
   <meta property="og:image:height" content="512">
   <meta name="twitter:card" content="summary">
-  <meta name="theme-color" content="#294be9">
+  <meta name="theme-color" content="#102b3a">
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="site.css">
 </head>
-<body>
+<body class="home-page">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp Cobblemon</span></a>
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp<br>Cobblemon</span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#menu"></use></svg>Menu</button>
     <nav class="nav" id="primary-nav" aria-label="Main navigation">
       <a href="index.html" class="active" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#home"></use></svg>Home</a>
@@ -48,23 +48,20 @@
     <a href="seasons.html#s2">About the season <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a>
   </aside>
 
-  <section class="hero" aria-labelledby="welcome-heading">
-    <div class="hero-copy">
-      <p class="kicker">Your next Minecraft home · Since 2024</p>
-      <h1 id="welcome-heading">Big builds.<br>Custom Pokémon.<br><span>A lot of Bidoofs.</span></h1>
-      <p class="lede">A place to build, catch, and settle in. We're an 18+ community playing on a modpack we maintain ourselves.</p>
-      <div class="actions">
-        <a class="btn btn-primary btn-lg" data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Apply in Discord</a>
-        <a class="btn btn-outline btn-lg" data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Get the modpack</a>
+  <section class="hero expedition-hero" aria-labelledby="welcome-heading">
+    <img class="hero-landscape" src="assets/season1/large/s1-60.jpg" alt="A stone and timber build tucked into the trees beside a river in Season 1" width="1600" height="900" fetchpriority="high">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="kicker">Minecraft + Pokémon · Est. 2024</p>
+        <h1 id="welcome-heading">Welcome to<br><span>Camp Cobblemon.</span></h1>
+        <p class="lede">Build a home. Find your favourites. Play alongside an 18+ community with custom Pokémon and a modpack of our own.</p>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Apply to join</a>
+          <a class="hero-guide" href="#join">How it works <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a>
+        </div>
+        <p class="hero-note">18+ · Application-only · Free to play</p>
       </div>
-      <p class="hero-note">Application-only. New to camp? <a href="#join">Here's how to join.</a></p>
-    </div>
-    <div class="hero-art">
-      <figure class="camp-photo">
-        <img class="world-photo" src="assets/season1/large/s1-42.jpg" alt="Season 1: a riverside bridge, Pokémon builds, and a tree above a tall stone cliff" width="1600" height="900" fetchpriority="high">
-        <a class="camper-sticker" href="pokedex.html" aria-label="Meet Camper Bidoof in the Pokédex"><img src="assets/pokemon/r33.png" alt="" width="256" height="256"><span>Meet Camper Bidoof <span aria-hidden="true">↗</span></span></a>
-        <figcaption><span>Built by our community</span><a href="gallery.html">Explore Season 1 <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a></figcaption>
-      </figure>
+      <a class="landscape-credit" href="gallery.html"><span>Made by our community</span><strong>Around Season 1 <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></strong></a>
     </div>
   </section>
 
@@ -83,30 +80,29 @@
     <p class="sr-only" id="copy-feedback" role="status"></p>
   </div>
 
-  <section class="section two-col">
-    <div class="camp-gallery">
-      <p class="kicker">A look around</p>
-      <h2>From Season 1</h2>
-      <div class="thumbs-3" id="featured"></div>
-      <a class="more" href="gallery.html">See the whole gallery →</a>
+  <section class="section camp-field-guide" aria-labelledby="locals-heading">
+    <div class="field-guide-copy">
+      <p class="kicker">01 / The field guide</p>
+      <h2 id="locals-heading">Familiar faces.<br>A camp original.</h2>
+      <p><span data-mon-count>30</span> custom Pokémon, including <span data-bidoof-count>23</span> costume Bidoofs, Campion regional forms, and new evolutions.</p>
+      <a class="btn btn-dark" href="pokedex.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#book"></use></svg>Explore the Pokédex</a>
     </div>
-    <div class="camp-pokemon">
-      <p class="kicker">Meet the locals</p>
-      <h2>Only at camp</h2>
-      <div class="sprites">
-        <img src="assets/pokemon/r32.png" alt="Campion Spiritomb" style="height:150px">
-        <img src="assets/pokemon/r29.png" alt="Campion Gligar" style="height:120px">
-        <img src="assets/pokemon/r34.png" alt="Bidoof in a Spider-Man costume" style="height:120px">
-      </div>
-      <p class="blurb"><span data-mon-count>30</span> Pokémon you won't find anywhere else: <span data-bidoof-count>23</span> costume Bidoofs, Campion regional forms and a couple of new evolutions.</p>
-      <a class="more" href="pokedex.html">Open the Pokédex →</a>
+    <div class="specimen-lineup">
+      <figure><img src="assets/pokemon/r33.png" alt="Camper Bidoof carrying a backpack" width="256" height="256" loading="lazy"><figcaption><span>01</span> Camper Bidoof</figcaption></figure>
+      <figure><img src="assets/pokemon/r29.png" alt="Campion Gligar" width="256" height="256" loading="lazy"><figcaption><span>02</span> Campion Gligar</figcaption></figure>
+      <figure><img src="assets/pokemon/r32.png" alt="Campion Spiritomb" width="256" height="256" loading="lazy"><figcaption><span>03</span> Campion Spiritomb</figcaption></figure>
     </div>
   </section>
 
+  <section class="section camp-gallery" aria-labelledby="builds-heading">
+    <div class="section-head"><div><p class="kicker">02 / Built together</p><h2 id="builds-heading">A world with character.</h2></div><a class="more" href="gallery.html">Visit the gallery <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a></div>
+    <div class="thumbs-3" id="featured"></div>
+    <p class="gallery-note">A few places from Season 1. Every build has someone behind it.</p>
+  </section>
 
   <section class="section join-grid" id="join" aria-labelledby="join-heading">
     <div>
-      <div class="section-head"><div><p class="kicker">Make yourself at home</p><h2 id="join-heading">How to join</h2></div><a class="more" href="rules.html">Read the camp rules <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a></div>
+      <div class="section-head"><div><p class="kicker">03 / Your first day</p><h2 id="join-heading">There’s a place<br>for you here.</h2><p class="join-intro">Four steps from finding camp to making it home.</p></div><a class="more" href="rules.html">Read the camp rules <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a></div>
       <ol class="cards-4 join-steps">
         <li class="card"><span class="step-marker"><span class="num" aria-hidden="true">01</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg></span><strong>Join the Discord</strong><p>Our home for announcements, chat, and applications.</p><a class="more" data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Open Discord ↗</a></li>
         <li class="card"><span class="step-marker"><span class="num" aria-hidden="true">02</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#apply"></use></svg></span><strong>Apply in #apply</strong><p>Fill out a short application. Staff read every one and DM you with the decision.</p></li>
@@ -123,7 +119,7 @@
 
   <section class="section" id="modpack">
     <div class="section-head">
-      <h2>The modpack</h2>
+      <div><p class="kicker">04 / Pack for the trip</p><h2>Everything you need.</h2></div>
       <p>Camp Cobblemon Official Modpack <span data-modpack-version>2.0.0</span> · Fabric · Modrinth app</p>
     </div>
     <div class="chips" id="modpack-chips"></div>
@@ -133,6 +129,14 @@
       <div class="modlist" id="modlist"></div>
     </details>
     <div><a class="btn btn-outline" data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Get it on Modrinth</a></div>
+  </section>
+
+  <section class="section" id="seasons-section">
+    <div class="section-head">
+      <div><p class="kicker">05 / The worlds so far</p><h2>Every season, a new start.</h2></div>
+      <a class="more" href="seasons.html">Every world so far →</a>
+    </div>
+    <div class="seasons" id="seasons"></div>
   </section>
 
   <section class="section" id="support">
@@ -146,14 +150,6 @@
       </div>
       <a class="btn btn-primary btn-lg" data-link="paypal" href="https://paypal.me/campcobblemon" target="_blank" rel="noopener">Chip in via PayPal</a>
     </div>
-  </section>
-
-  <section class="section" id="seasons-section">
-    <div class="section-head">
-      <h2>Seasons</h2>
-      <a class="more" href="seasons.html">Every world so far →</a>
-    </div>
-    <div class="seasons" id="seasons"></div>
   </section>
 
 </main>

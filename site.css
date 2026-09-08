@@ -1,108 +1,63 @@
+/* Camp Cobblemon: an open-air field guide. */
 :root {
-  --bg: #f5f7ff;
-  --card: #ffffff;
-  --chip: #e8edff;
-  --line: #d8dfef;
-  --ink: #182345;
-  --muted: #53607a;
-  --faint: #596781;
-  --accent: #294be9;
-  --accent-dark: #203cc0;
-  --accent-ink: #ffffff;
-  --sun: #ffd45b;
-  --night: #182345;
-  --green: #3f9b5c;
-  --red: #c0392b;
-  --head: Fredoka, "Segoe UI", sans-serif;
-  --body: Karla, "Segoe UI", sans-serif;
+  --bg: #f7f9f6; --card: #ffffff; --chip: #e7f1e8; --line: #cedbd3;
+  --ink: #102b3a; --night: #102b3a; --muted: #49616a; --faint: #50676f;
+  --accent: #226345; --accent-dark: #174b33; --accent-ink: #ffffff;
+  --highlight: #b8ef79; --green: #328349; --red: #ba322a;
+  --head: "Bricolage Grotesque", "Segoe UI", sans-serif;
+  --body: "DM Sans", "Segoe UI", sans-serif;
 }
-
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--body);
-  font-size: 1.125rem;
-  line-height: 1.55;
-}
-a { color: var(--accent-dark); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 1.0625rem/1.6 var(--body); }
+a { color: var(--accent-dark); text-underline-offset: .22em; }
 a:hover { color: var(--accent); }
 img { max-width: 100%; }
-h1, h2, h3 { font-family: var(--head); font-weight: 600; margin: 0; line-height: 1.1; text-wrap: pretty; }
-h2 { font-size: 2.375rem; }
+h1, h2, h3 { font-family: var(--head); font-weight: 700; margin: 0; line-height: 1.08; letter-spacing: -.035em; overflow-wrap: anywhere; }
+h2 { font-size: clamp(2rem, 3.3vw, 3rem); }
 p { margin: 0; }
-.wrap { max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+.wrap { max-width: 1380px; margin: 0 auto; padding: 0 48px; }
 .muted { color: var(--muted); }
 .faint { color: var(--faint); }
-
-/* header / footer */
-.site-header { border-bottom: 1px solid var(--line); background: var(--card); }
-.site-header .wrap { display: flex; align-items: center; gap: 28px; padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap; }
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
-.brand img { width: 52px; height: 52px; image-rendering: pixelated; }
-.brand span { font-family: var(--head); font-weight: 700; font-size: 1.5rem; }
-.nav { display: flex; gap: 6px; margin-left: auto; align-items: center; flex-wrap: wrap; }
-.nav a { text-decoration: none; color: var(--muted); font-weight: 500; padding: 10px 12px; border-radius: 8px; font-size: 1rem; }
-.nav a:hover { color: var(--ink); background: var(--chip); }
-.nav a.active { color: var(--ink); font-weight: 700; background: var(--chip); }
-.nav .btn { margin-left: 12px; color: var(--accent-ink); }
-.nav .btn:hover { color: var(--accent-ink); background: var(--accent-dark); }
-
-.btn {
-  display: inline-block; max-width: 100%; text-decoration: none; cursor: pointer;
-  font-family: var(--head); font-weight: 600; font-size: 1.125rem; line-height: 1.2;
-  padding: 11px 20px; border-radius: 10px; border: 2px solid transparent;
-}
-.btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: var(--accent-ink); }
-.btn-outline { color: var(--ink); border-color: var(--ink); background: transparent; }
-.btn-outline:hover { background: var(--ink); color: var(--bg); }
-.btn-lg { font-size: 1.25rem; padding: 14px 26px; }
-
-.site-footer { border-top: 2px solid var(--line); padding: 22px 0; color: var(--faint); font-size: 0.875rem; margin-top: 24px; }
-.site-footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-.site-footer nav a { color: var(--faint); text-decoration: none; margin-left: 16px; }
-.site-footer nav a:hover { color: var(--ink); }
-
-/* Home: camp colors, actual community builds, and a clear path to joining. */
-.season-announcement { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 0.875rem; }
-.season-announcement .tag { background: var(--ink); color: var(--card); flex-shrink: 0; }
-.season-announcement p { flex: 1; min-width: 220px; color: var(--muted); }
-.season-announcement a { font-weight: 700; text-decoration: none; }
-.hero { display: grid; grid-template-columns: 1fr 1.08fr; gap: 48px; align-items: center; padding: 52px 0 40px; }
-.hero-copy { display: flex; flex-direction: column; gap: 22px; }
-.kicker { font-weight: 700; font-size: 0.875rem; letter-spacing: .09em; text-transform: uppercase; color: var(--accent-dark); }
-.hero h1 { font-size: clamp(2.5rem, 4.4vw, 4rem); line-height: 1.08; letter-spacing: -.025em; }
-.hero h1 span { color: var(--accent-dark); }
-.lede { font-size: 1.25rem; color: var(--muted); max-width: 43ch; text-wrap: pretty; }
-.actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-.hero-note { font-size: 0.875rem; color: var(--muted); }
-.hero-note a { font-weight: 700; }
-.hero-art { min-width: 0; }
-.camp-photo { position: relative; margin: 0; border-radius: 22px; background: var(--ink); box-shadow: 0 16px 38px #09132b30; }
-.world-photo { display: block; width: 100%; height: 420px; object-fit: cover; object-position: 57% center; border-radius: 22px 22px 0 0; }
-.camp-emblem { position: absolute; width: 106px; height: 106px; top: -20px; right: 20px; padding: 10px; background: var(--card); border-radius: 20px; image-rendering: pixelated; box-shadow: 0 4px 14px #0002; }
-.camp-photo figcaption { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 16px 20px; color: var(--card); font-size: 0.875rem; }
-.camp-photo figcaption a { color: var(--card); font-weight: 700; text-underline-offset: 4px; }
-.server-bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 40px; }
-.server-bar .status { background: none; border: 0; padding: 0; justify-content: flex-start; font-size: 1rem; }
-.server-address { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 0.875rem; color: var(--muted); }
-.server-address .mono { padding: 8px 12px; overflow-wrap: anywhere; }
-
-.status { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; background: var(--card); border: 2px solid var(--line); border-radius: 14px; padding: 12px 18px; }
-.dot { display: block; width: 12px; height: 12px; border-radius: 50%; background: #b9a88f; }
-.status.online .dot { background: var(--green); }
-.status.offline .dot { background: var(--red); }
-.status strong { font-weight: 700; }
-.mono {
-  font-family: ui-monospace, Consolas, monospace; font-size: 0.9375rem;
-  background: var(--chip); color: var(--ink); padding: 4px 10px; border-radius: 8px; border: 0; cursor: pointer;
-}
-.mono:hover { background: var(--line); }
-
+.kicker { color: var(--accent-dark); font-size: .8125rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.site-header { background: var(--night); border-bottom: 1px solid #ffffff24; color: white; }
+.site-header .wrap { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; padding-top: 20px; padding-bottom: 20px; }
+.brand { display: flex; align-items: center; gap: 12px; color: white; text-decoration: none; min-width: 0; }
+.brand:hover { color: var(--highlight); }
+.brand img { width: 50px; height: 50px; flex-shrink: 0; image-rendering: pixelated; }
+.brand span { font: 800 1.35rem/1.05 var(--head); letter-spacing: -.025em; }
+.nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-left: auto; }
+.nav a { color: #d6e3e4; font-size: .9375rem; padding: 12px 11px; font-weight: 500; text-decoration: none; border-radius: 0; }
+.nav a:hover, .nav a.active { background: transparent; color: var(--highlight); }
+.nav a.active { box-shadow: inset 0 -2px var(--highlight); }
+.nav .btn { margin-left: 20px; padding: 12px 18px; color: var(--night); background: var(--highlight); }
+.nav .btn:hover { color: var(--night); background: #d0f7a8; }
+.site-header :focus-visible { outline-color: var(--highlight); }
+.btn { display: inline-flex; align-items: center; justify-content: center; max-width: 100%; min-height: 48px; padding: 14px 22px; border: 1px solid transparent; border-radius: 5px; font: 700 1rem/1.3 var(--body); text-decoration: none; cursor: pointer; }
+.btn-primary { color: white; background: var(--accent); border-color: var(--accent); }
+.btn-primary:hover { color: white; background: var(--accent-dark); border-color: var(--accent-dark); }
+.btn-outline { color: var(--ink); background: transparent; border-color: var(--ink); }
+.btn-outline:hover, .btn-dark { color: white; background: var(--night); }
+.btn-dark:hover { color: var(--highlight); background: #1d4052; }
+.btn-lg { min-height: 54px; padding: 16px 25px; }
+.site-footer { background: var(--night); color: #c5d5d9; padding: 40px 0; margin-top: 60px; font-size: .875rem; }
+.site-footer .wrap { display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
+.site-footer .wrap > span { max-width: 52ch; }
+.site-footer nav { display: flex; flex-wrap: wrap; gap: 20px; }
+.site-footer nav a { color: #e5edea; text-decoration: none; padding: 10px 0; }
+.site-footer nav a:hover { color: var(--highlight); }
+.site-footer :focus-visible { outline-color: var(--highlight); }
+.motion-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 9px 12px; border: 1px solid #82999b; border-radius: 5px; background: transparent; color: #e5edea; font: 600 .875rem var(--body); cursor: pointer; }
+.motion-toggle[aria-pressed="true"] { background: var(--highlight); color: var(--night); border-color: var(--highlight); }
+.mono { font: .9375rem ui-monospace, Consolas, monospace; padding: 10px 12px; background: var(--chip); color: var(--ink); border: 0; border-radius: 4px; cursor: pointer; overflow-wrap: anywhere; }
+.mono:hover { background: #d4e6d9; }
+.status { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; font-size: .9375rem; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); flex-shrink: 0; }
+.online .dot { background: var(--green); }
+.offline .dot { background: var(--red); }
+.server-address { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: .875rem; color: var(--muted); }
 /* sections */
 .section { padding: 24px 0 64px; display: flex; flex-direction: column; gap: 22px; }
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
@@ -449,107 +404,198 @@ a > .icon:first-child, button > .icon:first-child, .server-address span > .icon 
 }
 
 
-/* A bright, playful camp identity with quiet reading surfaces. */
-body { background: var(--bg); }
-.site-header { border-bottom: 1px solid var(--line); }
-.site-header .wrap { gap: 20px; }
-.brand { min-width: 0; max-width: 100%; }
-.brand span { font-weight: 600; overflow-wrap: anywhere; }
-.nav a.active { color: var(--accent-dark); background: var(--chip); box-shadow: inset 0 -2px var(--accent); }
-.nav .btn { color: white; }
-.btn-primary { box-shadow: 0 3px 0 #172f9b; }
-.btn-outline { border-color: var(--line); background: white; }
-.btn-outline:hover { background: var(--chip); color: var(--accent-dark); border-color: var(--accent); }
-.btn:active { box-shadow: none; }
-.season-announcement { background: var(--accent); color: white; border: 0; margin: 24px 0 0; border-radius: 14px; padding: 14px 20px; }
-.season-announcement p, .season-announcement a { color: white; }
-.season-announcement .tag { color: var(--night); background: var(--sun); }
-.hero { position: relative; background: var(--night); color: white; padding: 44px; margin: 20px 0 24px; border-radius: 28px; gap: 36px; grid-template-columns: 1.05fr 1fr; }
-.hero-copy { gap: 22px; min-width: 0; }
-.hero .kicker { color: var(--sun); font-size: .8125rem; letter-spacing: .08em; }
-.hero h1 { font-size: clamp(2.4rem, 4vw, 3.8rem); letter-spacing: -.02em; line-height: 1.1; }
-.hero h1 span { color: var(--sun); }
-.hero .lede { color: #d5def4; font-size: 1.125rem; line-height: 1.6; }
-.hero .btn-primary { color: var(--night); background: var(--sun); border-color: var(--sun); box-shadow: 0 3px 0 #ba9133; }
-.hero .btn-primary:hover { background: #ffe18c; border-color: #ffe18c; }
-.hero .btn-outline { color: white; background: transparent; border-color: #647396; }
-.hero .btn-outline:hover { background: #2c3b60; border-color: #a8b9e0; }
-.hero .btn-lg { font-size: 1.0625rem; padding: 13px 18px; }
-.hero-note, .hero-note a { color: #d5def4; }
-.hero :focus-visible { outline-color: var(--sun); }
-.hero-art { padding-bottom: 28px; }
-.camp-photo { background: #243558; border: 1px solid #5b6b91; border-radius: 18px; }
-.world-photo { height: 360px; border-radius: 17px 17px 0 0; object-position: 55% center; }
-.camp-photo figcaption { padding: 14px; font-size: .875rem; }
-.camper-sticker { position: absolute; z-index: 1; right: -10px; top: -28px; display: flex; flex-direction: column; align-items: center; color: var(--night); text-decoration: none; transform: rotate(4deg); }
-.camper-sticker img { width: 100px; height: 100px; object-fit: contain; filter: drop-shadow(0 5px 0 #0b133c55); }
-.camper-sticker > span { background: var(--sun); padding: 7px 12px; font-size: .8125rem; font-weight: 700; border: 2px solid var(--night); border-radius: 6px; }
-.camper-sticker:hover { color: var(--night); }
-.server-bar { border: 1px solid var(--line); border-radius: 14px; background: white; padding: 16px 20px; }
-.camp-pokemon { background: var(--chip); border: 1px solid #c6d2fc; position: relative; }
-.camp-pokemon .kicker { color: var(--accent-dark); }
-.camp-pokemon h2 { color: var(--night); }
-.camp-pokemon .sprites { gap: 8px; }
-.card { box-shadow: 0 3px 0 #18234508; }
-.join-steps .card { border-top: 1px solid var(--line); }
-.step-marker .num { display: grid; place-items: center; width: 46px; height: 46px; background: var(--sun); color: var(--night); border-radius: 12px; font-size: 1.25rem; }
-.page-head h1 { overflow-wrap: anywhere; }
-.page-head { border-bottom: 1px solid var(--line); margin-bottom: 24px; }
-.mon .art { background: #eef2ff; }
-.support { background: var(--night); color: white; border: 0; }
-.support p { color: #d5def4; }
-.support .btn { background: var(--sun); color: var(--night); border-color: var(--sun); box-shadow: 0 3px 0 #ba9133; }
-.support .btn:hover { background: #ffe18c; border-color: #ffe18c; }
-.site-footer .wrap > span { max-width: 58ch; }
-.motion-toggle { display: inline-flex; gap: 7px; align-items: center; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 9px; color: var(--muted); background: white; font: 700 .875rem var(--body); cursor: pointer; }
-.motion-toggle[aria-pressed="true"] { background: var(--chip); color: var(--accent-dark); border-color: var(--accent); }
+
+/* Open layouts, fine rules, and bold field-guide typography. */
+.card { border-radius: 6px; box-shadow: none; }
+.dropdown { border-width: 1px; border-radius: 6px; }
+.chip { border-width: 1px; font-size: .875rem; }
+.section { padding-top: 30px; padding-bottom: 64px; }
+.section-head { align-items: end; gap: 24px; }
+.section-head .kicker { margin-bottom: 12px; }
+.more { display: inline-flex; align-items: center; min-height: 44px; font-size: .9375rem; gap: 8px; }
+.page-head { padding: 62px 0 32px; margin-bottom: 26px; border-bottom: 1px solid var(--line); gap: 20px; }
+.page-head h1 { font-size: clamp(3rem, 7vw, 6.25rem); font-weight: 800; }
+.page-head p { max-width: 65ch; font-size: 1.125rem; }
+.page-head .kicker { color: var(--accent-dark); font-size: .8125rem; }
+.pill { border-width: 1px; border-radius: 5px; }
+.pill.active { background: var(--night); color: var(--highlight); }
+.search { border-width: 1px; border-radius: 4px; }
+.dex-tools { border-radius: 6px; background: var(--chip); }
+.mon { padding: 18px; border: 1px solid var(--line); }
+.mon .art { height: 220px; border-radius: 3px; background: linear-gradient(155deg, #e7f1e8, #f5f8ef); align-items: center; border-bottom: 2px solid #bbd8c2; }
+.mon .art img { max-height: 180px; }
+.mon h3 { font-size: 1.5rem; }
+.mon .sub { font-size: .875rem; }
+.mon .pill { flex: 1 1 auto; }
+.mon .pill:first-child { background: var(--night); color: white; border-color: var(--night); }
+.type, .lbl, .biome { font-size: .8125rem; }
+.notice { border: 0; border-left: 3px solid var(--accent); border-radius: 0; background: var(--chip); }
+.modal-card, .compare-tray { border-radius: 8px; }
+.modal-close { min-width: 44px; min-height: 44px; }
+.grid-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 24px; }
+.grid-gallery a { border: 0; border-radius: 0; background: transparent; }
+.grid-gallery a:first-child { grid-column: 1 / -1; }
+.grid-gallery a:first-child img { aspect-ratio: 21/9; max-height: 500px; }
+.grid-gallery img { border-radius: 6px; }
+.grid-gallery figcaption { padding: 14px 0 0; border-top: 0; }
+.shot-title { font-size: 1.125rem; font-family: var(--head); }
+.lightbox button:hover { color: var(--highlight); }
+.season-full { padding-bottom: 40px; border-bottom: 1px solid var(--line); }
+.season-copy h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+.season-logo { background: var(--chip); padding: 20px; border-radius: 50%; }
+.rules { max-width: 100%; }
+.rules section { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.5fr); gap: 24px 60px; }
+.rules h2 { grid-column: 1; grid-row: 1; border: 0; font-size: 2.375rem; }
+.rules .rule, .rules-stamp { grid-column: 2; }
+.rules .rule { padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.rules h3 { font-size: 1.375rem; }
+.event-list { gap: 0; border-top: 1px solid var(--line); }
+.event { padding: 30px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; }
+.event:nth-child(odd) { border-right: 1px solid var(--line); }
+.event .when { font-size: .875rem; letter-spacing: .04em; }
+.event h3 { font-size: 1.875rem; }
+.strip { border-width: 1px; border-radius: 6px; }
+/* Home: a panoramic arrival, then an open guide to camp. */
+.home-page main.wrap { max-width: none; padding: 0; }
+.home-page .season-announcement { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px 20px; padding: 12px 32px; margin: 0; background: var(--highlight); color: var(--night); font-size: .875rem; }
+.season-announcement .tag { background: var(--night); color: var(--highlight); flex-shrink: 0; font-size: .75rem; border-radius: 3px; }
+.season-announcement p { flex: 0 1 auto; }
+.season-announcement a { color: var(--night); font-weight: 700; }
+.expedition-hero { position: relative; isolation: isolate; color: white; background: var(--night); }
+.hero-landscape { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 65% 55%; }
+.expedition-hero::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, #102b3af5 0%, #102b3ade 35%, #102b3a70 70%, #102b3a38), linear-gradient(0deg, #102b3abf, transparent 40%); }
+.hero-inner { max-width: 1380px; min-height: 640px; margin: auto; padding: 72px 48px 56px; display: flex; align-items: end; justify-content: space-between; gap: 28px; }
+.hero-copy { max-width: 870px; display: flex; flex-direction: column; align-items: start; gap: 26px; min-width: 0; }
+.hero .kicker { color: #d7ead5; font-size: .8125rem; }
+.hero h1 { font-size: clamp(3.5rem, 6.5vw, 6rem); font-weight: 800; line-height: .99; letter-spacing: -.055em; }
+.hero h1 span { color: var(--highlight); }
+.hero .lede { max-width: 45ch; font-size: 1.125rem; line-height: 1.65; color: #f0f5f1; }
+.hero .btn-primary { background: var(--highlight); color: var(--night); border-color: var(--highlight); }
+.hero .btn-primary:hover { background: #d0f7a8; border-color: #d0f7a8; }
+.hero-guide { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; color: white; font-size: 1rem; font-weight: 600; }
+.hero-guide:hover { color: var(--highlight); }
+.hero-note { color: #d6e3dc; font-size: .8125rem; }
+.hero :focus-visible { outline-color: var(--highlight); }
+.landscape-credit { flex: 0 1 200px; min-width: 140px; color: white; padding: 16px; border: 1px solid #ffffff60; background: #102b3ae6; text-decoration: none; font-size: .875rem; }
+.landscape-credit span { display: block; font-size: .75rem; margin-bottom: 5px; color: #d2e0db; }
+.landscape-credit:hover { color: var(--highlight); }
+.home-page .server-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 48px; max-width: 1380px; margin: auto; border-bottom: 1px solid var(--line); }
+.home-page .section { max-width: 1380px; padding: 72px 48px; margin: 0 auto; }
+.home-page .camp-field-guide { display: grid; grid-template-columns: .95fr 1.4fr; align-items: center; gap: 48px; }
+.field-guide-copy { display: flex; flex-direction: column; align-items: start; gap: 24px; }
+.field-guide-copy p:not(.kicker) { max-width: 40ch; color: var(--muted); }
+.specimen-lineup { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 12px; background: var(--highlight); padding: 40px 24px 28px; border-radius: 50% 50% 8px 8px / 20% 20% 8px 8px; }
+.specimen-lineup figure { margin: 0; min-width: 0; }
+.specimen-lineup figure:nth-child(2) { padding-top: 38px; }
+.specimen-lineup img { display: block; width: 100%; height: 180px; object-fit: contain; filter: drop-shadow(0 10px 4px #102b3a18); }
+.specimen-lineup figcaption { border-top: 1px solid #102b3a40; padding-top: 12px; margin-top: 16px; font-size: .8125rem; font-weight: 600; }
+.specimen-lineup figcaption span { display: block; font: 500 .75rem ui-monospace, monospace; margin-bottom: 3px; }
+.home-page .camp-gallery { border-top: 1px solid var(--line); }
+.thumbs-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.thumbs-3 a:first-child { grid-column: auto; }
+.thumbs-3 a { border-radius: 5px; }
+.thumbs-3 img, .thumbs-3 a:first-child img { aspect-ratio: 4/3; }
+.camp-gallery .thumbs-3 a:nth-child(2) { margin-top: 30px; }
+.camp-gallery .thumbs-3 a:nth-child(3) { margin-top: 60px; }
+.gallery-note { color: var(--muted); font-size: .9375rem; }
+.home-page .join-grid { background: var(--chip); max-width: none; padding-inline: max(48px, calc((100vw - 1284px)/2)); }
+.join-grid > div:first-child { display: grid; grid-template-columns: .85fr 1.3fr; gap: 56px; }
+.join-grid .section-head { display: flex; flex-direction: column; justify-content: start; align-items: start; gap: 24px; }
+.join-intro { max-width: 27ch; font-size: 1.0625rem; margin-top: 24px; }
+.join-steps { display: flex; flex-direction: column; gap: 0; }
+.join-steps .card { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 8px 20px; padding: 24px 0; background: transparent; border: 0; border-bottom: 1px solid #b9cfc1; border-radius: 0; }
+.join-steps .card:first-child { padding-top: 0; }
+.join-steps .step-marker { grid-row: 1 / span 3; display: flex; flex-direction: column; justify-content: start; gap: 18px; margin: 0; }
+.join-steps .step-marker .num { font-size: 2rem; color: var(--accent-dark); margin: 0; }
+.join-steps .step-marker .icon { width: 22px; height: 22px; }
+.join-steps strong, .join-steps p, .join-steps .more { grid-column: 2; }
+.join-steps strong { font-size: 1.5rem; }
+.join-steps .more { margin: 0; padding: 0; }
+.discord-widget { margin-top: 24px; background: transparent; border-color: #b9cfc1; }
+.home-page #modpack { gap: 28px; }
+#modpack-ours .card { border: 0; border-left: 3px solid var(--accent); background: transparent; border-radius: 0; padding: 12px 24px; }
+.seasons { gap: 0; border-top: 1px solid var(--line); }
+a.season { border: 0; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); border-radius: 0; background: transparent; padding: 28px; }
+a.season:last-child { border-right: 0; }
+a.season:hover { background: var(--chip); }
+.home-page #support { padding-top: 0; }
+.support { padding: 40px; background: var(--night); color: white; border: 0; border-radius: 6px; }
+.support p { color: #d6e3dc; }
+.support .btn { color: var(--night); background: var(--highlight); border-color: var(--highlight); }
+.support .btn:hover { background: #d0f7a8; }
+.support :focus-visible { outline-color: var(--highlight); }
+.home-page .site-footer { margin-top: 0; }
+@media (max-width: 1200px) {
+  .nav-toggle { background: transparent; color: white; border-color: #82999b; border-radius: 5px; }
+  .nav a { min-height: 44px; }
+  .nav .btn { margin-left: 0; }
+  .nav { gap: 10px; }
+}
 @media (max-width: 1000px) {
-  .hero { grid-template-columns: 1fr; padding: 36px; }
-  .hero h1 { font-size: clamp(2.3rem, 6vw, 3.5rem); }
-  .hero .lede { max-width: 58ch; }
+  .hero-inner { padding: 70px 28px 40px; min-height: 590px; }
+  .hero h1 { font-size: clamp(3.2rem, 7vw, 5rem); }
+  .landscape-credit { display: none; }
+  .hero-copy { max-width: 760px; }
+  .home-page .section { padding: 56px 28px; }
+  .home-page .server-bar { padding: 22px 28px; }
+  .home-page .camp-field-guide { grid-template-columns: 1fr; }
+  .specimen-lineup { max-width: 700px; width: 100%; }
+  .join-grid > div:first-child { grid-template-columns: 1fr; gap: 36px; }
+  .rules section { grid-template-columns: 1fr; gap: 22px; }
+  .rules h2, .rules .rule, .rules-stamp { grid-column: auto; grid-row: auto; }
+  .event:nth-child(odd) { border-right: 0; }
+  a.season { border-right: 0; }
 }
 @media (max-width: 600px) {
-  .season-announcement { margin-top: 16px; padding: 14px; }
-  .hero { padding: 28px 22px; border-radius: 20px; gap: 28px; }
-  .hero h1 { font-size: clamp(1.8rem, 8vw, 2.6rem); overflow-wrap: anywhere; }
-  .hero .kicker { font-size: .75rem; }
+  .site-header .wrap { padding-top: 16px; padding-bottom: 16px; }
+  .brand { flex: 1 1 150px; }
+  .brand span { font-size: 1.1875rem; }
+  .brand img { width: 42px; height: 42px; }
+  .home-page .season-announcement { justify-content: start; padding: 14px 18px; font-size: .875rem; }
+  .season-announcement p { flex: 1 1 180px; }
+  .hero-inner { padding: 54px 20px 38px; min-height: 610px; }
+  .hero-copy { gap: 24px; }
+  .hero h1 { font-size: clamp(2.8rem, 12vw, 4rem); }
+  .hero .lede { font-size: 1rem; }
   .hero .actions { gap: 12px; }
-  .hero .btn-lg { width: 100%; text-align: center; }
-  .world-photo { height: 260px; }
-  .camper-sticker { right: -6px; }
-  .camper-sticker img { width: 78px; height: 78px; }
-  .server-bar { padding: 14px; }
-  .site-header .wrap { gap: 12px; }
-  .brand { flex: 1 1 170px; }
-  .brand img { flex-shrink: 0; }
-  .nav-toggle { flex-shrink: 0; }
-  .support { padding: 24px; }
+  .hero .btn { width: auto; }
+  .hero-landscape { object-position: 60% center; }
+  .expedition-hero::after { background: linear-gradient(90deg, #102b3aed, #102b3ab0); }
+  .home-page .section { padding: 44px 18px; }
+  .home-page .server-bar { padding: 22px 18px; }
+  .home-page .camp-field-guide { gap: 32px; }
+  .specimen-lineup { padding: 28px 14px 22px; gap: 8px; }
+  .specimen-lineup img { height: 100px; }
+  .specimen-lineup figure:nth-child(2) { padding-top: 20px; }
+  .specimen-lineup figcaption { font-size: .8125rem; overflow-wrap: anywhere; }
+  .thumbs-3 { grid-template-columns: 1fr; gap: 16px; }
+  .camp-gallery .thumbs-3 a:nth-child(n) { margin-top: 0; }
+  .camp-gallery .thumbs-3 a:first-child img, .thumbs-3 img { aspect-ratio: 16/9; }
+  .page-head { padding: 36px 0 24px; }
+  .page-head h1 { font-size: clamp(2.5rem, 12vw, 4rem); }
+  .page-head p { font-size: 1.0625rem; }
+  .grid-gallery { grid-template-columns: 1fr; gap: 28px; }
+  .grid-gallery a:first-child img { aspect-ratio: 16/9; }
+  .support { padding: 26px 22px; }
   .support .btn { flex-shrink: 1; }
+  .join-steps .card { grid-template-columns: 42px minmax(0, 1fr); gap: 8px 14px; }
+  .rules h2 { font-size: 2rem; }
 }
-/* Motion is progressive enhancement: content stays visible without scripting. */
+/* Brief motion; the visitor and device preferences both take precedence. */
 @media (prefers-reduced-motion: no-preference) {
-  html[data-motion="full"] .btn, html[data-motion="full"] .nav a,
-  html[data-motion="full"] .pill, html[data-motion="full"] .card,
-  html[data-motion="full"] .grid-gallery a, html[data-motion="full"] .camper-sticker { transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease, border-color .2s ease; }
+  html[data-motion="full"] .btn, html[data-motion="full"] .pill, html[data-motion="full"] .nav a { transition: background .2s, color .2s, transform .2s; }
   html[data-motion="full"] .btn:hover { transform: translateY(-2px); }
-  html[data-motion="full"] .btn:active { transform: translateY(2px); }
-  html[data-motion="full"] .hero-copy { animation: camp-enter .65s both; }
-  html[data-motion="full"] .hero-art { animation: camp-enter .75s .08s both; }
-  html[data-motion="full"] .camper-sticker img { animation: camp-bob 2.2s ease-in-out 2; }
+  html[data-motion="full"] .btn:active { transform: translateY(1px); }
+  html[data-motion="full"] .hero-copy { animation: camp-enter .7s both; }
+  html[data-motion="full"] .hero-landscape { animation: camp-pan 1.4s ease-out both; }
   html[data-motion="full"] .arrived { animation: camp-enter .55s both; }
-  html[data-motion="full"] .mon { animation: camp-enter .4s both; }
-  html[data-motion="full"] .mon:nth-child(4n+2) { animation-delay: .04s; }
-  html[data-motion="full"] .mon:nth-child(4n+3) { animation-delay: .08s; }
-  html[data-motion="full"] .mon:nth-child(4n+4) { animation-delay: .12s; }
-  html[data-motion="full"] .mon:hover .art img, html[data-motion="full"] .mon:focus-within .art img { animation: camp-bob .6s ease-in-out; }
-  html[data-motion="full"] .modal.open .modal-card { animation: camp-enter .24s both; }
-  html[data-motion="full"] .lightbox.open .lb-figure { animation: camp-enter .24s both; }
-  html[data-motion="full"] .camper-sticker:hover { transform: rotate(0deg) translateY(-3px); }
-  @media (hover: hover) {
-    html[data-motion="full"] .grid-gallery a:hover, html[data-motion="full"] a.season:hover { transform: translateY(-4px); box-shadow: 0 8px 20px #18234512; }
-  }
+  html[data-motion="full"] .mon { animation: camp-enter .35s both; }
+  html[data-motion="full"] .mon:hover .art img, html[data-motion="full"] .mon:focus-within .art img,
+  html[data-motion="full"] .specimen-lineup:hover img { animation: camp-bob .7s ease-in-out; }
+  html[data-motion="full"] .modal.open .modal-card, html[data-motion="full"] .lightbox.open .lb-figure { animation: camp-enter .25s both; }
 }
 @keyframes camp-enter { from { opacity: .4; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes camp-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes camp-pan { from { object-position: 69% 55%; opacity: .55; } to { object-position: 65% 55%; opacity: 1; } }
+@keyframes camp-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 html[data-motion="reduced"] { scroll-behavior: auto; }
 html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-motion="reduced"] *::after { animation: none !important; transition: none !important; }
