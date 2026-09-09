@@ -1,9 +1,9 @@
 /* Camp Cobblemon: an open-air field guide. */
 :root {
-  --bg: #f7f9f6; --card: #ffffff; --chip: #e7f1e8; --line: #cedbd3;
-  --ink: #102b3a; --night: #102b3a; --muted: #49616a; --faint: #50676f;
-  --accent: #226345; --accent-dark: #174b33; --accent-ink: #ffffff;
-  --highlight: #b8ef79; --green: #328349; --red: #ba322a;
+  --bg: #fff8ed; --card: #ffffff; --chip: #f2e7d7; --line: #dfd0bb;
+  --ink: #102b3a; --night: #102b3a; --muted: #655e56; --faint: #6d6358;
+  --accent: #b34b28; --accent-dark: #8e371d; --accent-ink: #ffffff;
+  --highlight: #f1ab79; --green: #328349; --red: #ba322a;
   --head: "Bricolage Grotesque", "Segoe UI", sans-serif;
   --body: "DM Sans", "Segoe UI", sans-serif;
 }
@@ -29,11 +29,11 @@ p { margin: 0; }
 .brand img { width: 50px; height: 50px; flex-shrink: 0; image-rendering: pixelated; }
 .brand span { font: 800 1.35rem/1.05 var(--head); letter-spacing: -.025em; }
 .nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-left: auto; }
-.nav a { color: #d6e3e4; font-size: .9375rem; padding: 12px 11px; font-weight: 500; text-decoration: none; border-radius: 0; }
+.nav a { color: #e9dfd0; font-size: .9375rem; padding: 12px 11px; font-weight: 500; text-decoration: none; border-radius: 0; }
 .nav a:hover, .nav a.active { background: transparent; color: var(--highlight); }
 .nav a.active { box-shadow: inset 0 -2px var(--highlight); }
-.nav .btn { margin-left: 20px; padding: 12px 18px; color: var(--night); background: var(--highlight); }
-.nav .btn:hover { color: var(--night); background: #d0f7a8; }
+.nav .btn { margin-left: 20px; padding: 12px 18px; color: white; background: var(--accent); }
+.nav .btn:hover { color: white; background: var(--accent-dark); }
 .site-header :focus-visible { outline-color: var(--highlight); }
 .btn { display: inline-flex; align-items: center; justify-content: center; max-width: 100%; min-height: 48px; padding: 14px 22px; border: 1px solid transparent; border-radius: 5px; font: 700 1rem/1.3 var(--body); text-decoration: none; cursor: pointer; }
 .btn-primary { color: white; background: var(--accent); border-color: var(--accent); }
@@ -42,17 +42,17 @@ p { margin: 0; }
 .btn-outline:hover, .btn-dark { color: white; background: var(--night); }
 .btn-dark:hover { color: var(--highlight); background: #1d4052; }
 .btn-lg { min-height: 54px; padding: 16px 25px; }
-.site-footer { background: var(--night); color: #c5d5d9; padding: 40px 0; margin-top: 60px; font-size: .875rem; }
+.site-footer { background: var(--night); color: #e0d3c3; padding: 40px 0; margin-top: 60px; font-size: .875rem; }
 .site-footer .wrap { display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
 .site-footer .wrap > span { max-width: 52ch; }
 .site-footer nav { display: flex; flex-wrap: wrap; gap: 20px; }
-.site-footer nav a { color: #e5edea; text-decoration: none; padding: 10px 0; }
+.site-footer nav a { color: #f2e7d7; text-decoration: none; padding: 10px 0; }
 .site-footer nav a:hover { color: var(--highlight); }
 .site-footer :focus-visible { outline-color: var(--highlight); }
-.motion-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 9px 12px; border: 1px solid #82999b; border-radius: 5px; background: transparent; color: #e5edea; font: 600 .875rem var(--body); cursor: pointer; }
+.motion-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 9px 12px; border: 1px solid #82999b; border-radius: 5px; background: transparent; color: #f2e7d7; font: 600 .875rem var(--body); cursor: pointer; }
 .motion-toggle[aria-pressed="true"] { background: var(--highlight); color: var(--night); border-color: var(--highlight); }
 .mono { font: .9375rem ui-monospace, Consolas, monospace; padding: 10px 12px; background: var(--chip); color: var(--ink); border: 0; border-radius: 4px; cursor: pointer; overflow-wrap: anywhere; }
-.mono:hover { background: #d4e6d9; }
+.mono:hover { background: #e8d7bf; }
 .status { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; font-size: .9375rem; }
 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); flex-shrink: 0; }
 .online .dot { background: var(--green); }
@@ -422,7 +422,7 @@ a > .icon:first-child, button > .icon:first-child, .server-address span > .icon 
 .search { border-width: 1px; border-radius: 4px; }
 .dex-tools { border-radius: 6px; background: var(--chip); }
 .mon { padding: 18px; border: 1px solid var(--line); }
-.mon .art { height: 220px; border-radius: 3px; background: linear-gradient(155deg, #e7f1e8, #f5f8ef); align-items: center; border-bottom: 2px solid #bbd8c2; }
+.mon .art { height: 220px; border-radius: 3px; background: linear-gradient(155deg, #f2e7d7, #fffaf2); align-items: center; border-bottom: 2px solid #dfc5a8; }
 .mon .art img { max-height: 180px; }
 .mon h3 { font-size: 1.5rem; }
 .mon .sub { font-size: .875rem; }
@@ -457,7 +457,7 @@ a > .icon:first-child, button > .icon:first-child, .server-address span > .icon 
 .strip { border-width: 1px; border-radius: 6px; }
 /* Home: a panoramic arrival, then an open guide to camp. */
 .home-page main.wrap { max-width: none; padding: 0; }
-.home-page .season-announcement { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px 20px; padding: 12px 32px; margin: 0; background: var(--highlight); color: var(--night); font-size: .875rem; }
+.home-page .season-announcement { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px 20px; padding: 12px 32px; margin: 0; background: var(--chip); color: var(--night); font-size: .875rem; }
 .season-announcement .tag { background: var(--night); color: var(--highlight); flex-shrink: 0; font-size: .75rem; border-radius: 3px; }
 .season-announcement p { flex: 0 1 auto; }
 .season-announcement a { color: var(--night); font-weight: 700; }
@@ -466,29 +466,28 @@ a > .icon:first-child, button > .icon:first-child, .server-address span > .icon 
 .expedition-hero::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, #102b3af5 0%, #102b3ade 35%, #102b3a70 70%, #102b3a38), linear-gradient(0deg, #102b3abf, transparent 40%); }
 .hero-inner { max-width: 1380px; min-height: 640px; margin: auto; padding: 72px 48px 56px; display: flex; align-items: end; justify-content: space-between; gap: 28px; }
 .hero-copy { max-width: 870px; display: flex; flex-direction: column; align-items: start; gap: 26px; min-width: 0; }
-.hero .kicker { color: #d7ead5; font-size: .8125rem; }
+.hero .kicker { color: #efe1ce; font-size: .8125rem; }
 .hero h1 { font-size: clamp(3.5rem, 6.5vw, 6rem); font-weight: 800; line-height: .99; letter-spacing: -.055em; }
 .hero h1 span { color: var(--highlight); }
-.hero .lede { max-width: 45ch; font-size: 1.125rem; line-height: 1.65; color: #f0f5f1; }
-.hero .btn-primary { background: var(--highlight); color: var(--night); border-color: var(--highlight); }
-.hero .btn-primary:hover { background: #d0f7a8; border-color: #d0f7a8; }
+.hero .lede { max-width: 45ch; font-size: 1.125rem; line-height: 1.65; color: #fff8ed; }
+.hero .btn-primary { background: var(--accent); color: white; border-color: var(--accent); }
+.hero .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
 .hero-guide { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; color: white; font-size: 1rem; font-weight: 600; }
 .hero-guide:hover { color: var(--highlight); }
-.hero-note { color: #d6e3dc; font-size: .8125rem; }
+.hero-note { color: #e9dfd0; font-size: .8125rem; }
 .hero :focus-visible { outline-color: var(--highlight); }
 .landscape-credit { flex: 0 1 200px; min-width: 140px; color: white; padding: 16px; border: 1px solid #ffffff60; background: #102b3ae6; text-decoration: none; font-size: .875rem; }
-.landscape-credit span { display: block; font-size: .75rem; margin-bottom: 5px; color: #d2e0db; }
+.landscape-credit span { display: block; font-size: .75rem; margin-bottom: 5px; color: #e9dfd0; }
 .landscape-credit:hover { color: var(--highlight); }
 .home-page .server-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 48px; max-width: 1380px; margin: auto; border-bottom: 1px solid var(--line); }
 .home-page .section { max-width: 1380px; padding: 72px 48px; margin: 0 auto; }
 .home-page .camp-field-guide { display: grid; grid-template-columns: .95fr 1.4fr; align-items: center; gap: 48px; }
 .field-guide-copy { display: flex; flex-direction: column; align-items: start; gap: 24px; }
 .field-guide-copy p:not(.kicker) { max-width: 40ch; color: var(--muted); }
-.specimen-lineup { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 12px; background: var(--highlight); padding: 40px 24px 28px; border-radius: 50% 50% 8px 8px / 20% 20% 8px 8px; }
+.specimen-lineup { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 24px; padding: 24px 0; }
 .specimen-lineup figure { margin: 0; min-width: 0; }
-.specimen-lineup figure:nth-child(2) { padding-top: 38px; }
 .specimen-lineup img { display: block; width: 100%; height: 180px; object-fit: contain; filter: drop-shadow(0 10px 4px #102b3a18); }
-.specimen-lineup figcaption { border-top: 1px solid #102b3a40; padding-top: 12px; margin-top: 16px; font-size: .8125rem; font-weight: 600; }
+.specimen-lineup figcaption { padding-top: 12px; margin-top: 16px; font-size: .875rem; font-weight: 600; text-align: center; }
 .specimen-lineup figcaption span { display: block; font: 500 .75rem ui-monospace, monospace; margin-bottom: 3px; }
 .home-page .camp-gallery { border-top: 1px solid var(--line); }
 .thumbs-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
@@ -503,7 +502,7 @@ a > .icon:first-child, button > .icon:first-child, .server-address span > .icon 
 .join-grid .section-head { display: flex; flex-direction: column; justify-content: start; align-items: start; gap: 24px; }
 .join-intro { max-width: 27ch; font-size: 1.0625rem; margin-top: 24px; }
 .join-steps { display: flex; flex-direction: column; gap: 0; }
-.join-steps .card { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 8px 20px; padding: 24px 0; background: transparent; border: 0; border-bottom: 1px solid #b9cfc1; border-radius: 0; }
+.join-steps .card { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 8px 20px; padding: 24px 0; background: transparent; border: 0; border-bottom: 1px solid #d6c4ab; border-radius: 0; }
 .join-steps .card:first-child { padding-top: 0; }
 .join-steps .step-marker { grid-row: 1 / span 3; display: flex; flex-direction: column; justify-content: start; gap: 18px; margin: 0; }
 .join-steps .step-marker .num { font-size: 2rem; color: var(--accent-dark); margin: 0; }
@@ -511,7 +510,7 @@ a > .icon:first-child, button > .icon:first-child, .server-address span > .icon 
 .join-steps strong, .join-steps p, .join-steps .more { grid-column: 2; }
 .join-steps strong { font-size: 1.5rem; }
 .join-steps .more { margin: 0; padding: 0; }
-.discord-widget { margin-top: 24px; background: transparent; border-color: #b9cfc1; }
+.discord-widget { margin-top: 24px; background: transparent; border-color: #d6c4ab; }
 .home-page #modpack { gap: 28px; }
 #modpack-ours .card { border: 0; border-left: 3px solid var(--accent); background: transparent; border-radius: 0; padding: 12px 24px; }
 .seasons { gap: 0; border-top: 1px solid var(--line); }
@@ -520,9 +519,9 @@ a.season:last-child { border-right: 0; }
 a.season:hover { background: var(--chip); }
 .home-page #support { padding-top: 0; }
 .support { padding: 40px; background: var(--night); color: white; border: 0; border-radius: 6px; }
-.support p { color: #d6e3dc; }
-.support .btn { color: var(--night); background: var(--highlight); border-color: var(--highlight); }
-.support .btn:hover { background: #d0f7a8; }
+.support p { color: #e9dfd0; }
+.support .btn { color: white; background: var(--accent); border-color: var(--accent); }
+.support .btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
 .support :focus-visible { outline-color: var(--highlight); }
 .home-page .site-footer { margin-top: 0; }
 @media (max-width: 1200px) {
@@ -564,9 +563,8 @@ a.season:hover { background: var(--chip); }
   .home-page .section { padding: 44px 18px; }
   .home-page .server-bar { padding: 22px 18px; }
   .home-page .camp-field-guide { gap: 32px; }
-  .specimen-lineup { padding: 28px 14px 22px; gap: 8px; }
+  .specimen-lineup { padding: 16px 0; gap: 12px; }
   .specimen-lineup img { height: 100px; }
-  .specimen-lineup figure:nth-child(2) { padding-top: 20px; }
   .specimen-lineup figcaption { font-size: .8125rem; overflow-wrap: anywhere; }
   .thumbs-3 { grid-template-columns: 1fr; gap: 16px; }
   .camp-gallery .thumbs-3 a:nth-child(n) { margin-top: 0; }
