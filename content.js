@@ -13,7 +13,8 @@ window.CC = {
   season2Opens: "2026-09-11T22:00:00-04:00",
 
   // Costume Bidoof typings, abilities and stats below are from datapack v2.0 (the rebalance).
-  // Flip to true once that datapack is on the server — it removes the "not live yet" notice on the Pokédex.
+  // The Pokédex "not live yet" notice retires itself at season2Opens, since the v2.0 datapack
+  // goes on with the new world. Only set this true to force it down earlier.
   doofRebalanceLive: false,
 
   // Oldest first. `shots` are screenshot ids shown on the Seasons page (thumbs live in

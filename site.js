@@ -415,7 +415,10 @@
     var filter = "all", shiny = false, q = "", sort = "default", compare = [];
 
     var notice = $("#doof-notice");
-    if (notice && !C.doofRebalanceLive) notice.hidden = false;
+    // The v2.0 datapack goes on with the Season 2 world, so the notice retires itself
+    // at that moment. doofRebalanceLive is only an override for installing it early.
+    var doofLive = C.doofRebalanceLive || now >= new Date(C.season2Opens).getTime();
+    if (notice && !doofLive) notice.hidden = false;
 
     function sprite(m, s) { return "assets/pokemon/r" + m.row + (s ? "-s" : "") + ".png"; }
     function subLine(m) { return m.dex.charAt(0) === "#" ? m.form + " · " + m.species + " " + m.dex : m.dex + " · " + m.form; }
