@@ -10,7 +10,7 @@ window.CC = {
   },
 
   // ISO time Season 2 opens. Before this the home page says "opens…", after it says "is live".
-  season2Opens: "2026-09-11T19:00:00-04:00",
+  season2Opens: "2026-09-11T22:00:00-04:00",
 
   // Costume Bidoof typings, abilities and stats below are from datapack v2.0 (the rebalance).
   // Flip to true once that datapack is on the server — it removes the "not live yet" notice on the Pokédex.
@@ -26,7 +26,7 @@ window.CC = {
       start: "2024-08-07T00:00:00-04:00",
       end: "2024-12-27T00:00:00-05:00",
       dates: "Aug 7, 2024 – Dec 27, 2024",
-      blurb: "Our first world, running from August to December 2024.",
+      blurb: "Where it started. August to December 2024, just under five months before the first reset.",
       logo: "",
       shots: ["s0-01"],
       download: "",
@@ -39,7 +39,7 @@ window.CC = {
       start: "2024-12-27T00:00:00-05:00",
       end: "2026-09-09T19:00:00-04:00",
       dates: "Dec 27, 2024 – Sep 9, 2026",
-      blurb: "A world updated from Cobblemon 1.6 to 1.7.3.",
+      blurb: "Our longest world. Updated in place from 1.6 to 1.7.3 as Cobblemon moved forward. It closed on September 9, 2026 so we could get Season 2 ready.",
       logo: "assets/season1/logo.png",
       shots: ["s1-42", "s1-60", "s1-17", "s1-37", "s1-12", "s1-28", "s1-19", "s1-36"],
       galleryCount: 56,
@@ -50,10 +50,10 @@ window.CC = {
       id: "s2",
       label: "Season 2",
       cobblemon: "Cobblemon 1.8",
-      start: "2026-09-11T19:00:00-04:00",
+      start: "2026-09-11T22:00:00-04:00",
       end: "",
       dates: "Sep 11, 2026 –",
-      blurb: "A new world using modpack 2.0.0, with triple shiny rates on weekends and custom event trophies.",
+      blurb: "A brand new world on modpack 2.0.0, with triple shiny rates on weekends and the new event trophies.",
       logo: "assets/logo.png",
       shots: [],
       shotsNote: "Screenshots will be added after the world opens.",
