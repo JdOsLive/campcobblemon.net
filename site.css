@@ -464,10 +464,10 @@ a > .icon:first-child, button > .icon:first-child, .server-address span > .icon 
 .expedition-hero { position: relative; isolation: isolate; color: white; background: var(--night); }
 .hero-landscape { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 65% 55%; }
 .expedition-hero::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, #102b3af5 0%, #102b3ade 35%, #102b3a70 70%, #102b3a38), linear-gradient(0deg, #102b3abf, transparent 40%); }
-.hero-inner { max-width: 1380px; min-height: 640px; margin: auto; padding: 72px 48px 56px; display: flex; align-items: end; justify-content: space-between; gap: 28px; }
-.hero-copy { max-width: 870px; display: flex; flex-direction: column; align-items: start; gap: 26px; min-width: 0; }
+.hero-inner { max-width: 1380px; min-height: 520px; margin: auto; padding: 60px 48px 48px; display: flex; align-items: end; justify-content: space-between; gap: 28px; }
+.hero-copy { max-width: 780px; display: flex; flex-direction: column; align-items: start; gap: 22px; min-width: 0; }
 .hero .kicker { color: #efe1ce; font-size: .8125rem; }
-.hero h1 { font-size: clamp(3.5rem, 6.5vw, 6rem); font-weight: 800; line-height: .99; letter-spacing: -.055em; }
+.hero h1 { font-family: var(--body); font-size: clamp(2.75rem, 5vw, 4.25rem); font-weight: 600; line-height: 1.1; letter-spacing: -.035em; }
 .hero h1 span { color: var(--highlight); }
 .hero .lede { max-width: 45ch; font-size: 1.125rem; line-height: 1.65; color: #fff8ed; }
 .hero .btn-primary { background: var(--accent); color: white; border-color: var(--accent); }
@@ -531,8 +531,8 @@ a.season:hover { background: var(--chip); }
   .nav { gap: 10px; }
 }
 @media (max-width: 1000px) {
-  .hero-inner { padding: 70px 28px 40px; min-height: 590px; }
-  .hero h1 { font-size: clamp(3.2rem, 7vw, 5rem); }
+  .hero-inner { padding: 52px 28px 40px; min-height: 480px; }
+  .hero h1 { font-size: clamp(2.5rem, 5.5vw, 3.75rem); }
   .landscape-credit { display: none; }
   .hero-copy { max-width: 760px; }
   .home-page .section { padding: 56px 28px; }
@@ -552,9 +552,9 @@ a.season:hover { background: var(--chip); }
   .brand img { width: 42px; height: 42px; }
   .home-page .season-announcement { justify-content: start; padding: 14px 18px; font-size: .875rem; }
   .season-announcement p { flex: 1 1 180px; }
-  .hero-inner { padding: 54px 20px 38px; min-height: 610px; }
+  .hero-inner { padding: 44px 20px 36px; min-height: 0; }
   .hero-copy { gap: 24px; }
-  .hero h1 { font-size: clamp(2.8rem, 12vw, 4rem); }
+  .hero h1 { font-size: clamp(2.25rem, 8.5vw, 3rem); }
   .hero .lede { font-size: 1rem; }
   .hero .actions { gap: 12px; }
   .hero .btn { width: auto; }
