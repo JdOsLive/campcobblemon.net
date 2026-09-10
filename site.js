@@ -412,6 +412,18 @@
     });
     var byRow = {};
     mons.forEach(function (m) { byRow[m.row] = m; });
+    // Series pills are generated from the data, so a new costume needs no HTML change.
+    var seriesBox = $("#series-filters");
+    if (seriesBox) {
+      var counts = {};
+      mons.forEach(function (m) { if (m.series) counts[m.series] = (counts[m.series] || 0) + 1; });
+      var names = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a] || a.localeCompare(b); });
+      seriesBox.innerHTML = names.map(function (n) {
+        return '<button class="pill small" data-filter="series:' + n + '" aria-pressed="false">' + n +
+               ' <span class="faint">' + counts[n] + '</span></button>';
+      }).join("");
+    }
+
     var filter = "all", shiny = false, q = "", sort = "default", compare = [];
 
     var notice = $("#doof-notice");
@@ -444,7 +456,8 @@
         whereChips(m) +
         (m.how ? '<div class="how"><span class="lbl">Or</span>' + esc(m.how) + '</div>' : '') +
         (m.ability ? '<div class="ability"><span class="lbl">Ability</span>' + esc(m.ability.split(" (hidden")[0]) + '</div>' : '') +
-        '<dl><dt>Design</dt><dd>' + esc(m.designer) + '</dd>' +
+        '<dl>' + (m.series ? '<dt>Series</dt><dd>' + esc(m.series) + '</dd>' : '') +
+        '<dt>Design</dt><dd>' + esc(m.designer) + '</dd>' +
         '<dt>Added</dt><dd>' + fmtDate(m.added, { month: "short", day: "numeric", year: "numeric" }) + '</dd></dl>' +
         '<div class="card-actions"><button class="pill small" data-detail="' + m.row + '" aria-label="Details for ' + esc(m.name) + '">' + icon("book") + 'Details</button>' +
         '<button class="pill small' + (inCompare ? ' active' : '') + '" data-compare="' + m.row + '" aria-label="Compare ' + esc(m.name) + '" aria-pressed="' + inCompare + '">' + icon("compare") + (inCompare ? "Comparing" : "Compare") + '</button></div>' +
@@ -453,9 +466,12 @@
     function visible() {
       var needle = q.trim().toLowerCase();
       var list = mons.filter(function (m) {
-        if (filter !== "all" && m.group !== filter) return false;
+        if (filter !== "all") {
+          if (filter.slice(0, 7) === "series:") { if (m.series !== filter.slice(7)) return false; }
+          else if (m.group !== filter) return false;
+        }
         if (!needle) return true;
-        var hay = [m.name, m.form, m.types.join(" "), m.where.join(" "), m.how || "", m.ability || "", m.designer].join(" ");
+        var hay = [m.name, m.form, m.types.join(" "), m.where.join(" "), m.how || "", m.ability || "", m.designer, m.series || ""].join(" ");
         return hay.toLowerCase().indexOf(needle) > -1;
       });
       if (sort === "newest") list.sort(function (a, b) { return b.added.localeCompare(a.added) || a.order - b.order; });
@@ -508,6 +524,7 @@
         row("Weak to", matchupList(m, function (e) { return e >= 2; })) +
         row("Resists", matchupList(m, function (e) { return e > 0 && e < 1; })) +
         row("Immune to", matchupList(m, function (e) { return e === 0; })) +
+        (m.series ? row("Series", esc(m.series)) : "") +
         row("Design", esc(m.designer) + ' · added ' + fmtDate(m.added, { month: "long", day: "numeric", year: "numeric" })) +
         '<div class="actions"><button class="pill' + (inCompare ? ' active' : '') + '" data-compare="' + m.row + '">' + (inCompare ? "Remove from compare" : "Add to compare") + '</button></div>' +
         '</div></div>';

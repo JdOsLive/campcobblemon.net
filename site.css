@@ -603,3 +603,8 @@ html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-
 .bot-note img { width: 68px; height: 68px; flex: none; }
 .bot-note p { margin: 0; font-size: .9375rem; line-height: 1.6; color: var(--muted); }
 @media (max-width: 560px) { .bot-note { flex-direction: column; align-items: flex-start; gap: 12px; } }
+
+/* Series pills sit under the category filters, visually secondary. */
+.series-filters { margin-top: -6px; gap: 6px; }
+.series-filters .pill { font-size: .8125rem; padding: 5px 10px; }
+.series-filters .pill .faint { margin-left: 4px; font-variant-numeric: tabular-nums; }
