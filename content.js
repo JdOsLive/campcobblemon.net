@@ -14,10 +14,10 @@ window.CC = {
   support: {
     goals: [
       {
-        label: "Honey Grimer and Honey Muk",
-        detail: "A new Normal/Fairy line for the camp, designed from scratch.",
+        label: "Campian Grimer and Campian Muk",
+        detail: "A honey-themed Normal/Fairy line, designed from scratch.",
         sketch: "assets/support/honey-line-sketch.jpg",
-        sketchAlt: "Pencil concept sketch of Honey Grimer and Honey Muk, labelled Normal slash Fairy, with notes reading honey jar, snail, orange and crown.",
+        sketchAlt: "Pencil concept sketch of Campian Grimer and Campian Muk, labelled Normal slash Fairy, with notes reading honey jar, snail, orange and crown.",
         amount: 40,
         raised: 0
       },
