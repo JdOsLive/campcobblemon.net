@@ -13,9 +13,6 @@ window.CC = {
   season2Opens: "2026-09-11T22:00:00-04:00",
 
   // Costume Bidoof typings, abilities and stats below are from datapack v2.0 (the rebalance).
-  // The Pokédex "not live yet" notice retires itself at season2Opens, since the v2.0 datapack
-  // goes on with the new world. Only set this true to force it down earlier.
-  doofRebalanceLive: false,
 
   // Oldest first. `shots` are screenshot ids shown on the Seasons page (thumbs live in
   // assets/seasonN/thumb). `download` and `map` are optional links — leave "" to hide the button.
@@ -57,7 +54,7 @@ window.CC = {
       blurb: "A brand new world on modpack 2.0.0, with triple shiny rates on weekends and the new event trophies.",
       logo: "assets/logo.png",
       shots: [],
-      shotsNote: "Screenshots will be added after the world opens.",
+      shotsNote: "No screenshots yet.",
       download: "",
       map: ""
     }
