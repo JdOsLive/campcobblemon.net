@@ -639,6 +639,39 @@
     renderGallery();
   }
 
+  // ---- commission goals ---------------------------------------------------------
+  // PayPal.me gives us no running total, so `raised` in content.js is maintained by hand.
+  // The bar is meant to read at zero too: the point is what the money is for.
+  (function () {
+    var box = $("#support-goals");
+    var goals = (C.support && C.support.goals) || [];
+    if (!box || !goals.length) return;
+    var money = function (n) {
+      var v = Math.round(n * 100) / 100;
+      return "$" + v.toLocaleString("en-US", { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 });
+    };
+    var total = goals.reduce(function (a, g) { return a + g.amount; }, 0);
+    var got = goals.reduce(function (a, g) { return a + (g.raised || 0); }, 0);
+
+    box.innerHTML =
+      '<div class="section-head"><h3>What we&rsquo;re raising for</h3>' +
+      '<p class="muted">' + money(got) + ' of ' + money(total) + '</p></div>' +
+      goals.map(function (g) {
+        var raised = g.raised || 0;
+        var pct = g.amount > 0 ? Math.min(100, raised / g.amount * 100) : 0;
+        var done = raised >= g.amount;
+        return '<div class="goal' + (done ? ' done' : '') + '">' +
+          '<div class="goal-head"><strong>' + esc(g.label) + '</strong>' +
+          '<span class="goal-sum">' + money(raised) + ' <span class="faint">of ' + money(g.amount) + '</span></span></div>' +
+          (g.detail ? '<p class="goal-detail">' + esc(g.detail) + '</p>' : '') +
+          '<div class="goal-bar" role="img" aria-label="' + money(raised) + ' raised of ' + money(g.amount) + '">' +
+          '<i style="width:' + pct.toFixed(1) + '%"></i></div>' +
+          (done ? '<p class="goal-detail">Funded — thank you.</p>' : '') +
+          '</div>';
+      }).join("");
+    box.hidden = false;
+  }());
+
   // ---- events (written by the Discord bot into events.json) -------------------
   var evUp = $("#events-upcoming"), evPast = $("#events-past");
   if (evUp) {

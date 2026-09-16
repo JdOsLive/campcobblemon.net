@@ -608,3 +608,20 @@ html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-
 .series-filters { margin-top: -6px; gap: 6px; }
 .series-filters .pill { font-size: .8125rem; padding: 5px 10px; }
 .series-filters .pill .faint { margin-left: 4px; font-variant-numeric: tabular-nums; }
+
+/* Commission goals under the support block. Readable at zero: the point is what the money is
+   for, not the percentage. */
+.goals { width: 100%; margin-top: 4px; padding-top: 22px; border-top: 1px solid rgba(255, 248, 237, .18);
+  display: flex; flex-direction: column; gap: 18px; }
+.goals .section-head h3 { font-family: var(--head); font-size: 1.125rem; }
+/* inside the dark support panel the muted/faint greys go illegible */
+.support .goals .muted, .support .goals .faint, .support .goal-detail { color: #cbbfae; }
+.support .goal-bar { background: rgba(255, 248, 237, .16); }
+/* the burnt-orange accent is only 2.8:1 on the navy panel; --highlight clears 3:1 */
+.support .goal-bar i { background: var(--highlight); }
+.goal-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.goal-sum { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.goal-detail { margin: 2px 0 0; color: var(--muted); font-size: .9375rem; }
+.goal-bar { margin-top: 10px; height: 8px; border-radius: 999px; background: var(--chip); overflow: hidden; }
+.goal-bar i { display: block; height: 100%; border-radius: 999px; background: var(--accent); transition: width .4s ease; }
+.goal.done .goal-bar i { background: var(--green); }

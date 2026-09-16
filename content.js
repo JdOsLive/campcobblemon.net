@@ -9,6 +9,25 @@ window.CC = {
     paypal: "https://paypal.me/campcobblemon"
   },
 
+  // Commission goals shown on the home page. PayPal.me has no API, so `raised` is edited by
+  // hand — update it when money comes in and push. Set goals: [] to hide the whole block.
+  support: {
+    goals: [
+      {
+        label: "Honey Grimer and Honey Muk",
+        detail: "Two new Pokémon, modelled and animated from scratch.",
+        amount: 40,
+        raised: 0
+      },
+      {
+        label: "Five more costume Bidoofs",
+        detail: "Costumes reuse the Bidoof model, so each one costs less to make.",
+        amount: 25,
+        raised: 0
+      }
+    ]
+  },
+
   // ISO time Season 2 opens. Before this the home page says "opens…", after it says "is live".
   season2Opens: "2026-09-11T22:00:00-04:00",
 
