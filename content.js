@@ -15,13 +15,15 @@ window.CC = {
     goals: [
       {
         label: "Honey Grimer and Honey Muk",
-        detail: "Two new Pokémon, modelled and animated from scratch.",
+        detail: "A new Normal/Fairy line for the camp, designed from scratch.",
+        sketch: "assets/support/honey-line-sketch.jpg",
+        sketchAlt: "Pencil concept sketch of Honey Grimer and Honey Muk, labelled Normal slash Fairy, with notes reading honey jar, snail, orange and crown.",
         amount: 40,
         raised: 0
       },
       {
         label: "Five more costume Bidoofs",
-        detail: "Costumes reuse the Bidoof model, so each one costs less to make.",
+        detail: "C’mon, who doesn’t want more Bidoofs?",
         amount: 25,
         raised: 0
       }

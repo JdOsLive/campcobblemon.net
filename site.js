@@ -664,6 +664,9 @@
           '<div class="goal-head"><strong>' + esc(g.label) + '</strong>' +
           '<span class="goal-sum">' + money(raised) + ' <span class="faint">of ' + money(g.amount) + '</span></span></div>' +
           (g.detail ? '<p class="goal-detail">' + esc(g.detail) + '</p>' : '') +
+          (g.sketch ? '<figure class="goal-sketch"><img src="' + esc(g.sketch) + '" alt="' +
+            esc(g.sketchAlt || '') + '" loading="lazy" decoding="async">' +
+            '<figcaption>Concept sketch</figcaption></figure>' : '') +
           '<div class="goal-bar" role="img" aria-label="' + money(raised) + ' raised of ' + money(g.amount) + '">' +
           '<i style="width:' + pct.toFixed(1) + '%"></i></div>' +
           (done ? '<p class="goal-detail">Funded — thank you.</p>' : '') +

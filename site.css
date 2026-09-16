@@ -625,3 +625,9 @@ html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-
 .goal-bar { margin-top: 10px; height: 8px; border-radius: 999px; background: var(--chip); overflow: hidden; }
 .goal-bar i { display: block; height: 100%; border-radius: 999px; background: var(--accent); transition: width .4s ease; }
 .goal.done .goal-bar i { background: var(--green); }
+/* Concept sketch for a goal: pencil on paper, so give it a light card to sit on rather than
+   letting the navy panel show through the paper. */
+.goal-sketch { margin: 12px 0 0; }
+.goal-sketch img { display: block; width: 100%; max-width: 620px; border-radius: 6px;
+  border: 1px solid rgba(255, 248, 237, .18); background: #fff; }
+.goal-sketch figcaption { margin-top: 6px; font-size: .8125rem; color: #cbbfae; }
