@@ -90,7 +90,7 @@ window.CC = {
       "Sophisticated Backpacks", "Storage Drawers", "Roughly Enough Items", "Axiom"
     ],
     ours: [
-      { name: "Camp Radio", text: "3× shiny rates every weekend, Friday 7 PM to Sunday midnight ET. Shiny catches and battle results get posted to Discord." },
+      { name: "Camp Radio", text: "3× shiny rates every weekend, Thursday 7 PM to Sunday midnight ET. Shiny catches and battle results get posted to Discord." },
       { name: "Camp Furnishings", text: "Commissioned trophies for tournaments and events, engraved with the winner's name." }
     ]
   },
