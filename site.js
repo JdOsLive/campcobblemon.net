@@ -655,7 +655,7 @@
     var got = goals.reduce(function (a, g) { return a + (g.raised || 0); }, 0);
 
     box.innerHTML =
-      '<div class="section-head"><h3>What we&rsquo;re raising for</h3>' +
+      '<div class="section-head"><h3>' + (got >= total ? 'Fully funded &mdash; thank you' : 'What we&rsquo;re raising for') + '</h3>' +
       '<p class="muted">' + money(got) + ' of ' + money(total) + '</p></div>' +
       goals.map(function (g) {
         var raised = g.raised || 0;

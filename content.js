@@ -19,13 +19,13 @@ window.CC = {
         sketch: "assets/support/honey-line-sketch.jpg",
         sketchAlt: "Pencil concept sketch of Campian Grimer and Campian Muk, labelled Normal slash Fairy, with notes reading honey jar, snail, orange and crown.",
         amount: 40,
-        raised: 0
+        raised: 40
       },
       {
         label: "Five more costume Bidoofs",
         detail: "C’mon, who doesn’t want more Bidoofs?",
         amount: 25,
-        raised: 0
+        raised: 25
       }
     ]
   },
