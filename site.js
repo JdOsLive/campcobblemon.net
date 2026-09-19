@@ -337,7 +337,11 @@
         '<p class="dates">' + esc(s.dates) + ' · ' + esc(s.cobblemon) + '</p>' +
         '<p class="blurb">' + esc(s.blurb) + '</p>' +
         (links.length ? '<div class="actions">' + links.join("") + '</div>' : '') +
-        '</div></div>' + shots + '</section>';
+        '</div></div>' +
+        (s.banner ? '<figure class="season-banner"><img src="' + esc(s.banner) + '" alt="' + esc(s.bannerAlt || '') +
+          '" width="960" height="540" loading="lazy" decoding="async">' +
+          (s.bannerCredit ? '<figcaption>Season art by ' + esc(s.bannerCredit) + '</figcaption>' : '') + '</figure>' : '') +
+        shots + '</section>';
     }).join("");
     sl.addEventListener("click", function (e) {
       var a = e.target.closest(".grid-gallery a");
