@@ -402,6 +402,14 @@
       return '<span class="type" style="background:' + color + ';color:' + ink(color) + '">' + esc(label) + '</span>';
     }
     function typeBadge(t) { return badge(t, TYPE[t] || "#888888"); }
+    // Rarity is not a type, so it doesn't get a filled type pill: outlined tag, colour only in the pips.
+    var PIPS = { Common: 1, Uncommon: 2, Rare: 3, "Ultra Rare": 4 };
+    function rarityBadge(r) {
+      var n = PIPS[r] || 1, pips = "";
+      for (var i = 0; i < 4; i++) pips += '<i' + (i < n ? ' class="on"' : '') + '></i>';
+      return '<span class="rarity" style="--rar:' + (RARITY[r] || "#9aab9f") + '"><span class="pips" aria-hidden="true">' +
+        pips + '</span>' + esc(r) + '</span>';
+    }
     function mult(m) { return m === 0.25 ? "¼×" : m === 0.5 ? "½×" : m + "×"; }
 
     var mons = C.pokemon.map(function (m, i) {
@@ -448,7 +456,7 @@
       return '<article class="card mon" data-row="' + m.row + '">' +
         '<div class="art"><img src="' + sprite(m, shiny) + '" alt="' + esc(m.name) + '" loading="lazy"></div>' +
         '<div><h3>' + esc(m.name) + newTag(m) + '</h3><div class="sub">' + esc(subLine(m)) + '</div></div>' +
-        '<div class="types">' + typeBadges(m) + badge(m.rarity, RARITY[m.rarity] || "#9aab9f") + '</div>' +
+        '<div class="types">' + typeBadges(m) + rarityBadge(m.rarity) + '</div>' +
         whereChips(m) +
         (m.how ? '<div class="how"><span class="lbl">Or</span>' + esc(m.how) + '</div>' : '') +
         (m.ability ? '<div class="ability"><span class="lbl">Ability</span>' + esc(m.ability.split(" (hidden")[0]) + '</div>' : '') +
@@ -509,7 +517,7 @@
         '<div class="art"><img src="' + sprite(m, true) + '" alt=""></div><div class="cap">Shiny</div></div>' +
         '<div class="info">' +
         '<div><h2>' + esc(m.name) + newTag(m) + '</h2><div class="sub">' + esc(subLine(m)) + '</div></div>' +
-        '<div class="types">' + typeBadges(m) + badge(m.rarity, RARITY[m.rarity] || "#9aab9f") + '</div>' +
+        '<div class="types">' + typeBadges(m) + rarityBadge(m.rarity) + '</div>' +
         (m.flavor ? '<p class="dex-text">' + esc(m.flavor) + '</p>' : "") +
         (m.role ? row("Role", esc(m.role)) : "") +
         (m.ability ? row("Abilities", esc(m.ability)) : "") +
