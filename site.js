@@ -235,9 +235,10 @@
     var START = 3 * 1440 + 19 * 60, END = 7 * 1440;
     var on = nowMin >= START;
     function span(mins) {
-      var d = Math.floor(mins / 1440), h = Math.round((mins % 1440) / 60);
+      var h = Math.round(mins / 60), d = Math.floor(h / 24);
+      h %= 24;
       if (d >= 1) return d + (d === 1 ? " day" : " days") + (h ? " " + h + " h" : "");
-      return h <= 1 ? "under an hour" : "about " + h + " hours";
+      return mins < 60 ? "under an hour" : "about " + h + (h === 1 ? " hour" : " hours");
     }
     var text = on ? "On now — " + span(END - nowMin) + " left" : "Next one Thursday 7 PM ET — in " + span(START - nowMin);
     if (shinyStrip) { shinyStrip.classList.toggle("on", on); shinyStatus.textContent = text; }
@@ -476,7 +477,7 @@
         (m.how ? '<div class="how"><span class="lbl">Or</span>' + esc(m.how) + '</div>' : '') +
         (m.ability ? '<div class="ability"><span class="lbl">Ability</span>' + esc(m.ability.split(" (hidden")[0]) + '</div>' : '') +
         '<dl>' + (m.series ? '<dt>Series</dt><dd>' + esc(m.series) + '</dd>' : '') +
-        '<dt>Design</dt><dd>' + (esc(m.designer) || '—') + '</dd>' +
+        '<dt>Design</dt><dd>' + (m.designer ? esc(m.designer) : '—') + '</dd>' +
         '<dt>Added</dt><dd>' + fmtDate(m.added, { month: "short", day: "numeric", year: "numeric" }) + '</dd>' +
         (m.updated ? '<dt>Updated</dt><dd>' + fmtDate(m.updated, { month: "short", day: "numeric", year: "numeric" }) + '</dd>' : '') + '</dl>' +
         '<div class="card-actions"><button class="pill small" data-detail="' + m.row + '" aria-label="Details for ' + esc(m.name) + '">' + icon("book") + 'Details</button>' +
@@ -491,7 +492,7 @@
           else if (m.group !== filter) return false;
         }
         if (!needle) return true;
-        var hay = [m.name, m.form, m.types.join(" "), m.where.join(" "), m.how || "", m.ability || "", m.designer, m.series || ""].join(" ");
+        var hay = [m.name, m.form, m.types.join(" "), m.where.join(" "), m.how || "", m.ability || "", m.designer, m.series || ""].join(" ").replace(/Campion/g, "Campion Campian");
         return hay.toLowerCase().indexOf(needle) > -1;
       });
       if (sort === "newest") list.sort(function (a, b) { return b.added.localeCompare(a.added) || a.order - b.order; });

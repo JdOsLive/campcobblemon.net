@@ -71,7 +71,7 @@ window.CC = {
       cobblemon: "Cobblemon 1.8",
       start: "2026-09-11T22:00:00-04:00",
       end: "",
-      dates: "Sep 11, 2026 –",
+      dates: "Sep 11, 2026 – present",
       blurb: "A brand new world on modpack 2.0.0, with triple shiny rates on weekends and the new event trophies.",
       logo: "assets/logo.png",
       banner: "assets/season2/banner.jpg",
@@ -93,7 +93,7 @@ window.CC = {
       "Sophisticated Backpacks", "Storage Drawers", "Roughly Enough Items", "Axiom"
     ],
     ours: [
-      { name: "Camp Radio", text: "3× shiny rates every weekend, Thursday 7 PM to Sunday midnight ET. Shiny catches and battle results get posted to Discord." },
+      { name: "Camp Radio", text: "Runs on the server, nothing to install. 3× shiny rates every weekend, Thursday 7 PM to Sunday midnight ET, and shiny catches and battle results get posted to Discord." },
       { name: "Camp Furnishings", text: "Commissioned trophies for tournaments and events, engraved with the winner's name." }
     ]
   },
@@ -420,7 +420,7 @@ window.CC = {
     { row: 33, name: "Bidoof (Camper)",        group: "bidoof", where: ["Forest", "Taiga", "Plains", "Meadow"], series: "Camp original", flavor: "A variation of Bidoof from Camp Cobblemon, at home in forests, plains and meadows. It comes prepared for a night outdoors and carries a pack of its own. The camp's favourite.", types: ["Normal"], ability: "Intimidate / Simple (hidden: Moody)", stats: [75, 58, 51, 45, 51, 40], role: "Well-rounded camper", rarity: "Rare", moves: ["Camouflage", "Round", "Nature Power", "Body Slam", "Bulk Up", "Double-Edge", "Slack Off", "Rest", "Work Up"], designer: "tortu152", added: "2026-09-11" },
     { row: 34, name: "Bidoof (Spider-Man)",   group: "bidoof", where: ["Towns and cities", "Villages"], series: "Marvel", flavor: "A variation of Bidoof from Camp Cobblemon that turns up wherever people build towns and cities. It wears the mask of a famous web-slinging hero, and senses danger before it arrives.", types: ["Bug", "Flying"], ability: "Anticipation / Simple (hidden: Moody)", stats: [55, 75, 55, 35, 45, 55], role: "Fast physical attacker", rarity: "Ultra Rare", moves: ["String Shot", "Quick Attack", "Bug Bite", "Aerial Ace", "Spider Web", "Lunge", "X-Scissor", "Skitter Smack", "U-turn", "Agility"], designer: "tortu152", added: "2026-09-11" },
     { row: 35, name: "Bidoof (Subaru)",       group: "bidoof", where: ["Dark Forest, at night"], series: "Re:Zero", flavor: "A variation of Bidoof from Camp Cobblemon that appears in dark forests at night. It resembles a boy from another world who refuses to stay down, however many times it falls. Trainers swear it already knows how the battle ends.", types: ["Ghost", "Dragon"], ability: "Sturdy / Simple (hidden: Moody)", stats: [65, 40, 55, 70, 45, 45], role: "Refuses to stay down", rarity: "Ultra Rare", moves: ["Astonish", "Dragon Breath", "Endure", "Hex", "Dragon Pulse", "Destiny Bond", "Shadow Ball", "Protect", "Dragon Dance"], designer: "tortu152", added: "2026-09-11" },
-    { row: 36, name: "Bidoof (Counselor)",       group: "bidoof", where: ["Any biome, in daylight", "Near cake or crops"], series: "Camp original", flavor: "A variation of Bidoof from Camp Cobblemon that turns up by day wherever food has been set out. It wears the hat and coat of someone trusted to look after a camp, and it takes the duty seriously. It will not leave until everyone has eaten.", types: ["Normal", "Dragon"], ability: "Natural Cure / Simple (hidden: Moody)", stats: [70, 40, 50, 70, 45, 45], role: "Bulky support", rarity: "Super Rare", moves: ["Round", "Dragon Breath", "Life Dew", "Hyper Voice", "Dragon Pulse", "Body Slam", "Draco Meteor", "Calm Mind", "Heal Bell"], designer: "tortu152 / SirPlnguin", added: "2026-09-11" },
+    { row: 36, name: "Bidoof (Counselor)",       group: "bidoof", where: ["Any biome, in daylight", "Near cake or crops"], series: "Camp original", flavor: "A variation of Bidoof from Camp Cobblemon that turns up by day wherever food has been set out. It wears the hat and coat of someone trusted to look after a camp, and it takes the duty seriously. It will not leave until everyone has eaten.", types: ["Normal", "Dragon"], ability: "Natural Cure / Simple (hidden: Moody)", stats: [70, 40, 50, 70, 45, 45], role: "Bulky support", rarity: "Ultra Rare", moves: ["Round", "Dragon Breath", "Life Dew", "Hyper Voice", "Dragon Pulse", "Body Slam", "Draco Meteor", "Calm Mind", "Heal Bell"], designer: "tortu152 / SirPlnguin", added: "2026-09-11" },
     { row: 37, name: "Bidoof (Deadpool)",        group: "bidoof", where: ["Pillager Outposts"], series: "Marvel", flavor: "A variation of Bidoof from Camp Cobblemon found near the outposts of hostile folk. Wrapped head to tail in red, it shrugs off wounds that would fell anything else, and it has never once been observed to stop talking.", types: ["Dark", "Fighting"], ability: "Regenerator / Simple (hidden: Moody)", stats: [70, 80, 45, 35, 45, 45], role: "Reckless attacker", rarity: "Ultra Rare", moves: ["Scratch", "Fury Cutter", "Sucker Punch", "Slash", "Brick Break", "Night Slash", "Close Combat", "Swords Dance", "Taunt"], designer: "tortu152", added: "2026-09-11" },
     { row: 38, name: "Bidoof (Wolverine)",       group: "bidoof", where: ["Snowy Taiga"], series: "Marvel", flavor: "A variation of Bidoof from Camp Cobblemon that prowls the snowy taiga alone. Claws of an unknown metal slide from its paws without warning, and no injury seems to slow it for long.", types: ["Steel"], ability: "Sharpness / Simple (hidden: Moody)", stats: [65, 85, 55, 25, 45, 45], role: "Berserker", rarity: "Ultra Rare", moves: ["Metal Claw", "Fury Swipes", "Slash", "Bite", "Iron Head", "Night Slash", "Crunch", "Swords Dance", "Close Combat"], designer: "tortu152", added: "2026-09-11" },
     { row: 41, name: "Bidoof (Ganondorf)",       group: "bidoof", where: ["Badlands, at night", "Desert, at night"], series: "Zelda", flavor: "A variation of Bidoof from Camp Cobblemon that roams badlands and deserts after dark. It wears the regalia of a desert king who wanted far more than his crown, and the power it carries scorches whatever it strikes. It is always plotting something.", types: ["Dark"], ability: "Sheer Force / Simple (hidden: Moody)", stats: [70, 85, 60, 35, 40, 30], role: "Slow powerhouse", rarity: "Ultra Rare", moves: ["Bite", "Leer", "Feint Attack", "Crunch", "Fire Punch", "Darkest Lariat", "Throat Chop", "Bulk Up", "Will-O-Wisp"], designer: "tortu152", added: "2026-10-09" },
@@ -441,6 +441,7 @@ window.CC = {
   evolutions: [
     ["Campion Gligar", "Leaf Stone, at night", "Glipine"],
     ["Pachirisu", "Shiny Stone", "Pachimitsu"],
-    ["Feebas", "Level 60 in a mangrove swamp", "Campion Milotic"]
+    ["Feebas", "Level 60 in a mangrove swamp", "Campion Milotic"],
+    ["Campion Koffing", "Level 35", "Campion Weezing"]
   ]
 };
