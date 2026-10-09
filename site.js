@@ -421,6 +421,8 @@
       o.order = i;
       o.total = o.stats.reduce(function (a, b) { return a + b; }, 0);
       o.isNew = now - new Date(o.added + "T12:00:00Z").getTime() < 45 * 864e5;
+      // a redesign keeps its original added date; `updated` marks the new model
+      o.isUpdated = !o.isNew && !!o.updated && now - new Date(o.updated + "T12:00:00Z").getTime() < 45 * 864e5;
       return o;
     });
     var byRow = {};
@@ -453,7 +455,10 @@
         return '<span>' + STAT[i] + '</span><span class="bar"><i style="width:' + Math.min(100, v / 160 * 100) + '%"></i></span><b' + win + '>' + v + '</b>';
       }).join("") + '<span>Total</span><span></span><b>' + m.total + '</b></div>';
     }
-    function newTag(m) { return m.isNew ? '<span class="new-tag">New</span>' : ""; }
+    function newTag(m) {
+      if (m.isNew) return '<span class="new-tag">New</span>';
+      return m.isUpdated ? '<span class="new-tag updated">Updated</span>' : "";
+    }
 
     function card(m) {
       var inCompare = compare.indexOf(m.row) > -1;
@@ -466,7 +471,8 @@
         (m.ability ? '<div class="ability"><span class="lbl">Ability</span>' + esc(m.ability.split(" (hidden")[0]) + '</div>' : '') +
         '<dl>' + (m.series ? '<dt>Series</dt><dd>' + esc(m.series) + '</dd>' : '') +
         '<dt>Design</dt><dd>' + (esc(m.designer) || '—') + '</dd>' +
-        '<dt>Added</dt><dd>' + fmtDate(m.added, { month: "short", day: "numeric", year: "numeric" }) + '</dd></dl>' +
+        '<dt>Added</dt><dd>' + fmtDate(m.added, { month: "short", day: "numeric", year: "numeric" }) + '</dd>' +
+        (m.updated ? '<dt>Updated</dt><dd>' + fmtDate(m.updated, { month: "short", day: "numeric", year: "numeric" }) + '</dd>' : '') + '</dl>' +
         '<div class="card-actions"><button class="pill small" data-detail="' + m.row + '" aria-label="Details for ' + esc(m.name) + '">' + icon("book") + 'Details</button>' +
         '<button class="pill small' + (inCompare ? ' active' : '') + '" data-compare="' + m.row + '" aria-label="Compare ' + esc(m.name) + '" aria-pressed="' + inCompare + '">' + icon("compare") + (inCompare ? "Comparing" : "Compare") + '</button></div>' +
         '</article>';
@@ -569,7 +575,8 @@
         row("Resists", matchupList(m, function (e) { return e > 0 && e < 1; })) +
         row("Immune to", matchupList(m, function (e) { return e === 0; })) +
         (m.series ? row("Series", esc(m.series)) : "") +
-        row("Design", (m.designer ? esc(m.designer) + ' · added ' : 'Added ') + fmtDate(m.added, { month: "long", day: "numeric", year: "numeric" })) +
+        row("Design", (m.designer ? esc(m.designer) + ' · added ' : 'Added ') + fmtDate(m.added, { month: "long", day: "numeric", year: "numeric" }) +
+          (m.updated ? ' · updated ' + fmtDate(m.updated, { month: "long", day: "numeric", year: "numeric" }) : '')) +
         '<div class="actions"><button class="pill' + (inCompare ? ' active' : '') + '" data-compare="' + m.row + '">' + (inCompare ? "Remove from compare" : "Add to compare") + '</button></div>' +
         '</div>' + movesHtml(m) + '</div>';
     }

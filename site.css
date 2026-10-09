@@ -663,3 +663,6 @@ html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-
   .movelist th:nth-last-child(1), .movelist td:nth-last-child(1),
   .movelist th:nth-last-child(3), .movelist td:nth-last-child(3) { display: none; }
 }
+
+/* a redesigned Pokémon: outlined rather than filled, so it doesn't read as new */
+.new-tag.updated { background: transparent; color: var(--accent); box-shadow: inset 0 0 0 1.5px var(--accent); }
