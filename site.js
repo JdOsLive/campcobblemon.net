@@ -416,13 +416,19 @@
     }
     function mult(m) { return m === 0.25 ? "¼×" : m === 0.5 ? "½×" : m + "×"; }
 
+    // Only the latest update gets tags: New for what it added, Updated for what it redesigned.
+    // The next batch takes them over automatically; they also lapse after 45 days.
+    var latestUpdate = C.pokemon.reduce(function (d, m) {
+      return [d, m.added || "", m.updated || ""].sort().pop();
+    }, "");
+    var latestIsRecent = now - new Date(latestUpdate + "T12:00:00Z").getTime() < 45 * 864e5;
     var mons = C.pokemon.map(function (m, i) {
       var o = Object.assign({}, m.group === "bidoof" ? C.bidoofBase : {}, m);
       o.order = i;
       o.total = o.stats.reduce(function (a, b) { return a + b; }, 0);
-      o.isNew = now - new Date(o.added + "T12:00:00Z").getTime() < 45 * 864e5;
+      o.isNew = latestIsRecent && o.added === latestUpdate;
       // a redesign keeps its original added date; `updated` marks the new model
-      o.isUpdated = !o.isNew && !!o.updated && now - new Date(o.updated + "T12:00:00Z").getTime() < 45 * 864e5;
+      o.isUpdated = !o.isNew && latestIsRecent && o.updated === latestUpdate;
       return o;
     });
     var byRow = {};
