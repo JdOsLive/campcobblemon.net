@@ -642,3 +642,24 @@ html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-
 .season-banner { margin: 20px 0 0; max-width: 960px; }
 .season-banner img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--line); }
 .season-banner figcaption { margin-top: 8px; font-size: .8125rem; color: var(--muted); }
+
+/* Pokédex: full move lists under the detail view */
+.detail .learn { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; }
+.learn-head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; }
+.learn-head .lbl { margin: 0; }
+.movetabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.movetabs .pill .faint { margin-left: 4px; font-variant-numeric: tabular-nums; }
+.movelist-wrap { max-height: 340px; overflow: auto; border: 1px solid var(--line); border-radius: 6px; }
+.movelist { width: 100%; border-collapse: collapse; font-size: .875rem; }
+.movelist th { position: sticky; top: 0; z-index: 1; background: var(--card); text-align: left; font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); padding: 7px 10px; border-bottom: 1px solid var(--line); }
+.movelist td { padding: 5px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.movelist tr:last-child td { border-bottom: 0; }
+.movelist .num { text-align: right; font-variant-numeric: tabular-nums; }
+.movelist .mv { font-weight: 600; white-space: normal; }
+.movelist .cat { color: var(--muted); }
+.movelist .type { font-size: .6875rem; padding: 2px 8px; }
+.learn-note { font-size: .8125rem; margin: 0; }
+@media (max-width: 560px) {
+  .movelist th:nth-last-child(1), .movelist td:nth-last-child(1),
+  .movelist th:nth-last-child(3), .movelist td:nth-last-child(3) { display: none; }
+}

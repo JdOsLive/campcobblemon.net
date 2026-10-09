@@ -465,7 +465,7 @@
         (m.how ? '<div class="how"><span class="lbl">Or</span>' + esc(m.how) + '</div>' : '') +
         (m.ability ? '<div class="ability"><span class="lbl">Ability</span>' + esc(m.ability.split(" (hidden")[0]) + '</div>' : '') +
         '<dl>' + (m.series ? '<dt>Series</dt><dd>' + esc(m.series) + '</dd>' : '') +
-        '<dt>Design</dt><dd>' + esc(m.designer) + '</dd>' +
+        '<dt>Design</dt><dd>' + (esc(m.designer) || '—') + '</dd>' +
         '<dt>Added</dt><dd>' + fmtDate(m.added, { month: "short", day: "numeric", year: "numeric" }) + '</dd></dl>' +
         '<div class="card-actions"><button class="pill small" data-detail="' + m.row + '" aria-label="Details for ' + esc(m.name) + '">' + icon("book") + 'Details</button>' +
         '<button class="pill small' + (inCompare ? ' active' : '') + '" data-compare="' + m.row + '" aria-label="Compare ' + esc(m.name) + '" aria-pressed="' + inCompare + '">' + icon("compare") + (inCompare ? "Comparing" : "Compare") + '</button></div>' +
@@ -504,6 +504,42 @@
       }
     }
 
+    // full move lists (learnsets.js, generated from the datapack by camp-tools/learnsets.py)
+    var LEARN = window.CC_LEARN || null;
+    var CATEGORY = { P: "Physical", S: "Special", "-": "Status", "?": "—" };
+    var MOVE_TABS = [["level", "Level up"], ["tm", "TM"], ["egg", "Egg"]];
+    function movesHtml(m) {
+      var ls = LEARN && LEARN.rows[m.row];
+      if (!ls) return "";
+      var tabs = MOVE_TABS.filter(function (t) { return ls[t[0]] && ls[t[0]].length; });
+      if (!tabs.length) return "";
+      function line(id, level) {
+        var mv = LEARN.moves[id] || [id, "Normal", "?", 0, 0];
+        return '<tr>' + (level === undefined ? '' : '<td class="num">' + level + '</td>') +
+          '<td class="mv">' + esc(mv[0]) + '</td><td>' + typeBadge(mv[1]) + '</td>' +
+          '<td class="cat">' + CATEGORY[mv[2]] + '</td>' +
+          '<td class="num">' + (mv[3] || "—") + '</td><td class="num">' + (mv[4] ? mv[4] + "%" : "—") + '</td></tr>';
+      }
+      function table(kind) {
+        var lv = kind === "level";
+        var body = lv ? ls.level.map(function (x) { return line(x[1], x[0]); }).join("")
+                      : ls[kind].map(function (id) { return line(id); }).join("");
+        return '<div class="movelist-wrap" data-moves-panel="' + kind + '"' + (kind === tabs[0][0] ? '' : ' hidden') + '>' +
+          '<table class="movelist"><thead><tr>' + (lv ? '<th class="num">Lv</th>' : '') +
+          '<th>Move</th><th>Type</th><th>Category</th><th class="num">Power</th><th class="num">Acc.</th></tr></thead>' +
+          '<tbody>' + body + '</tbody></table></div>';
+      }
+      return '<section class="learn" aria-label="Moves">' +
+        '<div class="learn-head"><span class="lbl">Moves</span><div class="movetabs">' +
+        tabs.map(function (t, i) {
+          return '<button type="button" class="pill small' + (i ? '' : ' active') + '" data-moves-tab="' + t[0] +
+            '" aria-pressed="' + (i ? 'false' : 'true') + '">' + t[1] + ' <span class="faint">' + ls[t[0]].length + '</span></button>';
+        }).join("") + '</div></div>' +
+        tabs.map(function (t) { return table(t[0]); }).join("") +
+        '<p class="faint learn-note">TMs are taught at a TM Machine. Egg moves pass down through breeding.</p>' +
+        '</section>';
+    }
+
     // detail view
     function row(label, html) { return '<div class="row"><span class="lbl">' + label + '</span>' + html + '</div>'; }
     function matchupList(m, test) {
@@ -533,9 +569,9 @@
         row("Resists", matchupList(m, function (e) { return e > 0 && e < 1; })) +
         row("Immune to", matchupList(m, function (e) { return e === 0; })) +
         (m.series ? row("Series", esc(m.series)) : "") +
-        row("Design", esc(m.designer) + ' · added ' + fmtDate(m.added, { month: "long", day: "numeric", year: "numeric" })) +
+        row("Design", (m.designer ? esc(m.designer) + ' · added ' : 'Added ') + fmtDate(m.added, { month: "long", day: "numeric", year: "numeric" })) +
         '<div class="actions"><button class="pill' + (inCompare ? ' active' : '') + '" data-compare="' + m.row + '">' + (inCompare ? "Remove from compare" : "Add to compare") + '</button></div>' +
-        '</div></div>';
+        '</div>' + movesHtml(m) + '</div>';
     }
 
     // compare view
@@ -586,7 +622,16 @@
       var d = e.target.closest("[data-detail]");
       if (d) { openModal($("#mon-modal"), detailHtml(byRow[+d.getAttribute("data-detail")])); return; }
       var c = e.target.closest("[data-compare]");
-      if (c) toggleCompare(+c.getAttribute("data-compare"));
+      if (c) { toggleCompare(+c.getAttribute("data-compare")); return; }
+      var t = e.target.closest("[data-moves-tab]");
+      if (t) {
+        var learn = t.closest(".learn"), kind = t.getAttribute("data-moves-tab");
+        $$("[data-moves-tab]", learn).forEach(function (b) {
+          b.classList.toggle("active", b === t);
+          b.setAttribute("aria-pressed", String(b === t));
+        });
+        $$("[data-moves-panel]", learn).forEach(function (p) { p.hidden = p.getAttribute("data-moves-panel") !== kind; });
+      }
     });
     trayOpen.addEventListener("click", function () {
       if (compare.length === 2) openModal($("#compare-modal"), compareHtml(byRow[compare[0]], byRow[compare[1]]));
