@@ -10,6 +10,9 @@
   function applyMotionPreference() {
     var reduced = motionQuery.matches || motionPreference === "reduced";
     document.documentElement.setAttribute("data-motion", reduced ? "reduced" : "full");
+    $$("video.hero-landscape").forEach(function (v) {
+      if (reduced) { v.pause(); v.currentTime = 0; } else if (v.paused) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    });
     $$("[data-motion-toggle]").forEach(function (button) {
       button.hidden = false;
       button.setAttribute("aria-pressed", String(reduced));
