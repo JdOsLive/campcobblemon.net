@@ -569,6 +569,10 @@ html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-
 }
 @media (max-width: 860px) {
   .dex-tools .search-field { flex-basis: 100%; }
+  /* One photo per row once two columns would shrink shots below ~400px wide,
+     so the caption tab never covers the subject of the photo. */
+  .grid-gallery { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .grid-gallery a:first-child img { aspect-ratio: 16 / 9; }
 }
 @media (max-width: 820px) {
   .hero-inner { flex-direction: column; align-items: flex-start; justify-content: center; }
@@ -676,8 +680,6 @@ html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-
   .season-full { padding: 36px 0; gap: 20px; }
   .season-head { flex-direction: column; align-items: flex-start; gap: 16px; }
   .season-logo { width: 96px; height: 96px; padding: 10px; }
-  .grid-gallery { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-  .grid-gallery a:first-child img { aspect-ratio: 16 / 9; }
   .grid-gallery .ph-cap { max-width: calc(100% - 24px); padding: 6px 10px 4px; }
   .grid-gallery .shot-title { font-size: .9375rem; }
   .grid-gallery .shot-meta { font-size: .72rem; }

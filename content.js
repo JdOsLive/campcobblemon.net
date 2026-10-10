@@ -54,7 +54,7 @@ window.CC = {
     {
       id: "s1",
       label: "Season 1",
-      cobblemon: "Cobblemon 1.6 → 1.7.3",
+      cobblemon: "Cobblemon 1.6 to 1.7.3",
       start: "2024-12-27T00:00:00-05:00",
       end: "2026-09-09T19:00:00-04:00",
       dates: "Dec 27, 2024 – Sep 9, 2026",
