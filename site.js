@@ -495,7 +495,7 @@
           else if (m.group !== filter) return false;
         }
         if (!needle) return true;
-        var hay = [m.name, m.form, m.types.join(" "), m.where.join(" "), m.how || "", m.ability || "", m.designer, m.series || ""].join(" ").replace(/Campion/g, "Campion Campian");
+        var hay = [m.name, m.form, m.types.join(" "), m.where.join(" "), m.how || "", m.ability || "", m.designer, m.series || ""].join(" ").replace(/Campian/g, "Campian Campion");  // the site said "Campion" until Oct 2026
         return hay.toLowerCase().indexOf(needle) > -1;
       });
       if (sort === "newest") list.sort(function (a, b) { return b.added.localeCompare(a.added) || a.order - b.order; });

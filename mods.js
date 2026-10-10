@@ -1,7 +1,7 @@
-// Generated from modpack 2.0.0 by camp-tools/modlist.py. Don't edit by hand;
+// Generated from modpack 2.1.0 by camp-tools/modlist.py. Don't edit by hand;
 // rerun the script against the new .mrpack when the pack changes.
 window.CC_MODS = {
- "version": "2.0.0",
+ "version": "2.1.0",
  "items": [
   {
    "name": "Almanac",
@@ -205,6 +205,11 @@ window.CC_MODS = {
    "url": "https://modrinth.com/mod/feytweaks"
   },
   {
+   "name": "Follow me [Cobblemon]",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/follow-me-cobblemon"
+  },
+  {
    "name": "Forge Config API Port",
    "type": "mod",
    "url": "https://modrinth.com/mod/forge-config-api-port"
@@ -355,6 +360,11 @@ window.CC_MODS = {
    "url": "https://modrinth.com/mod/netherportalfix"
   },
   {
+   "name": "No Enderman Grief",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/no-enderman-grief"
+  },
+  {
    "name": "Not Enough Animations",
    "type": "mod",
    "url": "https://modrinth.com/mod/not-enough-animations"
@@ -363,6 +373,11 @@ window.CC_MODS = {
    "name": "oωo (owo-lib)",
    "type": "mod",
    "url": "https://modrinth.com/mod/owo-lib"
+  },
+  {
+   "name": "Particle Effects",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/particle-effects"
   },
   {
    "name": "Particle Rain",
