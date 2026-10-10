@@ -14,19 +14,20 @@
   <meta property="og:image:width" content="960">
   <meta property="og:image:height" content="540">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#102b3a">
+  <meta name="theme-color" content="#151412">
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=8c52d8ad">
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;700;800;900&family=Overpass+Mono:wght@500;600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>try{document.documentElement.setAttribute("data-motion",matchMedia("(prefers-reduced-motion: reduce)").matches||localStorage.getItem("camp-motion")==="reduced"?"reduced":"full")}catch(e){}</script>
+  <link rel="stylesheet" href="site.css?v=d282840f">
 </head>
 <body class="home-page">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp<br>Cobblemon</span></a>
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp Cobblemon</span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#menu"></use></svg>Menu</button>
     <nav class="nav" id="primary-nav" aria-label="Main navigation">
       <a href="index.html" class="active" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#home"></use></svg>Home</a>
@@ -40,117 +41,150 @@
   </div>
 </header>
 
-<main class="wrap" id="main" tabindex="-1">
+<main id="main" tabindex="-1">
 
   <aside class="season-announcement" aria-label="Season announcement">
-    <span class="tag">Season 2</span>
-    <p data-season-line>Season 2 is live. It opened September 11, 2026.</p>
-    <a href="seasons.html#s2">About the season <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a>
+    <div class="wrap">
+      <span class="tag">Season 2</span>
+      <p data-season-line>Season 2 is live. It opened September 11, 2026.</p>
+      <a href="seasons.html#s2">About the season <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a>
+    </div>
   </aside>
 
-  <section class="hero expedition-hero" aria-labelledby="welcome-heading">
+  <section class="hero" aria-labelledby="welcome-heading">
     <video class="hero-landscape" autoplay muted loop playsinline preload="auto" poster="assets/video/s2-flyover-poster.jpg" aria-hidden="true"><source src="assets/video/s2-flyover.mp4" type="video/mp4"></video>
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <p class="kicker">Minecraft + Pokémon · Est. 2024</p>
-        <h1 id="welcome-heading">Big builds, custom Pokémon, and <span>a lot of Bidoofs.</span></h1>
-        <p class="lede">An 18+, application-only SMP running since August 2024 — one of the longest-running private Cobblemon servers — on a modpack we maintain ourselves.</p>
-        <div class="actions">
-          <a class="btn btn-primary btn-lg" data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Apply to join</a>
-          <a class="hero-guide" href="#join">How to join <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a>
+    <div class="wrap hero-inner">
+      <div class="hero-panel">
+        <p class="panel-hd"><span>Minecraft + Pokémon</span><span>Est. 2024</span></p>
+        <div class="hero-copy">
+          <h1 id="welcome-heading">Big builds, custom Pokémon, and <span>a lot of Bidoofs.</span></h1>
+          <p class="lede">An 18+, application-only SMP running since August 2024 — one of the longest-running private Cobblemon servers — on a modpack we maintain ourselves.</p>
+          <div class="actions">
+            <a class="btn btn-primary btn-lg" data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Apply to join</a>
+            <a class="btn btn-outline btn-lg" href="#join">How to join</a>
+          </div>
+          <div class="server-address"><span class="lbl"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#copy"></use></svg>Copy address</span><button class="mono" data-copy aria-label="Copy server address" title="Copy the server address" data-address>play.campcobblemon.net</button></div>
+          <p class="sr-only" id="copy-feedback" role="status"></p>
+          <div class="status" id="status" role="status">
+            <span class="dot" aria-hidden="true"></span>
+            <strong class="status-text">Checking server…</strong>
+            <span class="status-players"></span>
+            <span class="tag shiny-badge" id="shiny-badge" hidden>✦ Shiny weekend on</span>
+          </div>
+          <p class="hero-note">18+ · Application-only · Free to play</p>
         </div>
-        <p class="hero-note">18+ · Application-only · Free to play</p>
       </div>
-      <a class="landscape-credit" data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener"><span>Season 2, spawn</span><strong>Open the live map <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></strong></a>
+      <a class="landscape-credit" data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener"><span>Season 2 · Spawn</span><strong>Open the live map ↗</strong></a>
     </div>
   </section>
 
-  <div class="server-bar">
-    <div class="status" id="status" role="status">
-      <span class="dot" aria-hidden="true"></span>
-      <strong class="status-text">Checking server…</strong>
-      <span class="status-players muted"></span>
-      <span class="tag current shiny-badge" id="shiny-badge" hidden>✦ Shiny weekend on</span>
+  <nav class="key-strip" aria-label="Player shortcuts">
+    <div class="wrap">
+      <p class="key-title" aria-hidden="true">Shortcuts</p>
+      <ul class="key-list">
+        <li><a data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener"><span class="picto" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#map"></use></svg></span><span><strong>Live map ↗</strong><small>The Season 2 world, rendered from the server</small></span></a></li>
+        <li><a data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><span class="picto" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg></span><span><strong>Modpack ↗</strong><small>Version <span data-modpack-version>2.1.0</span> on Modrinth</small></span></a></li>
+        <li><a href="pokedex.html"><span class="picto" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#book"></use></svg></span><span><strong>Pokédex</strong><small><span data-mon-count>38</span> custom Pokémon</small></span></a></li>
+        <li><a href="events.html"><span class="picto" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#events"></use></svg></span><span><strong>Events</strong><small>Shiny weekends and community events</small></span></a></li>
+      </ul>
     </div>
-    <nav class="player-shortcuts" aria-label="Player shortcuts">
-      <a class="shortcut" data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#map"></use></svg>Live map</a>
-      <a class="shortcut" data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Modpack</a>
-    <div class="server-address"><span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#copy"></use></svg>Copy address</span><button class="mono" data-copy aria-label="Copy server address" title="Copy the server address" data-address>play.campcobblemon.net</button></div>
-    </nav>
-    <p class="sr-only" id="copy-feedback" role="status"></p>
-  </div>
+  </nav>
 
   <section class="section camp-field-guide" aria-labelledby="locals-heading">
-    <div class="field-guide-copy">
-      <h2 id="locals-heading">Custom Pokémon</h2>
-      <p><span data-mon-count>38</span> custom Pokémon, including <span data-bidoof-count>29</span> costume Bidoofs, Campian regional forms, and new evolutions.</p>
-      <a class="btn btn-dark" href="pokedex.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#book"></use></svg>View the Pokédex</a>
-    </div>
-    <div class="specimen-lineup">
-      <figure><img src="assets/pokemon/r33.png" alt="Camper Bidoof carrying a backpack" width="256" height="256" loading="lazy"><figcaption>Camper Bidoof</figcaption></figure>
-      <figure><img src="assets/pokemon/r29.png" alt="Campian Gligar" width="256" height="256" loading="lazy"><figcaption>Campian Gligar</figcaption></figure>
-      <figure><img src="assets/pokemon/r32.png" alt="Campian Spiritomb" width="256" height="256" loading="lazy"><figcaption>Campian Spiritomb</figcaption></figure>
+    <div class="wrap">
+      <div class="field-guide-copy">
+        <p class="kicker">Pokédex</p>
+        <h2 id="locals-heading">Custom Pokémon</h2>
+        <p><span data-mon-count>38</span> custom Pokémon, including <span data-bidoof-count>29</span> costume Bidoofs, Campian regional forms, and new evolutions.</p>
+        <a class="btn btn-dark" href="pokedex.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#book"></use></svg>View the Pokédex</a>
+      </div>
+      <div class="specimen-lineup">
+        <figure><img src="assets/pokemon/r33.png" alt="Camper Bidoof carrying a backpack" width="256" height="256" loading="lazy"><figcaption><strong>Camper Bidoof</strong><span>Costume Bidoof</span></figcaption></figure>
+        <figure><img src="assets/pokemon/r29.png" alt="Campian Gligar" width="256" height="256" loading="lazy"><figcaption><strong>Campian Gligar</strong><span>Campian form</span></figcaption></figure>
+        <figure><img src="assets/pokemon/r32.png" alt="Campian Spiritomb" width="256" height="256" loading="lazy"><figcaption><strong>Campian Spiritomb</strong><span>Campian form</span></figcaption></figure>
+      </div>
     </div>
   </section>
 
   <section class="section camp-gallery" aria-labelledby="builds-heading">
-    <div class="section-head"><div><h2 id="builds-heading">Community builds</h2></div><a class="more" href="gallery.html">Visit the gallery <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a></div>
-    <div class="thumbs-3" id="featured"></div>
-    <p class="gallery-note">Player builds from Season 1.</p>
+    <div class="wrap">
+      <div class="builds-copy">
+        <p class="kicker">Gallery</p>
+        <h2 id="builds-heading">Community builds</h2>
+        <p class="gallery-note">Player builds from Season 1.</p>
+        <a class="more" href="gallery.html">Visit the gallery <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a>
+      </div>
+      <div class="thumbs-3" id="featured"></div>
+    </div>
   </section>
 
   <section class="section join-grid" id="join" aria-labelledby="join-heading">
-    <div>
-      <div class="section-head"><div><h2 id="join-heading">How to join</h2><p class="join-intro">You’ll need to be 18 or older and have your application approved before joining the server.</p></div><a class="more" href="rules.html">Read the camp rules <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a></div>
-      <ol class="cards-4 join-steps">
-        <li class="card"><span class="step-marker"><span class="num" aria-hidden="true">01</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg></span><strong>Join the Discord</strong><p>Find server announcements, chat with players, and submit your application.</p><a class="more" data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Open Discord ↗</a></li>
-        <li class="card"><span class="step-marker"><span class="num" aria-hidden="true">02</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#apply"></use></svg></span><strong>Apply in #apply</strong><p>Fill in the two-page application in #apply. Staff review it, and Counselor Bidoof DMs you the decision.</p></li>
-        <li class="card"><span class="step-marker"><span class="num" aria-hidden="true">03</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg></span><strong>Install the modpack</strong><p>Get the latest version in the Modrinth app while you wait for approval.</p><a class="more" data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Get the modpack ↗</a></li>
-        <li class="card"><span class="step-marker"><span class="num" aria-hidden="true">04</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#play"></use></svg></span><strong>Connect to the server</strong><p>Once approved, connect to <span data-address>play.campcobblemon.net</span>.</p></li>
-      </ol>
-      <aside class="card bot-note">
-        <img src="assets/counselor.png" alt="Counselor Bidoof, the camp's Discord bot" width="192" height="192" loading="lazy">
-        <p><strong>Counselor Bidoof</strong> handles the backend in Discord — it takes your application, opens a thread for it, posts events and trophies, and reports whether the server is up. Staff read every application and make the call; the bot files it and sends you the answer. <span class="faint">Art by @SirPlnguin.</span></p>
-      </aside>
-    </div>
-    <details class="dropdown discord-widget">
-      <summary>Discord members</summary>
-      <iframe src="https://discord.com/widget?id=1269333810647138377&theme=light" width="350" height="500" title="Camp Cobblemon Discord" allowtransparency="true" frameborder="0" loading="lazy" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-    </details>
-  </section>
-
-
-  <section class="section" id="modpack">
-    <div class="section-head">
-      <div><h2>The modpack</h2></div>
-      <p>Camp Cobblemon Official Modpack <span data-modpack-version>2.0.0</span> · Fabric · Modrinth app</p>
-    </div>
-    <div class="chips" id="modpack-chips"></div>
-    <div class="cards-4" id="modpack-ours"></div>
-    <details class="dropdown">
-      <summary>Full mod list <span class="faint">· <span data-mod-count>121</span> mods, packs and shaders</span></summary>
-      <div class="modlist" id="modlist"></div>
-    </details>
-    <div><a class="btn btn-outline" data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Download on Modrinth</a></div>
-  </section>
-
-  <section class="section" id="seasons-section">
-    <div class="section-head">
-      <div><h2>Seasons</h2></div>
-      <a class="more" href="seasons.html">View all seasons →</a>
-    </div>
-    <div class="seasons" id="seasons"></div>
-  </section>
-
-  <section class="section" id="support">
-    <div class="support">
-      <div>
-        <h2>Support the camp</h2>
-        <p>Camp Cobblemon is free to play. Optional contributions help fund commissioned Pokémon.
-        There are no paid ranks, gameplay perks, or pay-to-win features.</p>
+    <div class="wrap">
+      <div class="sheet">
+        <div class="sheet-head">
+          <div><p class="kicker">Membership</p><h2 id="join-heading">How to join</h2></div>
+          <p class="join-intro">You’ll need to be 18 or older and have your application approved before joining the server.</p>
+          <a class="more" href="rules.html">Read the camp rules <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a>
+        </div>
+        <ol class="join-steps">
+          <li class="step"><span class="picto" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg><b>1</b></span><strong>Join the Discord</strong><p>Find server announcements, chat with players, and submit your application.</p><a class="more" data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener">Open Discord ↗</a></li>
+          <li class="step"><span class="picto" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#apply"></use></svg><b>2</b></span><strong>Apply in #apply</strong><p>Fill in the two-page application in #apply. Staff review it, and Counselor Bidoof DMs you the decision.</p></li>
+          <li class="step"><span class="picto" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg><b>3</b></span><strong>Install the modpack</strong><p>Get the latest version in the Modrinth app while you wait for approval.</p><a class="more" data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener">Get the modpack ↗</a></li>
+          <li class="step"><span class="picto" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#play"></use></svg><b>4</b></span><strong>Connect to the server</strong><p>Once approved, connect to <span class="mono" data-address>play.campcobblemon.net</span>.</p></li>
+        </ol>
+        <aside class="bot-note">
+          <img src="assets/counselor.png" alt="Counselor Bidoof, the camp's Discord bot" width="192" height="192" loading="lazy">
+          <p><strong>Counselor Bidoof</strong> handles the backend in Discord — it takes your application, opens a thread for it, posts events and trophies, and reports whether the server is up. Staff read every application and make the call; the bot files it and sends you the answer. <span class="faint">Art by @SirPlnguin.</span></p>
+        </aside>
       </div>
-      <a class="btn btn-primary btn-lg" data-link="paypal" href="https://paypal.me/campcobblemon" target="_blank" rel="noopener">Contribute via PayPal</a>
-      <div class="goals" id="support-goals" hidden></div>
+      <details class="dropdown discord-widget">
+        <summary>Discord members</summary>
+        <iframe src="https://discord.com/widget?id=1269333810647138377&theme=light" width="350" height="500" title="Camp Cobblemon Discord" allowtransparency="true" frameborder="0" loading="lazy" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+      </details>
+    </div>
+  </section>
+
+  <section class="section modpack" id="modpack" aria-labelledby="modpack-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="kicker">Modpack</p><h2 id="modpack-heading">The modpack</h2></div>
+        <p class="mono">Camp Cobblemon Official Modpack <span data-modpack-version>2.0.0</span> · Fabric · Modrinth app</p>
+      </div>
+      <div class="chips" id="modpack-chips"></div>
+      <div class="cards-4" id="modpack-ours"></div>
+      <details class="dropdown">
+        <summary>Full mod list <span class="faint">· <span data-mod-count>121</span> mods, packs and shaders</span></summary>
+        <div class="modlist" id="modlist"></div>
+      </details>
+      <div><a class="btn btn-outline" data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Download on Modrinth</a></div>
+    </div>
+  </section>
+
+  <section class="section" id="seasons-section" aria-labelledby="seasons-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="kicker">Worlds</p><h2 id="seasons-heading">Seasons</h2></div>
+        <a class="more" href="seasons.html">View all seasons <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow"></use></svg></a>
+      </div>
+      <div class="seasons" id="seasons"></div>
+    </div>
+  </section>
+
+  <section class="section" id="support" aria-labelledby="support-heading">
+    <div class="wrap">
+      <div class="support">
+        <p class="panel-hd" aria-hidden="true"><span>Optional contributions</span><span>No paid ranks</span></p>
+        <div class="support-body">
+          <div class="support-copy">
+            <p class="kicker">Support</p>
+            <h2 id="support-heading">Support the camp</h2>
+            <p>Camp Cobblemon is free to play. Optional contributions help fund commissioned Pokémon.
+            There are no paid ranks, gameplay perks, or pay-to-win features.</p>
+          </div>
+          <a class="btn btn-primary btn-lg" data-link="paypal" href="https://paypal.me/campcobblemon" target="_blank" rel="noopener">Contribute via PayPal</a>
+          <div class="goals" id="support-goals" hidden></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -158,19 +192,22 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <span>Fan-made server. Not affiliated with Nintendo, The Pokémon Company, Mojang or the Cobblemon team.</span>
+    <div class="foot-brand"><img src="assets/logo.png" alt="" width="44" height="44"><div><strong>Camp Cobblemon</strong><span>18+ · Application-only · Since August 2024</span><span class="mono" data-address>play.campcobblemon.net</span></div></div>
     <nav aria-label="Footer links">
       <a data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Discord</a>
       <a data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Modrinth</a>
       <a data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener">Live map</a>
       <a data-link="paypal" href="https://paypal.me/campcobblemon" target="_blank" rel="noopener">Support</a>
     </nav>
-    <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#motion"></use></svg><span>Reduce motion</span></button>
+    <div class="foot-base">
+      <p class="foot-note">Fan-made server. Not affiliated with Nintendo, The Pokémon Company, Mojang or the Cobblemon team.</p>
+      <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#motion"></use></svg><span>Reduce motion</span></button>
+    </div>
   </div>
 </footer>
 
 <script src="content.js?v=744ba8bd"></script>
 <script src="mods.js?v=3571bd7f"></script>
-<script src="site.js?v=cda7effe"></script>
+<script src="site.js?v=aacf94f6"></script>
 </body>
 </html>

@@ -12,19 +12,20 @@
   <meta property="og:description" content="Every custom Pokémon on Camp Cobblemon: costume Bidoofs, Campian regional forms and new evolutions.">
   <meta property="og:image" content="https://campcobblemon.net/assets/season2/banner.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#102b3a">
+  <meta name="theme-color" content="#151412">
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=8c52d8ad">
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;700;800;900&family=Overpass+Mono:wght@500;600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>try{document.documentElement.setAttribute("data-motion",matchMedia("(prefers-reduced-motion: reduce)").matches||localStorage.getItem("camp-motion")==="reduced"?"reduced":"full")}catch(e){}</script>
+  <link rel="stylesheet" href="site.css?v=d282840f">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp<br>Cobblemon</span></a>
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp Cobblemon</span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#menu"></use></svg>Menu</button>
     <nav class="nav" id="primary-nav" aria-label="Main navigation">
       <a href="index.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#home"></use></svg>Home</a>
@@ -38,84 +39,95 @@
   </div>
 </header>
 
-<main class="wrap" id="main" tabindex="-1">
+<main id="main" tabindex="-1">
 
   <div class="page-head">
-    <h1>Pokédex</h1>
-    <p>Browse our custom Pokémon, check their spawn locations and stats, or compare two side by side.</p>
+    <div class="wrap">
+      <p class="kicker">Field guide</p>
+      <h1>Pokédex</h1>
+      <p class="lede">Browse our custom Pokémon, check their spawn locations and stats, or compare two side by side.</p>
+      <p class="page-meta mono"><span data-mon-count>38</span> Pokémon · <span data-bidoof-count>29</span> costume Bidoofs</p>
+    </div>
   </div>
 
-  <section class="section">
-    <div class="filters" role="group" aria-label="Pokémon category">
-      <button class="pill active" data-filter="all" aria-pressed="true">All</button>
-      <button class="pill" data-filter="bidoof" aria-pressed="false">Costume Bidoofs</button>
-      <button class="pill" data-filter="campian" aria-pressed="false">Campian forms</button>
-      <button class="pill" data-filter="evo" aria-pressed="false">New evolutions</button>
-    </div>
-      <div class="filters series-filters" id="series-filters" role="group" aria-label="Series"></div>
-    <div class="dex-tools">
-      <div class="field search-field"><label for="search"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#search"></use></svg>Search Pokémon</label>
-      <input class="search" id="search" type="search" placeholder="Name, type, biome, or designer" aria-describedby="search-help">
-      <span class="field-hint" id="search-help">Try “Fire”, “Forest”, or a Pokémon’s name.</span></div>
-      <div class="field"><label for="sort">Sort by</label>
-      <select class="search" id="sort">
-        <option value="default">Default order</option>
-        <option value="newest">Newest first</option>
-        <option value="stats">Highest stats</option>
-        <option value="name">Name</option>
-      </select></div>
-      <label class="toggle"><input type="checkbox" id="shiny"> Show shiny</label>
-      <button class="pill reset-filters" data-reset-filters type="button"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#reset"></use></svg>Reset filters</button>
-    </div>
-    <div class="compare-tray" id="compare-tray" hidden>
-      <span class="lbl">Comparing</span>
-      <span class="compare-names" id="compare-names"></span>
-      <button class="pill" id="compare-open" disabled>Compare</button>
-      <button class="pill" id="compare-clear">Clear</button>
-    </div>
-    <p class="results-count" id="dex-results" role="status" aria-atomic="true"></p>
-    <div class="dex" id="dex"></div>
-  </section>
+  <div class="wrap page-body">
 
-  <section class="section">
-    <h2>Evolutions</h2>
-    <table class="evos">
-      <thead><tr><th>From</th><th>How</th><th>To</th></tr></thead>
-      <tbody id="evolutions"></tbody>
-    </table>
-  </section>
+    <section class="section">
+      <div class="filters" role="group" aria-label="Pokémon category">
+        <button class="pill active" data-filter="all" aria-pressed="true">All</button>
+        <button class="pill" data-filter="bidoof" aria-pressed="false">Costume Bidoofs</button>
+        <button class="pill" data-filter="campian" aria-pressed="false">Campian forms</button>
+        <button class="pill" data-filter="evo" aria-pressed="false">New evolutions</button>
+      </div>
+        <div class="filters series-filters" id="series-filters" role="group" aria-label="Series"></div>
+      <div class="dex-tools">
+        <div class="field search-field"><label for="search"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#search"></use></svg>Search Pokémon</label>
+        <input class="search" id="search" type="search" placeholder="Name, type, biome, or designer" aria-describedby="search-help">
+        <span class="field-hint" id="search-help">Try “Fire”, “Forest”, or a Pokémon’s name.</span></div>
+        <div class="field"><label for="sort">Sort by</label>
+        <select class="search" id="sort">
+          <option value="default">Default order</option>
+          <option value="newest">Newest first</option>
+          <option value="stats">Highest stats</option>
+          <option value="name">Name</option>
+        </select></div>
+        <label class="toggle"><input type="checkbox" id="shiny"> Show shiny</label>
+        <button class="pill reset-filters" data-reset-filters type="button"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#reset"></use></svg>Reset filters</button>
+      </div>
+      <div class="compare-tray" id="compare-tray" hidden>
+        <span class="lbl">Comparing</span>
+        <span class="compare-names" id="compare-names"></span>
+        <button class="pill" id="compare-open" disabled>Compare</button>
+        <button class="pill" id="compare-clear">Clear</button>
+      </div>
+      <p class="results-count" id="dex-results" role="status" aria-atomic="true"></p>
+      <div class="dex" id="dex"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div><p class="kicker">New evolutions</p><h2>Evolutions</h2></div></div>
+      <table class="evos">
+        <thead><tr><th>From</th><th>How</th><th>To</th></tr></thead>
+        <tbody id="evolutions"></tbody>
+      </table>
+    </section>
+
+  </div>
 
 </main>
 
 <div class="modal" id="mon-modal" role="dialog" aria-modal="true" aria-label="Pokémon details" tabindex="-1">
   <div class="modal-card">
-    <button class="modal-close" aria-label="Close">×</button>
+    <div class="modal-hd"><span>Pokédex entry</span><button class="modal-close" aria-label="Close">×</button></div>
     <div class="modal-body"></div>
   </div>
 </div>
 
 <div class="modal" id="compare-modal" role="dialog" aria-modal="true" aria-label="Compare Pokémon" tabindex="-1">
   <div class="modal-card wide">
-    <button class="modal-close" aria-label="Close">×</button>
+    <div class="modal-hd"><span>Compare</span><button class="modal-close" aria-label="Close">×</button></div>
     <div class="modal-body"></div>
   </div>
 </div>
 
 <footer class="site-footer">
   <div class="wrap">
-    <span>Fan-made server. Not affiliated with Nintendo, The Pokémon Company, Mojang or the Cobblemon team.</span>
+    <div class="foot-brand"><img src="assets/logo.png" alt="" width="44" height="44"><div><strong>Camp Cobblemon</strong><span>18+ · Application-only · Since August 2024</span><span class="mono" data-address>play.campcobblemon.net</span></div></div>
     <nav aria-label="Footer links">
       <a data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Discord</a>
       <a data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Modrinth</a>
       <a data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener">Live map</a>
       <a data-link="paypal" href="https://paypal.me/campcobblemon" target="_blank" rel="noopener">Support</a>
     </nav>
-    <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#motion"></use></svg><span>Reduce motion</span></button>
+    <div class="foot-base">
+      <p class="foot-note">Fan-made server. Not affiliated with Nintendo, The Pokémon Company, Mojang or the Cobblemon team.</p>
+      <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#motion"></use></svg><span>Reduce motion</span></button>
+    </div>
   </div>
 </footer>
 
 <script src="content.js?v=744ba8bd"></script>
 <script src="learnsets.js?v=d8a55d17"></script>
-<script src="site.js?v=cda7effe"></script>
+<script src="site.js?v=aacf94f6"></script>
 </body>
 </html>

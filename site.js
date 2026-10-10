@@ -310,8 +310,9 @@
 
   var feat = $("#featured");
   if (feat) {
-    feat.innerHTML = C.featured.map(function (id) {
-      return '<a href="gallery.html" aria-label="Explore the gallery: ' + esc(shotInfo(id).caption) + '"><img src="' + thumbOf(id) + '" alt="' + esc(shotInfo(id).alt) + '" loading="lazy" width="720" height="405"></a>';
+    feat.innerHTML = C.featured.map(function (id, i) {
+      return '<a href="gallery.html" aria-label="Explore the gallery: ' + esc(shotInfo(id).caption) + '"><img src="' + thumbOf(id) + '" alt="' + esc(shotInfo(id).alt) + '" loading="lazy" width="720" height="405">' +
+        '<span class="ph-cap" aria-hidden="true"><b>' + (i + 1) + '</b>' + esc(shotInfo(id).caption) + '</span></a>';
     }).join("");
   }
   $$("[data-mon-count]").forEach(function (el) { el.textContent = C.pokemon.length; });
@@ -805,6 +806,12 @@
         arrivalObserver.unobserve(entry.target);
       });
     }, { threshold: 0.05 });
-    $$(".section, .season-full").forEach(function (section) { arrivalObserver.observe(section); });
+    // Only sections still below the fold start hidden (.will-arrive), so nothing already on screen
+    // blinks out and back in. The CSS hides them only while motion is on.
+    $$(".section, .season-full").forEach(function (section) {
+      if (section.getBoundingClientRect().top < window.innerHeight) { section.classList.add("arrived"); return; }
+      section.classList.add("will-arrive");
+      arrivalObserver.observe(section);
+    });
   }
 })();

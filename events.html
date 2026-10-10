@@ -12,19 +12,20 @@
   <meta property="og:description" content="Tournaments, build contests, shiny hunts — upcoming and past, with results and trophies.">
   <meta property="og:image" content="https://campcobblemon.net/assets/season2/banner.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#102b3a">
+  <meta name="theme-color" content="#151412">
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=8c52d8ad">
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;700;800;900&family=Overpass+Mono:wght@500;600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>try{document.documentElement.setAttribute("data-motion",matchMedia("(prefers-reduced-motion: reduce)").matches||localStorage.getItem("camp-motion")==="reduced"?"reduced":"full")}catch(e){}</script>
+  <link rel="stylesheet" href="site.css?v=d282840f">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp<br>Cobblemon</span></a>
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp Cobblemon</span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#menu"></use></svg>Menu</button>
     <nav class="nav" id="primary-nav" aria-label="Main navigation">
       <a href="index.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#home"></use></svg>Home</a>
@@ -38,44 +39,54 @@
   </div>
 </header>
 
-<main class="wrap" id="main" tabindex="-1">
+<main id="main" tabindex="-1">
 
   <div class="page-head">
-    <h1>Events</h1>
-    <p>Upcoming community events and results from past tournaments, build contests, and shiny hunts.</p>
+    <div class="wrap">
+      <p class="kicker">On the server</p>
+      <h1>Events</h1>
+      <p class="lede">Upcoming community events and results from past tournaments, build contests, and shiny hunts.</p>
+    </div>
   </div>
 
-  <div class="strip" id="shiny-strip">
-    <div class="strip-main"><span class="strip-title">✦ 3× shiny weekend</span><span class="strip-sub">Triple shiny rates from Thursday at 7 PM to Sunday at midnight ET. Shiny catches are posted to Discord.</span></div>
-    <span class="tag" id="shiny-status">Checking…</span>
+  <div class="wrap page-body">
+
+    <div class="strip" id="shiny-strip">
+      <div class="strip-main"><span class="strip-title">✦ 3× shiny weekend</span><span class="strip-sub">Triple shiny rates from Thursday at 7 PM to Sunday at midnight ET. Shiny catches are posted to Discord.</span></div>
+      <span class="tag" id="shiny-status">Checking…</span>
+    </div>
+
+    <section class="section">
+      <div class="section-head"><div><p class="kicker">Calendar</p><h2>Upcoming</h2></div></div>
+      <div class="event-list" id="events-upcoming"><p class="empty">Loading…</p></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div><p class="kicker">Results</p><h2>Past events</h2></div></div>
+      <div class="event-list" id="events-past"></div>
+    </section>
+
   </div>
-
-  <section class="section">
-    <div class="section-head"><h2>Upcoming</h2></div>
-    <div class="event-list" id="events-upcoming"><p class="empty">Loading…</p></div>
-  </section>
-
-  <section class="section">
-    <div class="section-head"><h2>Past events</h2></div>
-    <div class="event-list" id="events-past"></div>
-  </section>
 
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <span>Fan-made server. Not affiliated with Nintendo, The Pokémon Company, Mojang or the Cobblemon team.</span>
+    <div class="foot-brand"><img src="assets/logo.png" alt="" width="44" height="44"><div><strong>Camp Cobblemon</strong><span>18+ · Application-only · Since August 2024</span><span class="mono" data-address>play.campcobblemon.net</span></div></div>
     <nav aria-label="Footer links">
       <a data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Discord</a>
       <a data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Modrinth</a>
       <a data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener">Live map</a>
       <a data-link="paypal" href="https://paypal.me/campcobblemon" target="_blank" rel="noopener">Support</a>
     </nav>
-    <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#motion"></use></svg><span>Reduce motion</span></button>
+    <div class="foot-base">
+      <p class="foot-note">Fan-made server. Not affiliated with Nintendo, The Pokémon Company, Mojang or the Cobblemon team.</p>
+      <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#motion"></use></svg><span>Reduce motion</span></button>
+    </div>
   </div>
 </footer>
 
 <script src="content.js?v=744ba8bd"></script>
-<script src="site.js?v=cda7effe"></script>
+<script src="site.js?v=aacf94f6"></script>
 </body>
 </html>
