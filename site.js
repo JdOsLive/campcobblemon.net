@@ -7,12 +7,24 @@
   var motionQuery = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : { matches: false };
   var motionPreference = "full";
   try { if (localStorage.getItem("camp-motion") === "reduced") motionPreference = "reduced"; } catch (e) { /* Preferences may be unavailable in private browsing. */ }
+  var videoPausedByVisitor = false;
+  function playVideo(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  function syncVideoToggle() {
+    $$("[data-video-toggle]").forEach(function (button) {
+      var v = $("video.hero-landscape");
+      if (!v) return;
+      button.hidden = false;
+      button.setAttribute("aria-label", v.paused ? "Play the background video" : "Pause the background video");
+      $("use", button).setAttribute("href", "assets/icons.svg#" + (v.paused ? "play" : "pause"));
+    });
+  }
   function applyMotionPreference() {
     var reduced = motionQuery.matches || motionPreference === "reduced";
     document.documentElement.setAttribute("data-motion", reduced ? "reduced" : "full");
     $$("video.hero-landscape").forEach(function (v) {
-      if (reduced) { v.pause(); v.currentTime = 0; } else if (v.paused) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      if (reduced) { v.pause(); v.currentTime = 0; } else if (v.paused && !videoPausedByVisitor) playVideo(v);
     });
+    syncVideoToggle();
     $$("[data-motion-toggle]").forEach(function (button) {
       button.hidden = false;
       button.setAttribute("aria-pressed", String(reduced));
@@ -28,6 +40,16 @@
     });
   });
   if (motionQuery.addEventListener) motionQuery.addEventListener("change", applyMotionPreference);
+  // The hero video has its own pause/play button; it changes only the video, not the motion setting.
+  $$("[data-video-toggle]").forEach(function (button) {
+    var v = $("video.hero-landscape");
+    if (!v) return;
+    button.addEventListener("click", function () {
+      if (v.paused) { videoPausedByVisitor = false; playVideo(v); } else { videoPausedByVisitor = true; v.pause(); }
+    });
+    v.addEventListener("play", syncVideoToggle);
+    v.addEventListener("pause", syncVideoToggle);
+  });
   applyMotionPreference();
 
   function esc(s) {
@@ -54,7 +76,7 @@
     return '<span class="shot-title">' + esc(info.caption) + '</span><span class="shot-meta">Season ' + id.split("-")[0].slice(1) + (info.creator ? ' · Built by ' + esc(info.creator) : '') + '</span>';
   }
   function shotLink(id, i) {
-    return '<a href="' + fullOf(id) + '" data-i="' + i + '" aria-label="View ' + esc(shotInfo(id).caption) + '"><figure><img src="' + thumbOf(id) + '" alt="' + esc(shotInfo(id).alt) + '" loading="lazy" width="720" height="405"><figcaption>' + shotCaption(id) + '</figcaption></figure></a>';
+    return '<a href="' + fullOf(id) + '" data-i="' + i + '" aria-label="View ' + esc(shotInfo(id).caption) + '"><figure><img src="' + thumbOf(id) + '" alt="' + esc(shotInfo(id).alt) + '" loading="lazy" width="720" height="405"><figcaption class="ph-cap">' + shotCaption(id) + '</figcaption></figure></a>';
   }
   function seasonState(s) {
     var start = new Date(s.start).getTime(), end = s.end ? new Date(s.end).getTime() : Infinity;
@@ -133,6 +155,7 @@
       dialogTriggers.set(el, { element: trigger, attribute: attr, row: attr ? trigger.getAttribute(attr) : null });
     }
     el.classList.add("open");
+    document.documentElement.classList.add("dialog-open");
     document.body.style.overflow = "hidden";
     $$(".site-header, main, .site-footer, .skip-link").forEach(function (background) { background.inert = true; });
     ($("button", el) || el).focus();
@@ -140,6 +163,7 @@
   function deactivateDialog(el) {
     el.classList.remove("open");
     if (!$(".modal.open, .lightbox.open")) {
+      document.documentElement.classList.remove("dialog-open");
       document.body.style.overflow = "";
       $$(".site-header, main, .site-footer, .skip-link").forEach(function (background) { background.inert = false; });
     }
@@ -312,7 +336,7 @@
   if (feat) {
     feat.innerHTML = C.featured.map(function (id, i) {
       return '<a href="gallery.html" aria-label="Explore the gallery: ' + esc(shotInfo(id).caption) + '"><img src="' + thumbOf(id) + '" alt="' + esc(shotInfo(id).alt) + '" loading="lazy" width="720" height="405">' +
-        '<span class="ph-cap" aria-hidden="true"><b>' + (i + 1) + '</b>' + esc(shotInfo(id).caption) + '</span></a>';
+        '<span class="ph-cap" aria-hidden="true"><b>' + (i + 1) + '</b><span class="ph-title">' + esc(shotInfo(id).caption) + '</span></span></a>';
     }).join("");
   }
   $$("[data-mon-count]").forEach(function (el) { el.textContent = C.pokemon.length; });
@@ -329,7 +353,7 @@
       var links = [];
       if (s.download) links.push('<a class="btn btn-outline" href="' + esc(s.download) + '">Download the world</a>');
       if (s.map) links.push('<a class="btn btn-outline" href="' + esc(s.map) + '" target="_blank" rel="noopener">Map</a>');
-      if (s.galleryCount) links.push('<a class="more" href="gallery.html">All ' + s.galleryCount + ' photos in the gallery →</a>');
+      if (s.galleryCount) links.push('<a class="more" href="gallery.html">All ' + s.galleryCount + ' photos in the gallery ' + icon("arrow") + '</a>');
       var shots = s.shots.length
         ? '<div class="grid-gallery" data-season="' + s.id + '">' + s.shots.map(shotLink).join("") + '</div>'
         : (s.shotsNote ? '<p class="faint">' + esc(s.shotsNote) + '</p>' : "");
@@ -482,8 +506,8 @@
         (m.ability ? '<div class="ability"><span class="lbl">Ability</span>' + esc(m.ability.split(" (hidden")[0]) + '</div>' : '') +
         '<dl>' + (m.series ? '<dt>Series</dt><dd>' + esc(m.series) + '</dd>' : '') +
         '<dt>Design</dt><dd>' + (m.designer ? esc(m.designer) : '—') + '</dd>' +
-        '<dt>Added</dt><dd>' + fmtDate(m.added, { month: "short", day: "numeric", year: "numeric" }) + '</dd>' +
-        (m.updated ? '<dt>Updated</dt><dd>' + fmtDate(m.updated, { month: "short", day: "numeric", year: "numeric" }) + '</dd>' : '') + '</dl>' +
+        '<dt>Added</dt><dd class="mono">' + fmtDate(m.added, { month: "short", day: "numeric", year: "numeric" }) + '</dd>' +
+        (m.updated ? '<dt>Updated</dt><dd class="mono">' + fmtDate(m.updated, { month: "short", day: "numeric", year: "numeric" }) + '</dd>' : '') + '</dl>' +
         '<div class="card-actions"><button class="pill small" data-detail="' + m.row + '" aria-label="Details for ' + esc(m.name) + '">' + icon("book") + 'Details</button>' +
         '<button class="pill small' + (inCompare ? ' active' : '') + '" data-compare="' + m.row + '" aria-label="Compare ' + esc(m.name) + '" aria-pressed="' + inCompare + '">' + icon("compare") + (inCompare ? "Comparing" : "Compare") + '</button></div>' +
         '</article>';
@@ -586,8 +610,8 @@
         row("Resists", matchupList(m, function (e) { return e > 0 && e < 1; })) +
         row("Immune to", matchupList(m, function (e) { return e === 0; })) +
         (m.series ? row("Series", esc(m.series)) : "") +
-        row("Design", (m.designer ? esc(m.designer) + ' · added ' : 'Added ') + fmtDate(m.added, { month: "long", day: "numeric", year: "numeric" }) +
-          (m.updated ? ' · updated ' + fmtDate(m.updated, { month: "long", day: "numeric", year: "numeric" }) : '')) +
+        row("Design", (m.designer ? esc(m.designer) + ' · added ' : 'Added ') + '<span class="mono date">' + fmtDate(m.added, { month: "long", day: "numeric", year: "numeric" }) + '</span>' +
+          (m.updated ? ' · updated <span class="mono date">' + fmtDate(m.updated, { month: "long", day: "numeric", year: "numeric" }) + '</span>' : '')) +
         '<div class="actions"><button class="pill' + (inCompare ? ' active' : '') + '" data-compare="' + m.row + '">' + (inCompare ? "Remove from compare" : "Add to compare") + '</button></div>' +
         '</div>' + movesHtml(m) + '</div>';
     }
@@ -680,6 +704,7 @@
       render(); search.focus();
     });
     render();
+    setTimeout(function () { dex.classList.add("settled"); }, 700);
 
     var evos = $("#evolutions");
     if (evos) {
@@ -694,7 +719,7 @@
   if (gal) {
     var cur = "season1";
     $$("[data-set]").forEach(function (b) {
-      b.textContent = b.textContent + " · " + C.gallery[b.getAttribute("data-set")].length;
+      b.innerHTML = esc(b.textContent) + ' <span class="faint">' + C.gallery[b.getAttribute("data-set")].length + '</span>';
       b.addEventListener("click", function () {
         cur = b.getAttribute("data-set");
         $$("[data-set]").forEach(function (x) { x.classList.toggle("active", x === b); x.setAttribute("aria-pressed", String(x === b)); });
@@ -770,7 +795,7 @@
         (e.description ? '<p>' + esc(e.description) + '</p>' : '') +
         (results ? '<ol>' + results + '</ol>' : '') +
         (e.trophy ? '<div class="trophy">' + esc(e.trophy) + '</div>' : '') +
-        (e.link ? '<a class="more" href="' + esc(e.link) + '" target="_blank" rel="noopener">Details in Discord →</a>' : '') +
+        (e.link ? '<a class="more" href="' + esc(e.link) + '" target="_blank" rel="noopener">Details in Discord ' + icon("external") + '</a>' : '') +
         '</article>';
     }
     function loadEvents() {
@@ -805,13 +830,17 @@
         entry.target.classList.add("arrived");
         arrivalObserver.unobserve(entry.target);
       });
-    }, { threshold: 0.05 });
+    }, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
     // Only sections still below the fold start hidden (.will-arrive), so nothing already on screen
     // blinks out and back in. The CSS hides them only while motion is on.
     $$(".section, .season-full").forEach(function (section) {
       if (section.getBoundingClientRect().top < window.innerHeight) { section.classList.add("arrived"); return; }
       section.classList.add("will-arrive");
       arrivalObserver.observe(section);
+    });
+    // Anything printed or saved before it was scrolled to must still show up.
+    window.addEventListener("beforeprint", function () {
+      $$(".will-arrive").forEach(function (section) { section.classList.add("arrived"); arrivalObserver.unobserve(section); });
     });
   }
 })();
