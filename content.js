@@ -86,9 +86,9 @@ window.CC = {
 
   // The full "everything in the pack" list is generated into mods.js (see camp-tools/modlist.py).
   modpack: {
-    version: "2.1.0",
+    version: "2.2.0",
     highlights: [
-      "Cobblemon 1.8.1", "Minecraft 1.21.1", "Sodium + Iris", "Complementary Reimagined shaders",
+      "Cobblemon 1.8.2", "Minecraft 1.21.1", "Sodium + Iris", "Complementary Reimagined shaders",
       "Distant Horizons", "Xaero's minimap & world map", "Simple Voice Chat", "Litematica",
       "Sophisticated Backpacks", "Storage Drawers", "Roughly Enough Items", "Axiom"
     ],

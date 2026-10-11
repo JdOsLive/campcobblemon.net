@@ -1,7 +1,7 @@
-// Generated from modpack 2.1.0 by camp-tools/modlist.py. Don't edit by hand;
+// Generated from modpack 2.2.0 by camp-tools/modlist.py. Don't edit by hand;
 // rerun the script against the new .mrpack when the pack changes.
 window.CC_MODS = {
- "version": "2.1.0",
+ "version": "2.2.0",
  "items": [
   {
    "name": "Almanac",
