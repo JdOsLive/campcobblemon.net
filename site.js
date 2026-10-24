@@ -37,6 +37,9 @@
       motionPreference = motionPreference === "full" ? "reduced" : "full";
       try { localStorage.setItem("camp-motion", motionPreference); } catch (e) { /* The choice still applies for this page. */ }
       applyMotionPreference();
+  // "New" badges retire themselves: anything marked data-new-until="YYYY-MM-DD" hides after that day (Eastern).
+  var todayNY = new Date().toLocaleDateString("en-CA", { timeZone: NY });
+  $$("[data-new-until]").forEach(function (el) { if (todayNY > el.getAttribute("data-new-until")) el.hidden = true; });
     });
   });
   if (motionQuery.addEventListener) motionQuery.addEventListener("change", applyMotionPreference);
@@ -227,6 +230,8 @@
   function closeModal(el) {
     deactivateDialog(el);
   }
+  // Page scripts (suggest.js) reuse the same dialogs and helpers.
+  window.CCUI = { openModal: openModal, closeModal: closeModal, esc: esc, icon: icon, fmtDate: fmtDate };
   $$(".modal").forEach(function (el) {
     $(".modal-close", el).addEventListener("click", function () { closeModal(el); });
     el.addEventListener("click", function (e) { if (e.target === el) closeModal(el); });

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Suggest a form · Camp Cobblemon</title>
+  <meta name="description" content="Suggest a Campian form, a Mega form, a new evolution, a pre-evolution or a Fakemon for Camp Cobblemon, and vote on everyone's ideas.">
+  <meta property="og:site_name" content="Camp Cobblemon">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://campcobblemon.net/suggest.html">
+  <meta property="og:title" content="Suggest a form · Camp Cobblemon">
+  <meta property="og:description" content="Suggest a Campian form, a Mega form, a new evolution, a pre-evolution or a Fakemon for Camp Cobblemon, and vote on everyone's ideas.">
+  <meta property="og:image" content="https://campcobblemon.net/assets/season2/banner.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#151412">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;700;800;900&family=Overpass+Mono:wght@500;600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>try{document.documentElement.setAttribute("data-motion",matchMedia("(prefers-reduced-motion: reduce)").matches||localStorage.getItem("camp-motion")==="reduced"?"reduced":"full")}catch(e){}</script>
+  <link rel="stylesheet" href="site.css?v=d48bb17c">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Camp Cobblemon</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#menu"></use></svg>Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Main navigation">
+      <a href="index.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#home"></use></svg>Home</a>
+      <a href="seasons.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#calendar"></use></svg>Seasons</a>
+      <a href="events.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#events"></use></svg>Events</a>
+      <a href="pokedex.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#book"></use></svg>Pokédex</a>
+      <a href="suggest.html" class="active" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#sparkle"></use></svg>Suggest<span class="nav-new" data-new-until="2026-11-21">New</span></a>
+      <a href="gallery.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#gallery"></use></svg>Gallery</a>
+      <a href="rules.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#shield"></use></svg>Rules</a>
+      <a class="btn btn-primary" data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg>Join the Discord</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <div class="page-head">
+    <div class="wrap">
+      <p class="kicker">Community</p>
+      <h1>Suggest a form</h1>
+      <p class="lede">Pitch a Campian form, a Mega form, a new evolution, a pre-evolution or a Fakemon of your own. Add concept art if you have it, or roll a random idea to start from. Anyone can vote on the ideas below.</p>
+      <div class="head-actions">
+        <a class="btn btn-primary" href="#suggest"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#apply"></use></svg>Suggest a form</a>
+        <button class="btn btn-outline" type="button" data-roll-head><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#sparkle"></use></svg>Roll a random idea</button>
+      </div>
+      <p class="page-meta mono"><span data-idea-count>0</span> ideas</p>
+    </div>
+  </div>
+
+  <div class="wrap page-body">
+
+    <section class="section" aria-labelledby="ideas-heading" id="ideas-section">
+      <div class="section-head"><div><p class="kicker">Vote for your favorites</p><h2 id="ideas-heading">Ideas</h2></div></div>
+      <div class="idea-toolbar">
+        <div class="filters" role="group" aria-label="Sort ideas">
+          <button class="pill active" data-sort="top" aria-pressed="true">Most votes</button>
+          <button class="pill" data-sort="new" aria-pressed="false">Newest</button>
+        </div>
+        <div class="filters" role="group" aria-label="Kind of idea">
+          <button class="pill small active" data-kind="" aria-pressed="true">All</button>
+          <button class="pill small" data-kind="campian" aria-pressed="false">Campian forms</button>
+          <button class="pill small" data-kind="mega" aria-pressed="false">Mega forms</button>
+          <button class="pill small" data-kind="evo" aria-pressed="false">New evolutions</button>
+          <button class="pill small" data-kind="preevo" aria-pressed="false">Pre-evolutions</button>
+          <button class="pill small" data-kind="fakemon" aria-pressed="false">Fakemon</button>
+        </div>
+      </div>
+      <p class="results-count" id="ideas-status" role="status" aria-atomic="true"></p>
+      <div class="dex ideas" id="ideas"></div>
+      <button class="btn btn-outline load-more" type="button" id="ideas-more" hidden>Show more ideas</button>
+    </section>
+
+    <section class="section" aria-labelledby="suggest-heading" id="suggest">
+      <div class="section-head">
+        <div><p class="kicker">Your idea</p><h2 id="suggest-heading">Make a suggestion</h2></div>
+        <p>It goes up for everyone to see and vote on as soon as you post it.</p>
+      </div>
+      <div class="suggest-layout">
+        <form class="suggest-form" id="suggest-form" novalidate>
+          <fieldset class="kind-choice">
+            <legend>What are you suggesting?</legend>
+            <div class="filters">
+              <label class="pill"><input class="sr-only" type="radio" name="kind" value="campian" checked>Campian form</label>
+              <label class="pill"><input class="sr-only" type="radio" name="kind" value="mega">Mega form</label>
+              <label class="pill"><input class="sr-only" type="radio" name="kind" value="evo">New evolution</label>
+              <label class="pill"><input class="sr-only" type="radio" name="kind" value="preevo">New pre-evolution</label>
+              <label class="pill"><input class="sr-only" type="radio" name="kind" value="fakemon">Fakemon</label>
+            </div>
+            <p class="field-hint" id="kind-hint"></p>
+          </fieldset>
+
+          <div class="form-grid">
+            <div class="field full">
+              <label for="f-name">Name <span class="req">Required</span></label>
+              <input class="search" id="f-name" maxlength="40" autocomplete="off" required>
+            </div>
+            <div class="field">
+              <label for="f-type1">Type <span class="req">Required</span></label>
+              <select class="search" id="f-type1"></select>
+            </div>
+            <div class="field">
+              <label for="f-type2">Second type <span class="opt">Optional</span></label>
+              <select class="search" id="f-type2"></select>
+            </div>
+            <div class="field full">
+              <label for="f-notes">Your idea <span class="req">Required</span></label>
+              <textarea class="search" id="f-notes" maxlength="800" rows="4" required placeholder="What is it, and what makes it special? How should it look, and what moves should it learn?"></textarea>
+            </div>
+          </div>
+
+          <div class="optional">
+            <p class="optional-hd"><span class="lbl">Optional details</span><span class="field-hint">Fill in as much or as little as you like.</span></p>
+
+            <div class="form-grid">
+              <div class="field full" id="base-field">
+                <label for="f-base" id="f-base-label">Pokémon</label>
+                <input class="search" id="f-base" list="species-list" autocomplete="off" placeholder="Start typing a name" aria-describedby="f-base-hint">
+                <span class="field-hint" id="f-base-hint"></span>
+              </div>
+            </div>
+
+            <fieldset>
+              <legend class="sr-only">Base stats</legend>
+              <label class="toggle"><input type="checkbox" id="f-use-stats"> Include base stats</label>
+              <div id="stats-box" hidden>
+                <div class="stat-edit" id="stat-edit"></div>
+                <p class="field-hint" id="stat-hint"></p>
+              </div>
+            </fieldset>
+
+            <div class="form-grid">
+              <div class="field"><label for="f-ab1">Ability</label><input class="search" id="f-ab1" list="ability-list" maxlength="30" autocomplete="off"></div>
+              <div class="field"><label for="f-ab2">Second ability</label><input class="search" id="f-ab2" list="ability-list" maxlength="30" autocomplete="off"></div>
+              <div class="field"><label for="f-ab3">Hidden ability</label><input class="search" id="f-ab3" list="ability-list" maxlength="30" autocomplete="off"></div>
+              <div class="field"><label for="f-how" id="f-how-label">Where it lives</label><input class="search" id="f-how" maxlength="160" autocomplete="off"></div>
+              <div class="field full">
+                <label for="f-flavor">Pokédex entry</label>
+                <textarea class="search" id="f-flavor" maxlength="300" rows="2" placeholder="One or two sentences, like the in-game Pokédex."></textarea>
+              </div>
+            </div>
+
+            <fieldset>
+              <legend>Concept art</legend>
+              <div class="art-picker" id="art-picker">
+                <label class="art-add" for="f-art"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#gallery"></use></svg><span>Add image</span></label>
+                <input class="sr-only" id="f-art" type="file" accept="image/png,image/jpeg,image/webp,image/gif" multiple>
+              </div>
+              <p class="field-hint">Up to 3 images (PNG, JPG, WebP or GIF, 8 MB each).</p>
+            </fieldset>
+
+            <fieldset>
+              <legend>3D model</legend>
+              <div class="model-pick">
+                <input class="sr-only" id="f-model" type="file" accept=".bbmodel,.zip">
+                <label class="pill" for="f-model" id="model-add"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#download"></use></svg>Add model file</label>
+                <span class="model-name mono" id="model-name" hidden></span>
+                <button class="pill small" type="button" id="model-remove" hidden>Remove</button>
+              </div>
+              <p class="field-hint">Already made a model? Add the Blockbench .bbmodel, or a .zip with its .geo.json, animations and textures (15 MB max).</p>
+            </fieldset>
+
+            <div class="form-grid">
+              <div class="field"><label for="f-designer">Your name</label><input class="search" id="f-designer" maxlength="32" autocomplete="nickname" placeholder="Discord or Minecraft name"></div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary btn-lg" type="submit" id="f-submit">Post idea</button>
+            <button class="btn btn-outline" type="button" data-roll><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#sparkle"></use></svg>Roll a random idea</button>
+            <button class="pill small" type="button" data-clear>Clear</button>
+          </div>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="suggest-preview" aria-label="Preview">
+          <p class="lbl">Preview</p>
+          <div id="preview"></div>
+        </aside>
+      </div>
+      <datalist id="species-list"></datalist>
+      <datalist id="ability-list"></datalist>
+    </section>
+
+  </div>
+
+</main>
+
+<div class="modal" id="idea-modal" role="dialog" aria-modal="true" aria-label="Idea details" tabindex="-1">
+  <div class="modal-card">
+    <div class="modal-hd"><span>Form idea</span><button class="modal-close" aria-label="Close">×</button></div>
+    <div class="modal-body"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-brand"><img src="assets/logo.png" alt="" width="44" height="44"><div><strong>Camp Cobblemon</strong><span>18+ · Application-only · Since August 2024</span><span class="mono" data-address>play.campcobblemon.net</span></div></div>
+    <nav aria-label="Footer links">
+      <a data-link="discord" href="https://discord.com/invite/fWGNXbbjsd" target="_blank" rel="noopener">Discord<svg class="icon trail" aria-hidden="true" focusable="false"><use href="assets/icons.svg#external"></use></svg></a>
+      <a data-link="modrinth" href="https://modrinth.com/modpack/camp-cobblemon-modpack" target="_blank" rel="noopener">Modrinth<svg class="icon trail" aria-hidden="true" focusable="false"><use href="assets/icons.svg#external"></use></svg></a>
+      <a data-link="map" href="https://map.campcobblemon.net" target="_blank" rel="noopener">Live map<svg class="icon trail" aria-hidden="true" focusable="false"><use href="assets/icons.svg#external"></use></svg></a>
+      <a data-link="paypal" href="https://paypal.me/campcobblemon" target="_blank" rel="noopener">Support<svg class="icon trail" aria-hidden="true" focusable="false"><use href="assets/icons.svg#external"></use></svg></a>
+    </nav>
+    <div class="foot-base">
+      <p class="foot-note">Fan-made server. Not affiliated with Nintendo, The Pokémon Company, Mojang or the Cobblemon team.</p>
+      <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#motion"></use></svg><span>Reduce motion</span></button>
+    </div>
+  </div>
+</footer>
+
+<script src="content.js?v=d46ced88"></script>
+<script src="species.js?v=1d7d4691"></script>
+<script src="site.js?v=c81a7473"></script>
+<script src="suggest.js?v=e568c99d"></script>
+</body>
+</html>
