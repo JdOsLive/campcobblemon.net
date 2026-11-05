@@ -399,7 +399,6 @@
       Fighting: "#C22E28", Poison: "#A33EA1", Ground: "#E2BF65", Flying: "#A98FF3", Psychic: "#F95587", Bug: "#A6B91A",
       Rock: "#B6A136", Ghost: "#735797", Dragon: "#6F35FC", Dark: "#705746", Steel: "#B7B7CE", Fairy: "#D685AD"
     };
-    var RARITY = { "Ultra Rare": "#d685ad", Rare: "#7fa5e0", Uncommon: "#7fc79a", Common: "#9aab9f" };
     var STAT = ["HP", "Atk", "Def", "SpA", "SpD", "Spe"];
     // attacking type -> defending type -> multiplier (anything missing is 1×)
     var CHART = {
@@ -440,13 +439,11 @@
       return '<span class="type" style="background:' + color + ';color:' + ink(color) + '">' + esc(label) + '</span>';
     }
     function typeBadge(t) { return badge(t, TYPE[t] || "#888888"); }
-    // Rarity is not a type, so it doesn't get a filled type pill: outlined tag, colour only in the pips.
-    var PIPS = { Common: 1, Uncommon: 2, Rare: 3, "Ultra Rare": 4 };
+    // Rarity is not a type, so it doesn't get a filled type pill. These are Cobblemon's four spawn buckets, each
+    // about ten times rarer than the last, so each gets its own Trading Card Game mark instead of a filling bar.
+    var RARITY_MARK = { Common: "●", Uncommon: "◆", Rare: "★", "Ultra Rare": "★★" };
     function rarityBadge(r) {
-      var n = PIPS[r] || 1, pips = "";
-      for (var i = 0; i < 4; i++) pips += '<i' + (i < n ? ' class="on"' : '') + '></i>';
-      return '<span class="rarity" style="--rar:' + (RARITY[r] || "#9aab9f") + '"><span class="pips" aria-hidden="true">' +
-        pips + '</span>' + esc(r) + '</span>';
+      return '<span class="rarity"><span class="mark" aria-hidden="true">' + (RARITY_MARK[r] || RARITY_MARK.Common) + '</span>' + esc(r) + '</span>';
     }
     function mult(m) { return m === 0.25 ? "¼×" : m === 0.5 ? "½×" : m + "×"; }
 

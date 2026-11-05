@@ -1,7 +1,7 @@
-// Generated from modpack 2.2.0 by camp-tools/modlist.py. Don't edit by hand;
+// Generated from modpack 2.5.1 by camp-tools/modlist.py. Don't edit by hand;
 // rerun the script against the new .mrpack when the pack changes.
 window.CC_MODS = {
- "version": "2.2.0",
+ "version": "2.5.1",
  "items": [
   {
    "name": "Almanac",
@@ -115,6 +115,31 @@ window.CC_MODS = {
    "url": "https://modrinth.com/mod/cobblemon"
   },
   {
+   "name": "Cobblemon Battle Tower",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/cobblemon-battle-tower"
+  },
+  {
+   "name": "Cobblemon Info for REI / JEI / EMI",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/cobbledex-rei-emi-jei"
+  },
+  {
+   "name": "Cobblemon Tim Core",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/cobblemon-tim-core"
+  },
+  {
+   "name": "Cobblemon: Simple Ball Swap",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/cobblemon-simple-ball-swap"
+  },
+  {
+   "name": "COBBLEVERSE: Badges & Trophies",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/cobbleverse-badges"
+  },
+  {
    "name": "Collective",
    "type": "mod",
    "url": "https://modrinth.com/mod/collective"
@@ -218,6 +243,11 @@ window.CC_MODS = {
    "name": "Freecam",
    "type": "mod",
    "url": "https://modrinth.com/mod/freecam"
+  },
+  {
+   "name": "Geckolib",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/geckolib"
   },
   {
    "name": "Highlight",
@@ -355,6 +385,11 @@ window.CC_MODS = {
    "url": "https://modrinth.com/mod/monsters-in-the-closet"
   },
   {
+   "name": "Moonlight Lib",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/moonlight"
+  },
+  {
    "name": "NetherPortalFix",
    "type": "mod",
    "url": "https://modrinth.com/mod/netherportalfix"
@@ -405,9 +440,19 @@ window.CC_MODS = {
    "url": "https://modrinth.com/mod/prickle"
   },
   {
+   "name": "Radical Cobblemon Trainers API",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/rctapi"
+  },
+  {
    "name": "Reese's Sodium Options",
    "type": "mod",
    "url": "https://modrinth.com/mod/reeses-sodium-options"
+  },
+  {
+   "name": "Remove Reloading Screen",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/rrls"
   },
   {
    "name": "RightClickHarvest",
@@ -477,12 +522,12 @@ window.CC_MODS = {
   {
    "name": "Sophisticated Backpacks (Unoffical Fabric port)",
    "type": "mod",
-   "url": "https://modrinth.com/mod/sophisticated-backpacks-(unoffical-fabric-port)"
+   "url": "https://modrinth.com/mod/sophisticated-backpacks-unoffical-fabric-port"
   },
   {
    "name": "Sophisticated Core (Unofficial Fabric port)",
    "type": "mod",
-   "url": "https://modrinth.com/mod/sophisticated-core-(unofficial-fabric-port)"
+   "url": "https://modrinth.com/mod/sophisticated-core-unofficial-fabric-port"
   },
   {
    "name": "Sound Physics Remastered",
@@ -515,6 +560,11 @@ window.CC_MODS = {
    "url": "https://modrinth.com/mod/supermartijn642s-core-lib"
   },
   {
+   "name": "Supplementaries",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/supplementaries"
+  },
+  {
    "name": "SwingThrough",
    "type": "mod",
    "url": "https://modrinth.com/mod/swingthrough"
@@ -545,6 +595,11 @@ window.CC_MODS = {
    "url": "https://modrinth.com/mod/tree-chopping"
   },
   {
+   "name": "True Ending - Ender Dragon Overhaul",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/true-ending"
+  },
+  {
    "name": "TxniLib",
    "type": "mod",
    "url": "https://modrinth.com/mod/txnilib"
@@ -573,6 +628,11 @@ window.CC_MODS = {
    "name": "What Are They Up To (Watut)",
    "type": "mod",
    "url": "https://modrinth.com/mod/what-are-they-up-to"
+  },
+  {
+   "name": "Wild Battle API",
+   "type": "mod",
+   "url": "https://modrinth.com/mod/wild-battle-api"
   },
   {
    "name": "Xaero's Minimap",

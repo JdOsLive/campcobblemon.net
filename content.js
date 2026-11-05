@@ -33,7 +33,7 @@ window.CC = {
   // ISO time Season 2 opens. Before this the home page says "opens…", after it says "is live".
   season2Opens: "2026-09-11T22:00:00-04:00",
 
-  // Costume Bidoof typings, abilities and stats below are from datapack v2.0 (the rebalance).
+  // Costume Bidoof typings, abilities and stats below are from the live datapack (v2.4), via camp-tools/doof_site_patch.py.
 
   // Oldest first. `shots` are screenshot ids shown on the Seasons page (thumbs live in
   // assets/seasonN/thumb). `download` and `map` are optional links — leave "" to hide the button.
@@ -68,7 +68,7 @@ window.CC = {
     {
       id: "s2",
       label: "Season 2",
-      cobblemon: "Cobblemon 1.8",
+      cobblemon: "Cobblemon 1.8 to 1.8.4",
       start: "2026-09-11T22:00:00-04:00",
       end: "",
       dates: "Sep 11, 2026 – present",
@@ -86,15 +86,16 @@ window.CC = {
 
   // The full "everything in the pack" list is generated into mods.js (see camp-tools/modlist.py).
   modpack: {
-    version: "2.2.0",
+    version: "2.5.1",
     highlights: [
-      "Cobblemon 1.8.2", "Minecraft 1.21.1", "Sodium + Iris", "Complementary Reimagined shaders",
+      "Cobblemon 1.8.4", "Minecraft 1.21.1", "Sodium + Iris", "Complementary Reimagined shaders (optional)",
       "Distant Horizons", "Xaero's minimap & world map", "Simple Voice Chat", "Litematica",
-      "Sophisticated Backpacks", "Storage Drawers", "Roughly Enough Items", "Axiom"
+      "Sophisticated Backpacks", "Storage Drawers", "Roughly Enough Items", "Axiom",
+      "Cobblemon Battle Tower", "Supplementaries"
     ],
     ours: [
-      { name: "Camp Radio", text: "Runs on the server, nothing to install. 3× shiny rates every weekend, Thursday 7 PM to Sunday midnight ET, and shiny catches and battle results get posted to Discord." },
-      { name: "Camp Furnishings", text: "Commissioned trophies for tournaments and events, engraved with the winner's name." }
+      { name: "Camp Radio", text: "Runs on the server, nothing to install. 3× shiny rates every weekend, Thursday 7 PM to Sunday midnight ET, shiny catches and battle results posted to Discord, and the shiny boosts players fund with the Camp Fund Jar." },
+      { name: "Camp Furnishings", text: "Commissioned trophies for tournaments and events, engraved with the winner's name. Wanted Boards for trading Pokémon with anyone, even when they're offline. Team Frames for showing off a team. And the Camp Fund Jar, where players pool diamonds for server-wide shiny boosts." }
     ]
   },
 
