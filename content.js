@@ -12,22 +12,7 @@ window.CC = {
   // Commission goals shown on the home page. PayPal.me has no API, so `raised` is edited by
   // hand — update it when money comes in and push. Set goals: [] to hide the whole block.
   support: {
-    goals: [
-      {
-        label: "Campian Grimer and Campian Muk",
-        detail: "A honey-themed Normal/Fairy line, designed from scratch.",
-        sketch: "assets/support/honey-line-sketch.jpg",
-        sketchAlt: "Pencil concept sketch of Campian Grimer and Campian Muk, labelled Normal slash Fairy, with notes reading honey jar, snail, orange and crown.",
-        amount: 40,
-        raised: 40
-      },
-      {
-        label: "Five more costume Bidoofs",
-        detail: "C’mon, who doesn’t want more Bidoofs?",
-        amount: 25,
-        raised: 25
-      }
-    ]
+    goals: []
   },
 
   // ISO time Season 2 opens. Before this the home page says "opens…", after it says "is live".
